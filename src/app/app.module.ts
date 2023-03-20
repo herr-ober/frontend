@@ -7,12 +7,14 @@ import {FooterComponent} from './core/footer/footer.component';
 import {HeaderComponent} from './core/header/header.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import {PageNotFoundComponent} from './modules/error-pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
