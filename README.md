@@ -35,7 +35,7 @@ npm install
 
 #### Start for development
 ```bash
-npm serve
+ng serve
 ```
 
 #### Ends the application
