@@ -12,4 +12,7 @@ export class DashboardOrganizerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  submitClicked() {
+    console.log("Cklicked");
+  }
 }

@@ -1,3 +1,5 @@
+import { SharedModule } from './../../shared/shared.module';
+import { AppModule } from './../../app.module';
 import { OrganizerRoutingModule } from './organizer-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +15,8 @@ import { CreateNewEventComponent } from './create-new-event/create-new-event.com
   ],
   imports: [
     CommonModule,
-    OrganizerRoutingModule
+    SharedModule,
+    OrganizerRoutingModule,
   ]
 })
 export class OrganizerModule { }
