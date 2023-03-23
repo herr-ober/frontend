@@ -14,8 +14,6 @@ export class DashboardOrganizerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
-
   openModal() {
     this.createModal = true;
     }

@@ -3,4 +3,4 @@
 
 <app-button (clicked)="openModal()">Modal anzeigen</app-button>
 
-<app-modal (visible)="createModal" (modalClosed)="createModal = false">Hallo</app-modal>
+<app-modal [visible]="createModal" (modalClosed)="createModal = false">Hallo</app-modal>

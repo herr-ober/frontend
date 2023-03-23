@@ -8,6 +8,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ModalComponent {
 
 @Input() visible: Boolean = false;
-
 @Output() modalClosed = new EventEmitter<void>();
+
 }
