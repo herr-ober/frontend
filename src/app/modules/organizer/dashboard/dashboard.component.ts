@@ -18,6 +18,8 @@ export class DashboardOrganizerComponent implements OnInit {
   eventExists: boolean = false;
 
 
+  createModal: Boolean = false;
+
   ngOnInit(): void {
     this.reload();
   }
