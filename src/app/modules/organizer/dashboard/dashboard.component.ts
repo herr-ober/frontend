@@ -9,10 +9,14 @@ export class DashboardOrganizerComponent implements OnInit {
 
   constructor() { }
 
+  createModal: Boolean = false;
+
   ngOnInit(): void {
   }
 
-  submitClicked() {
-    console.log("Cklicked");
-  }
+  
+
+  openModal() {
+    this.createModal = true;
+    }
 }
