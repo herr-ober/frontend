@@ -3,12 +3,14 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from "@angular/forms";
 import { ButtonComponent } from './components/button/button.component';
 import { InputfieldComponent } from './components/inputfield/inputfield.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
   declarations: [
     ButtonComponent,
-    InputfieldComponent
+    InputfieldComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,9 @@ import { InputfieldComponent } from './components/inputfield/inputfield.componen
   exports: [
     CommonModule,
     FormsModule,
-    ButtonComponent
+    ButtonComponent,
+    ModalComponent,
+    InputfieldComponent
   ]
 })
 export class SharedModule {

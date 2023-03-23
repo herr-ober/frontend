@@ -1,4 +1,6 @@
 <p>dashboard works!</p>
 
 
-<app-button (clicked)="submitClicked()">Sven ist da</app-button>
+<app-button (clicked)="openModal()">Modal anzeigen</app-button>
+
+<app-modal (visible)="createModal" (modalClosed)="createModal = false">Hallo</app-modal>
