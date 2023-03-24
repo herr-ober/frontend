@@ -9,7 +9,16 @@ export class CreateNewEventComponent implements OnInit {
 
   constructor() { }
 
+  eventName: string | undefined;
+  eventLocation: string | undefined;
+  eventDate: Date | undefined;
+
   ngOnInit(): void {
+  }
+
+
+  test(): void {
+    console.log(this.eventName + " " + this.eventDate + " " + this.eventLocation)
   }
 
 }
