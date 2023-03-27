@@ -7,11 +7,8 @@ import { WaiterRoutingModule } from './waiter-routing.module';
 
 @NgModule({
   declarations: [
-    NewOrderComponent
+    NewOrderComponent,
   ],
-  imports: [
-    CommonModule,
-    WaiterRoutingModule
-  ]
+  
 })
 export class WaiterModule { }
