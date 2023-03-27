@@ -1,0 +1,51 @@
+<p>orderview works!</p>
+
+<div class="grid grid-cols-3 gap-2 ...">
+    <div>01</div>
+    <div class="place-self-stretch bg-slate-300">02</div>
+    <div class="bg-slate-300">03</div>
+    <div>04</div>
+    <div>05</div>
+    <div>07</div>
+  </div>
+
+  <ul>
+    <li *ngFor="let order of orders; let o = index" [attr.data-index]="o">
+      <div *ngIf="isnotready(order)">
+        <div class="row-auto m-2 p-2 rounded-lg place-self-stretch bg-slate-300">
+          <div class="grid grid-cols-2 content-center mb-2">
+            <div class="text-xl">
+              <b>Bestellung {{order.id}}</b>
+            </div>
+            <div class="text-sm text-right content-center">
+              <button (click)="fertig(o)" class="rounded-full bg-lime-600 text-white content px-10 py-1 inline content-center">
+                {{order.status}}
+              </button>
+            </div>
+          </div>
+          <div *ngFor="let food of order.food; let f = index" [attr.data-index]="f">
+            <button (click)="foodready(o, f)" class="row-auto my-2">
+              <div class="rounded-full text-white bg-lime-600 px-2" style="display: inline-block;">
+                  {{food.amount}}
+              </div>
+              <div class="inline">
+                {{food.food}}
+              </div>
+            </button>
+            
+          </div>
+          <hr style="border-top: 2px solid #000000;">
+          <div *ngFor="let drink of order.drinks; let d = index"  [attr.data-index]="d">
+            <button (click)="drinkready(o,d)" class="row-auto my-2">
+              <div class="rounded-full text-white bg-lime-600 px-2" style="display: inline-block;">
+                {{drink.amount}}
+              </div>
+              <div class="inline">
+                {{drink.drink}}
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
