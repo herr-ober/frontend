@@ -5,7 +5,7 @@
   </header>
   
   <main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div *ngIf="!eventExists" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
       Es sieht so aus, als wäre noch kein Event angelegt. Nutze den Button und lege ein neues Event an!
       <br>
       <br>

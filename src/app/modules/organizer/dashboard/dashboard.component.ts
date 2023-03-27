@@ -9,6 +9,8 @@ export class DashboardOrganizerComponent implements OnInit {
 
   constructor() { }
 
+  eventExists: boolean = false;
+
   ngOnInit(): void {
   }
 
