@@ -1,13 +1,5 @@
 <p>orderview works!</p>
 
-<div class="grid grid-cols-3 gap-2 ...">
-    <div>01</div>
-    <div class="place-self-stretch bg-slate-300">02</div>
-    <div class="bg-slate-300">03</div>
-    <div>04</div>
-    <div>05</div>
-    <div>07</div>
-  </div>
 
   <ul>
     <li *ngFor="let order of orders; let o = index" [attr.data-index]="o">
