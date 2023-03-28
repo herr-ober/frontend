@@ -1,7 +1,7 @@
 import { IEvent } from './../../models/IEvent';
 import { ApiService } from "./api.service";
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -9,30 +9,23 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 export class EventService {
 
-
-    private event: IEvent | undefined;
-
-
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService) { 
+    }
 
 
 
-    private async getEvent(): Promise<IEvent> {
+    async getEvent(): Promise<IEvent> {
         return this.apiService.doGetRequest('/events')
     }
 
 
-    getEventExists(): boolean {
-        //console.log(this.event?.date)
-        return (this.event != undefined);
-    }
-
-    async update() {
+    /*async update() {
         await this.getEvent().then(res => {
             this.event = res;
-            console.log(this.event)
-            console.log(res)
+            this.eventExists = true;
         }).catch((err: HttpErrorResponse) => {
         })
-    }
+        console.log(this.event);
+        console.log(this.eventExists)
+    }*/
 }
