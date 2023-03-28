@@ -1,6 +1,4 @@
 export interface IEvent {
-    uuid: string
-    organizerUuid: string
     name: string
     location: string
     date: Date
@@ -9,15 +7,11 @@ export interface IEvent {
 
 export class Event implements IEvent {
 
-    uuid: string
-    organizerUuid: string
     name: string
     location: string
     date: Date
 
-    constructor(uuid: string, organizerUuid: string, name: string, location: string, date: Date) {
-        this.uuid = uuid;
-        this.organizerUuid = organizerUuid;
+    constructor(name: string, location: string, date: Date) {
         this.name = name;
         this.location = location;
         this.date = date;
