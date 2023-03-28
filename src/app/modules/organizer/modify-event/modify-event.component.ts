@@ -9,7 +9,15 @@ export class ModifyEventComponent implements OnInit {
 
   constructor() { }
 
+  eventName: string | undefined;
+  eventLocation: string | undefined;
+  eventDate: Date | undefined;
+
   ngOnInit(): void {
+  }
+
+  updateEventDetails(): void {
+
   }
 
 }
