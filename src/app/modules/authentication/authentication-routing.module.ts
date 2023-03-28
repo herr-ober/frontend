@@ -14,7 +14,7 @@ const routes: Routes = [
     component: LoginOrganizerComponent
   },
   {
-    path: 'register/staff',
+    path: 'register/organizer',
     component: RegisterOrganizerComponent
   },
   {
