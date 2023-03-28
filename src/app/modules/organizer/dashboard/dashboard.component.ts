@@ -28,6 +28,5 @@ export class DashboardOrganizerComponent implements OnInit {
       .catch((err: HttpErrorResponse) => {})
     this.eventExists = (this.event != undefined);
     console.log(this.event)
-    console.log(this.eventExists)
   }
 }
