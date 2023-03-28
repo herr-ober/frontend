@@ -18,6 +18,7 @@ export class CreateNewEventComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
 
 

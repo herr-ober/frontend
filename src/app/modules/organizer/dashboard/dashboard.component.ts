@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { EventService } from './../../../core/services/event.service';
 import { Component, OnInit } from '@angular/core';
+import { IEvent } from 'src/app/models/IEvent';
 
 @Component({
   selector: 'app-organizer-dashboard',
@@ -8,16 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardOrganizerComponent implements OnInit {
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService) {
+  }
 
+  private event: IEvent | undefined;
   eventExists: boolean = false;
 
 
-  ngOnInit(): void {
 
-    this.eventService.update();
-    this.eventExists = this.eventService.getEventExists();
-    
-    console.log(this.eventService.getEventExists())
+  ngOnInit(): void {
+    this.reload();
+  }
+
+  async reload() {
+    await this.eventService.getEvent()
+      .then(res => {this.event = res})
+      .catch((err: HttpErrorResponse) => {})
+    this.eventExists = (this.event != undefined);
+    console.log(this.event)
+    console.log(this.eventExists)
   }
 }
