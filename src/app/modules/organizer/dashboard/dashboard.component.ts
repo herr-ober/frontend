@@ -13,8 +13,9 @@ export class DashboardOrganizerComponent implements OnInit {
   constructor(private eventService: EventService) {
   }
 
-  eventExists: boolean = false;
   private event: IEvent | undefined;
+  eventExists: boolean = false;
+
 
 
   ngOnInit(): void {
@@ -25,8 +26,7 @@ export class DashboardOrganizerComponent implements OnInit {
     await this.eventService.getEvent()
       .then(res => {this.event = res})
       .catch((err: HttpErrorResponse) => {})
-    
-    this.eventExists = (this.event !== undefined);
+    this.eventExists = (this.event != undefined);
     console.log(this.event)
     console.log(this.eventExists)
   }

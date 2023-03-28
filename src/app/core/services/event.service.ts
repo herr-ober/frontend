@@ -13,19 +13,21 @@ export class EventService {
     }
 
 
-
     async getEvent(): Promise<IEvent> {
         return this.apiService.doGetRequest('/events')
     }
 
+    async patchEvent(body: IEvent): Promise<void> {
+        return this.apiService.doPatchRequest('/events', body)
+    }
 
-    /*async update() {
-        await this.getEvent().then(res => {
-            this.event = res;
-            this.eventExists = true;
-        }).catch((err: HttpErrorResponse) => {
-        })
-        console.log(this.event);
-        console.log(this.eventExists)
-    }*/
+    async postEvent(body: IEvent): Promise<IEvent> {
+        return this.apiService.doPostRequest('/events', body)
+    }
+
+    /*
+    async deleteEvent(): Promise<IEvent> {
+        return this.apiService.doGetRequest('/events')
+    }
+    */
 }
