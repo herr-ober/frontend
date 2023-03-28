@@ -1,17 +1,79 @@
 <header class="bg-white shadow">
-    <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard: Dein Event</h1>
-    </div>
-  </header>
+  <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard: Eventverwaltung</h1>
+  </div>
+</header>
   
-  <main>
+<main>
+  <div *ngIf="!eventExists; else modifyEvent" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    Es sieht so aus, als wäre noch kein Event angelegt. Nutze den Button und lege ein neues Event an!
+    <br>
+    <br>
+    <a [routerLink]="['createevent']" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Neues Event anlegen</a>
+  </div>
+
+  <ng-template #modifyEvent>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      Es sieht so aus, als wäre noch kein Event angelegt. Nutze den Button und lege ein neues Event an!
-      <br>
-      <br>
-      <a [routerLink]="['createevent']" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Neues Event anlegen</a>
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-center">
+                <thead class="border-b bg-gray-800">
+                  <tr>
+                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                      Eventname
+                    </th>
+                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                      Veranstaltungsort
+                    </th>
+                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                      Aktionen
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                    <td>
+                      Test
+                    </td>
+                    <td>
+                      Test 2
+                    </td> 
+                    <td>
+                      <div class="flex justify-center">
+                        <div class="mt-10 sm:mt-0">
+                          <div class="mt-1 md:col-span-2 md:mt-0">
+                            <div class="max-w-64 px-4 py-5 sm:p-1">
+                              <div class="grid grid-cols-2 gap-4">
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="block">
 
+                                    <button [routerLink]="['modifyevent']" class="rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Bearbeiten</button>
+                                  
+                                  </div>
+                                </div>
+                  
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="block">
+
+                                    <button  class="rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Löschen</button>                         
+                                  
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>                       
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>    
     </div>
-  </main>
-
-
+  </ng-template>
+</main>
