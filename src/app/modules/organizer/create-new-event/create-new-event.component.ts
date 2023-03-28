@@ -18,8 +18,6 @@ export class CreateNewEventComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    this.loadEventIfAlreadyExists();
   }
 
 
@@ -28,12 +26,5 @@ export class CreateNewEventComponent implements OnInit {
   }
 
 
-  async loadEventIfAlreadyExists() {
 
-    await this.eventService.getEvent().then(res => {
-      this.eventName = res.event.name;
-      this.eventLocation = res.event.location;
-      this.eventDate = res.event.date;
-    })
-  }
 }

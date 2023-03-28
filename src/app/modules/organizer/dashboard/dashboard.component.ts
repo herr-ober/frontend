@@ -1,3 +1,4 @@
+import { EventService } from './../../../core/services/event.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardOrganizerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
-  eventExists: boolean = true;
+  eventExists: boolean = false;
+
 
   ngOnInit(): void {
-  }
 
+    this.eventService.update();
+    this.eventExists = this.eventService.getEventExists();
+    
+    console.log(this.eventService.getEventExists())
+  }
 }
