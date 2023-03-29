@@ -1,9 +1,11 @@
 export interface IEvent {
-    uuid: string
-    organizerUuid: string
-    name: string
-    location: string
-    date: Date
+    event: {
+        uuid: string
+        organizerUuid: string
+        name: string
+        location: string
+        date: Date
+    }
 }
 
 
