@@ -158,6 +158,7 @@ export class OrderviewComponent implements OnInit {
   isready(order: any): boolean {
     return order.status == "Fertig";
   }
+
   Sleep(milliseconds: number) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
@@ -184,4 +185,5 @@ export class OrderviewComponent implements OnInit {
       return false;
     }
   }
+
 }
