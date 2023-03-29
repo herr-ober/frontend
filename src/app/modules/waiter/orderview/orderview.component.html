@@ -1,35 +1,36 @@
 <p>orderview works!</p>
 <div class="grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-2">
-    <div *ngFor="let order of orders; let o = index" [attr.data-index]="o">
-      <div *ngIf="isnotcompleted(order)" >
-        <div class="row-auto m-2 p-2 rounded-lg place-self-stretch bg-gray-300	">
-          <div class="grid grid-cols-2 content-center mb-2">
-            <div class="text-xl">
-              <b>Bestellung {{order.id}}</b>
-            </div>
-            <div class="text-sm text-right content-center">
-              <div class="rounded-full bg-lime-600  text-white content px-7 py-1 inline content-center" [ngStyle]="{'background-color': ostatus(o)? '#65a30d' : 'black'}">
-                {{order.status}}
-              </div>
+  <div *ngFor="let order of orders; let o = index" [attr.data-index]="o">
+    <div *ngIf="isnotcompleted(order)">
+      <div class="row-auto m-2 p-2 rounded-lg place-self-stretch bg-gray-300	">
+        <div class="grid grid-cols-2 content-center mb-2">
+          <div class="text-xl">
+            <b>Bestellung {{order.id}}</b>
+          </div>
+          <div class="text-sm text-right content-center">
+            <div class="rounded-full bg-lime-600  text-white content px-7 py-1 inline content-center"
+              [ngStyle]="{'background-color': ostatus(o)? '#65a30d' : 'black'}">
+              {{order.status}}
             </div>
           </div>
+        </div>
         <div class="grid max-[370px]:grid-rows-2 min-[371px]:grid-cols-2 content-center mb-2">
           <div>
             <div *ngFor="let food of order.food; let f = index" [attr.data-index]="f">
               <div class="row-auto my-2">
-                <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
-                    {{food.amount}}
+                <div class="rounded-full text-white bg-black px-2" [ngStyle]="{'background-color': foodstatus(food)? '#65a30d' : 'black'}" style="display: inline-block;">
+                  {{food.amount}}
                 </div>
                 <div class="inline">
                   {{food.food}}
                 </div>
               </div>
-              
+
             </div>
             <hr style="border-top: 2px solid #000000;">
-            <div *ngFor="let drink of order.drinks; let d = index"  [attr.data-index]="d">
+            <div *ngFor="let drink of order.drinks; let d = index" [attr.data-index]="d">
               <div class="row-auto my-2">
-                <div class="rounded-full text-white bg-black px-2"  style="display: inline-block;">
+                <div class="rounded-full text-white bg-black px-2" [ngStyle]="{'background-color': drinkstatus(drink)? '#65a30d' : 'black'}" style="display: inline-block;">
                   {{drink.amount}}
                 </div>
                 <div class="inline">
@@ -39,8 +40,9 @@
             </div>
           </div>
           <div *ngIf="isready(order)" class="flex flex-col items-end justify-center">
-            
-            <button (click)="abholen(o)" class=" absolute rounded-lg bg-lime-600  text-white py-8 px-10  text-center inline-block content-center" >
+
+            <button (click)="abholen(o)"
+              class=" absolute rounded-lg bg-lime-600  text-white py-8 px-10  text-center inline-block content-center">
               abholen
             </button>
           </div>
@@ -49,4 +51,3 @@
     </div>
   </div>
 </div>
-    

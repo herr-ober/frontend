@@ -1,36 +1,93 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-kitchenview',
-  templateUrl: './kitchenview.component.html',
-  styleUrls: ['./kitchenview.component.css']
+  selector: "app-kitchenview",
+  templateUrl: "./kitchenview.component.html",
+  styleUrls: ["./kitchenview.component.css"],
 })
 export class KitchenviewComponent {
   heroes = [
-    {id: 1, name:'Superman'},
-    {id: 2, name:'Batman'},
-    {id: 5, name:'BatGirl'},
-    {id: 3, name:'Robin'},
-    {id: 4, name:'Flash'}
+    { id: 1, name: "Superman" },
+    { id: 2, name: "Batman" },
+    { id: 5, name: "BatGirl" },
+    { id: 3, name: "Robin" },
+    { id: 4, name: "Flash" },
   ];
   dborders = [
-    {id: 1, status:'Waiting', food:[{id:1, status:"Fertig", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
-    {id: 2, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
-    {id: 5, status:'Fertig', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"Fertig", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
-    {id: 3, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
-    {id: 4, status:'Fertig', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"Fertig", food:"food1", amount:5},{id:3, status:"in Bearbeitung", food:"food1", amount:5},{id:4, status:"in Bearbeitung", food:"food1", amount:5},{id:5, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]}
+    {
+      id: 1,
+      status: "Waiting",
+      food: [
+        { id: 1, status: "Fertig", food: "food1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
+      ],
+      drinks: [
+        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
+      ],
+    },
+    {
+      id: 2,
+      status: "in Bearbeitung",
+      food: [
+        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
+      ],
+      drinks: [
+        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
+      ],
+    },
+    {
+      id: 5,
+      status: "Fertig",
+      food: [
+        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
+        { id: 2, status: "Fertig", food: "food1", amount: 5 },
+      ],
+      drinks: [
+        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
+      ],
+    },
+    {
+      id: 3,
+      status: "in Bearbeitung",
+      food: [
+        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
+      ],
+      drinks: [
+        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
+      ],
+    },
+    {
+      id: 4,
+      status: "Fertig",
+      food: [
+        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
+        { id: 2, status: "Fertig", food: "food1", amount: 5 },
+        { id: 3, status: "in Bearbeitung", food: "food1", amount: 5 },
+        { id: 4, status: "in Bearbeitung", food: "food1", amount: 5 },
+        { id: 5, status: "in Bearbeitung", food: "food1", amount: 5 },
+      ],
+      drinks: [
+        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
+        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
+      ],
+    },
   ];
   orders = this.dborders;
   ordervergleich = this.orders;
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.add()
-    this.prepareorders()
+    this.add();
+    this.prepareorders();
   }
 
-
-  prepareorders(){
+  prepareorders() {
     /*for (int i = 0; i< this.orders.lengt; i++){
 
     }
@@ -46,149 +103,117 @@ export class KitchenviewComponent {
       });
       
     });*/
-
   }
-  async add(){
-    var a = 5
-    while (a < 10){
-
-    
-      console.log("adding")
-      await this.Sleep(10000)
-      this.dborders.push({id: a, status:'Waiting', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]})
-      a ++
-      console.log(this.dborders)
+  async add() {
+    var a = 5;
+    while (a < 10) {
+      console.log("adding");
+      await this.Sleep(10000);
+      this.dborders.push({
+        id: a,
+        status: "Waiting",
+        food: [
+          { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
+          { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
+        ],
+        drinks: [
+          { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
+          { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
+        ],
+      });
+      a++;
+      console.log(this.dborders);
     }
   }
-  fertig(orderindex: number){
-    this.orders[orderindex]!.status = "Fertig"
-
+  fertig(orderindex: number) {
+    this.orders[orderindex]!.status = "Fertig";
   }
 
-
-  foodready(orderid: number, foodid: number){
+  foodready(orderid: number, foodid: number) {
     //this.orders[order].food[foodindex].amount
-    this.dborders[orderid].food[foodid].status = "Fertig"
+    this.dborders[orderid].food[foodid].status = "Fertig";
 
-
-    this.checkorderstatus(orderid)
-
+    this.checkorderstatus(orderid);
   }
 
-  drinkready(orderid: number, drinkid: number){
-    this.dborders[orderid].drinks[drinkid].status = "Fertig"
+  drinkready(orderid: number, drinkid: number) {
+    this.dborders[orderid].drinks[drinkid].status = "Fertig";
 
-    this.checkorderstatus(orderid)
-
+    this.checkorderstatus(orderid);
   }
 
-  checkorderstatus(orderid: number){
-    let edit: Boolean = false
-    const a = this.dborders[orderid].food.forEach((element: {id: number; status: string; }) => {
-      console.log(element)
+  checkorderstatus(orderid: number) {
+    let edit: Boolean = false;
+    const a = this.dborders[orderid].food.forEach(
+      (element: { id: number; status: string }) => {
+        console.log(element);
 
-      if(element.status != "Fertig"){
-        edit = true;
-        console.log("RAUUUUUUUUUUUUUUUS!")
-        return
+        if (element.status != "Fertig") {
+          edit = true;
+          console.log("RAUUUUUUUUUUUUUUUS!");
+          return;
+        }
       }
-      
-    });
-    this.dborders[orderid].drinks.forEach((element: {id: number; status: string; }) => {
-      console.log(element)
-      if(element.status != "Fertig"){
-        edit = true;
+    );
+    this.dborders[orderid].drinks.forEach(
+      (element: { id: number; status: string }) => {
+        console.log(element);
+        if (element.status != "Fertig") {
+          edit = true;
 
-        return
+          return;
+        }
       }
-      
-    });
-    console.log(a)
-    if (!edit){
-
-    this.dborders[orderid].status = "Fertigstellen"
-    
-    
-
+    );
+    console.log(a);
+    if (!edit) {
+      this.dborders[orderid].status = "Fertigstellen";
     }
   }
 
-
-  inQuery(order: any): boolean{
-
-    return order.status == "Waiting"
-
+  inQuery(order: any): boolean {
+    return order.status == "Waiting";
   }
-  inProgress(order:any){
-    return order.status == "in Bearbeitung" || order.status == "Fertigstellen"
-  
+  inProgress(order: any) {
+    return order.status == "in Bearbeitung" || order.status == "Fertigstellen";
   }
-  isReleasable(order: any){
-    return order.status == "Fertigstellen"
-
+  isReleasable(order: any) {
+    return order.status == "Fertigstellen";
   }
-  isready(order: any): boolean{
-
-    if(order.status == "Fertig"){
-
-      return true
-    }
-    else{
-
-      return false
+  isready(order: any): boolean {
+    if (order.status == "Fertig") {
+      return true;
+    } else {
+      return false;
     }
   }
   Sleep(milliseconds: number) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
-   }
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  }
 
-  
-  fstatus(orderindex: number, foodindex: number){
-    
-    try{
-
-      
-        
-      return this.dborders[orderindex].food[foodindex].status == "Fertig"
-
-      
-
-    }
-    catch{
-
-    
-      return false
+  foodstatus(food: any) {
+    try {
+      return food.status == "Fertig";
+    } catch {
+      return false;
     }
   }
-  dstatus(orderindex: number,drinkindex: number){
-
-    try{
-  
-    
-        return this.dborders[orderindex].drinks[drinkindex].status == "Fertig"
-
-      
-    
-
+  drinkstatus(drink: any) {
+    try {
+      return drink.status == "Fertig";
+    } catch {
+      return false;
     }
-    catch{
-
-    
-      return false
-    }
-    
-
   }
-  async bearbeiten(orderindex: any){
+  async bearbeiten(orderindex: any) {
     //await this.Sleep(10000)
-    this.orders[orderindex].status = "in Bearbeitung" 
+    this.orders[orderindex].status = "in Bearbeitung";
   }
-  async complete(orderindex: any){
+  async complete(orderindex: any) {
     //await this.Sleep(10000)
-    this.orders[orderindex].status = "Fertig" 
+    this.orders[orderindex].status = "Fertig";
   }
-  ostatus(orderindex: number){
-    return this.orders[orderindex].status == "Fertig"
-
+  ostatus(orderindex: number) {
+    return this.orders[orderindex].status == "Fertig";
   }
 }
