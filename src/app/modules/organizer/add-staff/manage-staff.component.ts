@@ -1,6 +1,5 @@
 import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {StaffService} from "../../../core/services/staff.service";
 
@@ -16,7 +15,7 @@ export class ManageStaff implements OnInit {
 
   createStaffFormGroup = new FormGroup({
     name: new FormControl(null, {validators: [Validators.required]}),
-    role: new FormControl(null)
+    role: new FormControl("Waiter")
   });
 
   ngOnInit(): void { }
