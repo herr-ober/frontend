@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { KitchenRoutingModule } from './kitchen-routing.module';
+import { KitchenviewComponent } from './kitchenview/kitchenview.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    KitchenviewComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    KitchenRoutingModule
   ]
 })
 export class KitchenModule { }
