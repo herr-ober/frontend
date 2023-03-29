@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-register-organizer',
@@ -7,19 +9,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register-organizer.component.css']
 })
 export class RegisterOrganizerComponent implements OnInit {
-  visible: boolean = true;
-  message: string = '';
-
-  show(message: string) {
-    this.visible = true;
-    this.message = message;
-  }
-
-  closeAlert() {
-    this.visible = false;
-  }
-
-  
   registerForm!: FormGroup;
   submitted = false;
 
@@ -41,7 +30,7 @@ export class RegisterOrganizerComponent implements OnInit {
       return;
     }
 
-    
-  }
+    //API Call
 
+  }
 }
