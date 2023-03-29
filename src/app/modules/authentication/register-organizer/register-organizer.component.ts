@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AccountOrganizerService } from '../../../core/services/accountorganizer.service';
+import { ICreateAccountOrganizer } from 'src/app/models/IAccountOrganizer';
 
 
 @Component({
@@ -12,10 +14,11 @@ export class RegisterOrganizerComponent implements OnInit {
   registerForm!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private AccountOrganizerService: AccountOrganizerService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
@@ -30,7 +33,25 @@ export class RegisterOrganizerComponent implements OnInit {
       return;
     }
 
-    //API Call
+    this.createAccountOrganizer()
 
   }
+
+  async createAccountOrganizer() {
+    await this.AccountOrganizerService.postAccountOrganizer(this.registerForm.value.username, this.registerForm.value.email, this.registerForm.value.password)
+    .then(res => { 
+      this.router.navigate(['/auth/login/organizer']);
+    })
+    .catch(err => {
+      this.displayErrorNotification(err.error.message)
+    });    
+  }
+
+  displayErrorNotification(msg: string): void {
+    let eventErrorNotification = document.getElementById("event-error-notification");
+    eventErrorNotification!.innerHTML = msg;
+    eventErrorNotification!.style.display = "block";
+  }
+
 }
+
