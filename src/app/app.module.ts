@@ -5,9 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {HeaderComponent} from './core/header/header.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {PageNotFoundComponent} from './modules/error-pages/page-not-found/page-not-found.component';
+import { ApiInterceptor } from './core/services/api-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,11 @@ import {PageNotFoundComponent} from './modules/error-pages/page-not-found/page-n
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true 
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

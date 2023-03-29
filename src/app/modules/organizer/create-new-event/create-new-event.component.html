@@ -1,1 +1,112 @@
-<p>create-new-event works!</p>
+<header class="bg-white shadow">
+  <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Neues Event anlegen</h1>
+  </div>
+</header>
+
+<main>
+  <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+
+    <!-- Success-Message -->
+    <div id="event-notification" class="hidden p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+    </div>
+
+    <!-- Error-Message -->
+    <div id="event-error-notification" class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+    </div>
+
+    <!-- General Event Information. Must be filled out, before next step can be completed. -->
+    <div id="general-event-information" class="mt-10 sm:mt-0">
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          <div class="px-4 sm:px-0">
+            <h3 class="text-base font-semibold leading-6 text-gray-900">Eventinformationen</h3>
+            <p class="mt-1 text-sm text-gray-600">Gebe hier grundlegende Informationen deines Events an.</p>
+         </div>
+        </div>
+
+        <div class="mt-5 md:col-span-2 md:mt-0">
+          <form>
+            <div class="overflow-hidden shadow sm:rounded-md">
+              <div class="bg-white px-4 py-5 sm:p-6">
+                <div class="grid grid-cols-6 gap-6">
+
+                  <!-- Eventname -->
+                  <div class="col-span-6 sm:col-span-4">
+                    <label for="event-name" class="block text-sm font-medium leading-6 text-gray-900">Eventname</label>
+                    <input [(ngModel)]="eventName" type="text" name="event-name" id="event-name" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  </div>
+  
+                  <!-- Startdatum des Events -->
+                  <div class="col-span-6 sm:col-span-2">
+                    <label for="event-date" class="block text-sm font-medium leading-6 text-gray-900">Startdatum</label>
+                    <input [(ngModel)]="eventDate" type="date" name="event-date" id="event-date" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>
+                 </div>
+
+                  <!-- Eventlocation -->
+                  <div class="col-span-6 sm:col-span-3">
+                    <label for="event-loaction" class="block text-sm font-medium leading-6 text-gray-900">Eventlocation</label>
+                    <input [(ngModel)]="eventLocation" type="text" name="event-loaction" id="event-loaction" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  </div>
+                </div>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                <button (click)="createNewEvent()" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Speichern und weiter</button>
+              </div>
+            </div>
+          </form>
+        </div>        
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+
+    <!-- More Event Options (Event Structure ...). First visible after Event has been created with succsess. -->
+    <div id="event-structure" class="hidden mt-10 sm:mt-0">
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+          <div class="md:col-span-1">
+            <div class="px-4 sm:px-0">
+              <h3 class="text-base font-semibold leading-6 text-gray-900">Struktur des Events</h3>
+              <p class="mt-1 text-sm text-gray-600">Lege hier die angebotenen Speisen, Mitarbeiter sowie die anzubietenden Tische deines Events an oder bearbeite diese.</p>
+           </div>
+          </div>
+  
+          <div class="mt-5 md:col-span-2 md:mt-0">
+            <form>
+              <div class="overflow-hidden shadow sm:rounded-md">
+                <div class="bg-white px-4 py-5 sm:p-6">
+                  <div class="grid grid-cols-6 gap-6">
+  
+                    <!-- Eventname -->
+                    <div class="col-span-6 sm:col-span-2">
+                      <label for="manage-eats" class="block text-sm font-medium leading-6 text-gray-900">Speisenangebot verwalten:</label>
+                      <button name="manage-eats" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Speisenabgebot bearbeiten</button>
+                    </div>
+    
+                    <!-- Startdatum des Events -->
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="manage-staff" class="block text-sm font-medium leading-6 text-gray-900">Mitarbeiter verwalten:</label>
+                        <button name="manage-staff" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Mitarbeiter bearbeiten</button>
+                   </div>
+  
+                    <!-- Eventlocation -->
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="manage-tables" class="block text-sm font-medium leading-6 text-gray-900">Tische verwalten:</label>
+                        <button name="manage-tables" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Tische bearbeiten</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+        
+    <br>
+    <br>
+    <a [routerLink]="['/organizer']" class="font-medium text-indigo-600 hover:text-indigo-500"> &#8592; zurück zum Dashboard</a>
+
+  </div>
+</main>

@@ -1,3 +1,39 @@
-<p>dashboard works!</p>
+<header class="bg-white shadow">
+  <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard: Eventverwaltung</h1>
+  </div>
+</header>
 
-<a [routerLink]="['createevent']" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Neues Event anlegen</a>
+
+<main>
+  <div *ngIf="!eventExists; else modifyEvent" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    Es sieht so aus, als wäre noch kein Event angelegt. Nutze den Button und lege ein neues Event an!
+    <br>
+    <br>
+    <a [routerLink]="['createevent']" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Neues Event anlegen</a>
+  </div>
+
+  <ng-template #modifyEvent>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Mein Eventname</h5>
+              <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Datum vom Event</h6>
+
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+              <button [routerLink]="['modifyevent']" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Event bearbeiten</button>
+              
+              &NonBreakingSpace;
+              
+              <button class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Event löschen</button>
+            </div>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </ng-template>
+
+
+</main>

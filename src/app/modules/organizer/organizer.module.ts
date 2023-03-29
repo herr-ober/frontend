@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardOrganizerComponent } from './dashboard/dashboard.component';
 import { CreateNewEventComponent } from './create-new-event/create-new-event.component';
 import { AddProductsComponent } from './add-products/add-products.component';
+import { FormsModule } from '@angular/forms';
+import { ModifyEventComponent } from './modify-event/modify-event.component';
 
 
 
@@ -11,11 +13,13 @@ import { AddProductsComponent } from './add-products/add-products.component';
   declarations: [
     DashboardOrganizerComponent,
     CreateNewEventComponent,
-    AddProductsComponent
+    AddProductsComponent,
+    ModifyEventComponent
   ],
   imports: [
     CommonModule,
-    OrganizerRoutingModule
+    OrganizerRoutingModule,
+    FormsModule
   ]
 })
 export class OrganizerModule { }

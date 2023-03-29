@@ -2,7 +2,19 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#14213D",
+        primary_hover: "#20335E",
+        secondary: "#FCA311",
+        secondary_hover: "#FCB441",
+        gray: "#E5E5E5",
+        black: "#000000",
+        white: "#FFFFFF"
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
