@@ -15,39 +15,66 @@ export class OrderviewComponent implements OnInit {
     {id: 4, name:'Flash'}
   ];
   dborders = [
-    {id: 1, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
+    {id: 1, status:'in Bearbeitung', food:[{id:1, status:"Fertig", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
     {id: 2, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
-    {id: 5, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
-    {id: 3, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
-    {id: 4, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5},{id:3, status:"in Bearbeitung", food:"food1", amount:5},{id:4, status:"in Bearbeitung", food:"food1", amount:5},{id:5, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]}
+    {id: 3, status:'Fertig', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"Fertig", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
+    {id: 4, status:'Completed', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]},
+    {id: 5, status:'Fertig', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"Fertig", food:"food1", amount:5},{id:3, status:"in Bearbeitung", food:"food1", amount:5},{id:4, status:"in Bearbeitung", food:"food1", amount:5},{id:5, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]}
   ];
-  orders = this.dborders;
+  orders = this.createorders();
   ordervergleich = this.orders;
   constructor() { }
 
   ngOnInit(): void {
     this.add()
-    this.prepareorders()
   }
 
+  createorders(){
+    var orderlist: any[] = []
+    this.dborders.forEach(order => {
+      if(order.status == "Fertig"){
+        orderlist.push(order)
+      }
+    })
+    this.dborders.forEach(order => {
+      if(order.status == "in Bearbeitung"){
+        orderlist.push(order)
+      }
+    })
+    this.dborders.forEach(order => {
+      if(order.status == "Completed"){
+        orderlist.push(order)
+      }
+    })
 
-  prepareorders(){
-    
+    return orderlist
+  }
+  updatorders(){
+    this.dborders.forEach(order => {
+      const exists = this.orders.findIndex(element => element.id === order.id) > -1;
+      if(!exists){
+        this.orders.push(order);
+      }
+    })
 
   }
+
+  
   async add(){
     var a = 5
-    while (a < 10){
+    while (a < 100){
 
-    
+      console.log("add")
       await this.Sleep(10000)
-      this.dborders.push({id: a, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]})
+      console.log("add")
+
+      this.orders.push({id: a, status:'in Bearbeitung', food:[{id:1, status:"in Bearbeitung", food:"food1", amount:5},{id:2, status:"in Bearbeitung", food:"food1", amount:5}], drinks:[{id:1, status:"in Bearbeitung", drink:"drink1", amount:5},{id:2, status:"in Bearbeitung", drink:"drink2", amount:5}]})
       a ++
     }
   }
   fertig(orderindex: number){
     this.orders[orderindex]!.status = "Fertig"
-
+    //Datenbank order als completed marken0
   }
 
   drinkready(orderindex: number, drinkindex: number){
@@ -81,9 +108,9 @@ export class OrderviewComponent implements OnInit {
 
   }
 
-  isnotready(order: any): boolean{
+  isnotcompleted(order: any): boolean{
 
-    if(order.status == "Fertig"){
+    if(order.status == "Completed"){
 
       return false
     }
@@ -92,8 +119,23 @@ export class OrderviewComponent implements OnInit {
       return true
     }
   }
+
+  isready(order: any): boolean{
+
+    return order.status == "Fertig"
+  }
   Sleep(milliseconds: number) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
    }
 
+  
+  ostatus(orderindex: number){
+    return this.orders[orderindex].status == "Fertig"
+
+  }
+
+  async abholen(orderindex: any){
+    //await this.Sleep(10000)
+    this.orders[orderindex].status = "Completed" 
+  }
 }
