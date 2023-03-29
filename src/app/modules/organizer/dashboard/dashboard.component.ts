@@ -13,7 +13,7 @@ export class DashboardOrganizerComponent implements OnInit {
   constructor(private eventService: EventService) {
   }
 
-  private event: IEvent | undefined;
+  event: IEvent | undefined;
   eventExists: boolean = false;
 
 

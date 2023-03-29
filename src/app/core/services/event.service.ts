@@ -18,7 +18,7 @@ export class EventService {
     }
 
     async patchEvent(body: IEvent): Promise<void> {
-        return this.apiService.doPatchRequest('/events', body)
+        return this.apiService.doPatchRequest('/events', { updates: body })
     }
 
     async postEvent(body: IEvent): Promise<IEvent> {

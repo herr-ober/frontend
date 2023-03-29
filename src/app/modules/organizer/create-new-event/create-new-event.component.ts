@@ -23,8 +23,7 @@ export class CreateNewEventComponent implements OnInit {
 
 
   async createNewEvent() {
-    console.log("Speichern hier ...");
-
+    
     await this.eventService.postEvent(new Event(this.eventName!, this.eventLocation!, this.eventDate!))
     .then(res => { 
       this.displayNotification("Event wurde erfolgreich angelegt. Jetzt können weitere Eventeinstellungen bearbeitet werden.");
