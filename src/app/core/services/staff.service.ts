@@ -11,7 +11,7 @@ export class StaffService {
     constructor(private apiService: ApiService, private httpClient: HttpClient) {}
 
     async addStaff(event: IEvent, name: string, role: string) {
-        await this.apiService.doPostRequest<void>(`/events/${event.event.uuid}/staff`, {name: name, role: role})
+        await this.apiService.doPostRequest<void>(`/events/${event.uuid}/staff`, {name: name, role: role})
     }
 
     async editStaff(event: IEvent, uuid: string, name: string, role: string) {
@@ -19,7 +19,7 @@ export class StaffService {
     }
 
     async getStaffs(event: IEvent): Promise<IStaff> {
-        return firstValueFrom(this.httpClient.get<IStaff>(`http://localhost:3000/api/events/${event.event.uuid}/staff`))
+        return firstValueFrom(this.httpClient.get<IStaff>(`http://localhost:3000/api/events/${event.uuid}/staff`))
     }
 
     async deleteStaff(event: IEvent, uuid: string) {
