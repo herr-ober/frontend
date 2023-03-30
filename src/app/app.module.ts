@@ -5,8 +5,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {HeaderComponent} from './core/header/header.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PageNotFoundComponent} from './modules/error-pages/page-not-found/page-not-found.component';
 import { ApiInterceptor } from './core/services/api-interceptor.service';
 
@@ -16,18 +16,15 @@ import { ApiInterceptor } from './core/services/api-interceptor.service';
     FooterComponent,
     HeaderComponent,
     PageNotFoundComponent
-  ],
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [
-    { 
-      provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true 
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

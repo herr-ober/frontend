@@ -7,13 +7,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ModifyEventComponent} from './modify-event/modify-event.component';
 import {ManageStaff} from "./add-staff/manage-staff.component";
 
-
 @NgModule({
   declarations: [
     DashboardOrganizerComponent,
     CreateNewEventComponent,
     ModifyEventComponent,
-      ManageStaff
+    ManageStaff
   ],
     imports: [
         CommonModule,
