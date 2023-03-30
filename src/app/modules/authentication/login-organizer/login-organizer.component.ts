@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AccountOrganizerService } from '../../../core/services/accountorganizer.service';
+import { ILoginAccountOrganizer } from 'src/app/models/IAccountOrganizer';
 
 @Component({
   selector: 'app-login-organizer',
@@ -11,7 +13,7 @@ export class LoginOrganizerComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private AccountOrganizerService: AccountOrganizerService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -29,7 +31,24 @@ export class LoginOrganizerComponent implements OnInit {
       return;
     }
 
-    //API Call
+    this.loginAccountOrganizer()
 
+  }
+
+  async loginAccountOrganizer() {
+  await this.AccountOrganizerService.loginAccountOrganizer(this.loginForm.value.email, this.loginForm.value.password)
+  .then(res => {
+    console.log(res.token);
+    this.router.navigate(['/organizer']);
+  })
+    .catch(err => {
+      this.displayErrorNotification(err.error.message)
+    });
+  }
+
+  displayErrorNotification(msg: string): void {
+    let eventErrorNotification = document.getElementById("event-error-notification");
+    eventErrorNotification!.innerHTML = msg;
+    eventErrorNotification!.style.display = "block";
   }
 }
