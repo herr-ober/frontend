@@ -3,6 +3,7 @@ import { CreateNewEventComponent } from './create-new-event/create-new-event.com
 import { DashboardOrganizerComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {ManageStaff} from "./add-staff/manage-staff.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'modifyevent',
     component: ModifyEventComponent
+  },
+  {
+    path: 'add-staff',
+    component: ManageStaff
   },
   {
     path: '**',
