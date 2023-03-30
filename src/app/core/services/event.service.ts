@@ -1,7 +1,6 @@
-import { IEvent, ICreateEvent, IUpdateEvent } from './../../models/IEvent';
-import { ApiService } from "./api.service";
-import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import {ICreateEvent, IEvent, IUpdateEvent} from '../../models/IEvent';
+import {ApiService} from "./api.service";
+import {Injectable} from '@angular/core';
 
 @Injectable({
     providedIn: 'root'

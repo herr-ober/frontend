@@ -10,8 +10,8 @@ export class ApiInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let token = "eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJhY2NvdW50LXNlcnZpY2UiLCJzdWIiOiJmZmFhZjJiNy0yY2UyLTRmODEtODU1My1iMjJmNTM0MjFiMmIiLCJleHAiOjE2ODAwMDQ5NDg4MTB9.loFMTiCHkic9XtNqASGV4q7LSIXRL8wgN5-X3R5PM9r0r-Q1Gqog32f-KQOSasW9hh34bxejGypFmDXoSgk2ag";
-    
+    let token = "eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJhY2NvdW50LXNlcnZpY2UiLCJzdWIiOiIzZjlhNmQzOS1hZDZjLTRhNTEtYTBjNC0wZDE5NDE5NWRkMjQiLCJleHAiOjE2ODAxNzEwOTgyMjZ9.tF3Uvs07Git8B-mk8BylN8Ev6WJZjKzm_FYVJYL5Ro08H2Zy44Bpu9bAB9o2S5trozXbBjOjcpxRqvVzkLI3ug"
+
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`        
