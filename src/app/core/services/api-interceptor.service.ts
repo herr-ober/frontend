@@ -10,7 +10,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let token = "eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJhY2NvdW50LXNlcnZpY2UiLCJzdWIiOiJmZmFhZjJiNy0yY2UyLTRmODEtODU1My1iMjJmNTM0MjFiMmIiLCJleHAiOjE2ODAwMDQ5NDg4MTB9.loFMTiCHkic9XtNqASGV4q7LSIXRL8wgN5-X3R5PM9r0r-Q1Gqog32f-KQOSasW9hh34bxejGypFmDXoSgk2ag";
+    let token = "eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJhY2NvdW50LXNlcnZpY2UiLCJzdWIiOiIwMzBhMmNlOS1mZWM1LTRjNTQtYjdkOS0zNmE2YzljYTNmMGUiLCJleHAiOjE2ODAxODczMjUzNTN9.EvFjepfTfadOER6qvoQomc0KWSNIcJggPf8wJaDrhsIHKGaQwZNFrkjbkf_Ke3m1_Br7EgFMN7rRt7WGI0Z_vA";
     
     request = request.clone({
       setHeaders: {

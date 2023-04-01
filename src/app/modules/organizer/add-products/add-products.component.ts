@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/core/services/product.sercice';
+import { ProductService } from 'src/app/core/services/product.service';
 import { IProduct, Product } from 'src/app/models/IProduct';
 
 @Component({
@@ -16,9 +16,11 @@ export class AddProductsComponent{
   private productModalVisible: boolean = false;
 
   productName: string = "";
+  productPrice: number = 0;
+  productCategory: string="";
 
 
-  constructor(private sessionService: UserService, private productService: ProductService) { }
+  constructor(private productService: ProductService) { }
 
   @HostListener('document:click', ['$event'])
   onClick(e: MouseEvent) {
@@ -40,7 +42,7 @@ export class AddProductsComponent{
 
   async submitProducts() {
     if (this.productName) {
-      await this.productService.addNewProduct(new Product(this.productName))
+      await this.productService.addNewProduct(new Product(this.productName, this.productPrice, this.productCategory))
       .then().catch((res: HttpErrorResponse) => {
         if (res.status == 201) {
           this.switchProductAddModal();
