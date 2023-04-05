@@ -12,11 +12,11 @@ import { ApiService } from "./api.service";
   
   
     async addNewProduct(body: IProduct): Promise<void> {
-      return this.apiService.doPostRequest('/exercises', body);
+      return this.apiService.doPostRequest('/events/products', body);
     }
   
     private async getAllProducts(): Promise<IProduct[]> {
-      return await this.apiService.doGetRequest('/exercises');
+      return await this.apiService.doGetRequest('/events/products');
     }
   
   
@@ -37,7 +37,7 @@ import { ApiService } from "./api.service";
   
   
     async deleteProductById(id: string): Promise<void> {
-      return this.apiService.doDeleteRequest('/exercises/' + id, {}).then(() => {
+      return this.apiService.doDeleteRequest('/events/products/' + id, {}).then(() => {
       }).catch((res: HttpErrorResponse) => {
         console.log(res)
       })
