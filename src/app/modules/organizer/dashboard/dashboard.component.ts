@@ -10,23 +10,21 @@ import { IEvent } from 'src/app/models/IEvent';
 })
 export class DashboardOrganizerComponent implements OnInit {
 
-  constructor(private eventService: EventService) {
-  }
+  constructor(private eventService: EventService) { }
 
   event: IEvent | undefined;
   eventExists: boolean = false;
-
 
 
   ngOnInit(): void {
     this.reload();
   }
 
+
   async reload() {
     await this.eventService.getEvent()
       .then(res => {this.event = res})
       .catch((err: HttpErrorResponse) => {})
     this.eventExists = (this.event != undefined);
-    console.log(this.event)
   }
 }
