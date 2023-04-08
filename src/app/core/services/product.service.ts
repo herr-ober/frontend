@@ -1,45 +1,28 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
+import {ApiService} from "./api.service";
+import {IEvent} from "../../models/IEvent";
+import {HttpClient} from "@angular/common/http";
 import { IProduct } from "src/app/models/IProduct";
-import { ApiService } from "./api.service";
 
-@Injectable({
-    providedIn: 'root'
-  })
-  export class ProductService {
-  
-    constructor(private apiService: ApiService) { }
-  
-  
-    async addNewProduct(body: IProduct): Promise<void> {
-      return this.apiService.doPostRequest('/events/products', body);
+@Injectable({providedIn: 'root'})
+export class ProductService {
+
+    constructor(private apiService: ApiService, private httpClient: HttpClient) {}
+
+    /* async getCategories(): Promise<{categoryList: ICategories[]}> {
+        await this.apiService.doGetRequest(`/events/products/categories`)
+    } */
+    async addNewProduct(event: IEvent, name: string, category: string, price: number) {
+        await this.apiService.doPostRequest<void>(`/events/${event.uuid}/products`, {name: name, price: price, category: category})
     }
-  
-    private async getAllProducts(): Promise<IProduct[]> {
-      return await this.apiService.doGetRequest('/events/products');
+    async deleteProduct(event: IEvent, uuid: string) {
+        await this.apiService.doDeleteRequest<void>(`/events/${event.uuid}/products`, {uuid: uuid})
     }
-  
-  
-    async getAllProductsAsMap() {
-      let result: Map<string, IProduct> = new Map();
-  
-      await this.getAllProducts().then(res => {
-        result = new Map(
-          res.map(object => {
-            return [object.name, object];
-          }),
-        )
-      }).catch((res: HttpErrorResponse) => {
-        console.log(res)
-      })
-      return result;
+    async getProducts(event: IEvent): Promise<{productList: IProduct[]}>{
+        return this.apiService.doGetRequest(`/events/${event.uuid}/products`)
     }
-  
-  
-    async deleteProductById(id: string): Promise<void> {
-      return this.apiService.doDeleteRequest('/events/products/' + id, {}).then(() => {
-      }).catch((res: HttpErrorResponse) => {
-        console.log(res)
-      })
+    async getProductsByCategory(event: IEvent, uuid: string): Promise<{productList: IProduct[]}>{
+        return this.apiService.doGetRequest(`/events/${event.uuid}/products?category=${uuid}`)
     }
-  }
+    
+}
