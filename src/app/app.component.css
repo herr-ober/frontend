@@ -5,6 +5,7 @@
 }
 
 .main-content {
-  padding: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
   flex: 1;
 }
