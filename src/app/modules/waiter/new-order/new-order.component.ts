@@ -29,6 +29,28 @@ export class NewOrderComponent implements OnInit {
 
   async switchSelectedCategory(category: String) {
     console.log(category)
+
+    if (category == "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2") {
+      this.productsFromCategory = [ 
+        { name: "Cola", price: 3, category: "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2"},
+        { name: "Fanta", price: 3, category: "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2"},
+        { name: "Spezi", price: 3, category: "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2"},
+        { name: "Wasser", price: 4, category: "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2"},
+        { name: "Apfelschorle", price: 2, category: "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2"},
+        { name: "Seltzer", price: 6, category: "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2"},
+        { name: "Kirschsaft", price: 10, category: "8041cbd6-e1c1-4d85-91fc-d8cc9c3456b2"}
+      ]
+    }
+
+    else if (category == "066998d3-4305-4d02-a26f-93788f736956") {
+      this.productsFromCategory = [ 
+        { name: "Cäsar Salat", price: 3, category: "93788f736956"},
+        { name: "Kleine Pommes", price: 3, category: "93788f736956"},
+        { name: "Tomate", price: 3, category: "93788f736956"}
+      ]
+    } else {
+      this.productsFromCategory = []
+    }
   }
 
 
