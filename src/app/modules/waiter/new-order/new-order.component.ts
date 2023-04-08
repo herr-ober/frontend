@@ -21,6 +21,7 @@ export class NewOrderComponent implements OnInit {
   eventCategories: ICategory[] = []
   productsFromCategory: IProduct[] = []
 
+  temp: number = 5;
 
   ngOnInit() {
     this.reload();
@@ -51,6 +52,21 @@ export class NewOrderComponent implements OnInit {
     } else {
       this.productsFromCategory = []
     }
+  }
+
+
+  getAmountOfProductInNewOrder(uuid: string): number {
+    return this.temp;
+  }
+
+  decrementProductInNewOrder(uuid: string): void {
+    if (this.temp > 0) {
+      this.temp --;
+    }
+  }
+
+  incrementProductInNewOrder(uuid: string): void {
+    this.temp ++;
   }
 
 
