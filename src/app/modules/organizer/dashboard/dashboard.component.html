@@ -23,30 +23,30 @@
               <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{event?.location}}</h6>
 
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Startdatum: {{event?.date}}</p>
-              <button [routerLink]="['modifyevent']" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Event bearbeiten</button>
+              <button [routerLink]="['modifyevent']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Event bearbeiten</button>
               
 
                 <!-- Eventname -->
                 <div class="col-span-6 sm:col-span-2">
                   <label for="manage-eats" class="block text-sm font-medium leading-6 text-gray-900">Speisenangebot verwalten:</label>
-                  <button id="manage-eats" name="manage-eats" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Speisenabgebot bearbeiten</button>
+                  <button id="manage-eats" name="manage-eats" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Speisenabgebot bearbeiten</button>
                 </div>
 
                 <!-- Startdatum des Events -->
                 <div class="col-span-6 sm:col-span-2">
                     <label for="manage-staff" class="block text-sm font-medium leading-6 text-gray-900">Mitarbeiter verwalten:</label>
-                    <button id="manage-staff" name="manage-staff" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" [routerLink]="['add-staff']">Mitarbeiter bearbeiten</button>
+                    <button id="manage-staff" name="manage-staff" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover" [routerLink]="['add-staff']">Mitarbeiter bearbeiten</button>
               </div>
 
                 <!-- Eventlocation -->
                 <div class="col-span-6 sm:col-span-2">
                     <label for="manage-tables" class="block text-sm font-medium leading-6 text-gray-900">Tische verwalten:</label>
-                    <button id="manage-tables" name="manage-tables" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Tische bearbeiten</button>
+                    <button id="manage-tables" name="manage-tables" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Tische bearbeiten</button>
                 </div>
               
               &NonBreakingSpace;
               
-              <button class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Event löschen</button>
+              <button class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Event löschen</button>
             </div>
           </div>
         </div>
