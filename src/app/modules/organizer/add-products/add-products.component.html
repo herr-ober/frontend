@@ -1,0 +1,101 @@
+<header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Produkte</h1>
+    </div>
+  </header>
+  
+  <main>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+  
+      <!-- General Event Information. Must be filled out, before next step can be completed. -->
+      <div id="general-staff-information" class="mt-10 sm:mt-0">
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+          <div class="md:col-span-1">
+            <div class="px-4 sm:px-0">
+              <h3 class="text-base font-semibold leading-6 text-gray-900">Produkte hinzufügen</h3>
+              <p class="mt-1 text-sm text-gray-600">Hier können neue Produkte erstellt werden</p>
+           </div>
+          </div>
+  
+          <div class="mt-5 md:col-span-2 md:mt-0">
+            <form>
+              <div class="overflow-hidden shadow sm:rounded-md">
+                <form (submit)="addProduct()" [formGroup]="addProductFormGroup">
+                <div class="bg-white px-4 py-5 sm:p-6">
+                  <div class="grid grid-cols-6 gap-6">
+  
+                    <div class="col-span-6 sm:col-span-4">
+                      <label for="product-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                      <input formControlName="name" type="text" name="product-name" id="product-name" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+  
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="product-price" class="block text-sm font-medium leading-6 text-gray-900">Preis</label>
+                      <input formControlName="price" type="number" name="product-price" id="product-price" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="product-category" class="block text-sm font-medium leading-6 text-gray-900">Preis</label>
+                        <select formControlName="category" name="product-category" id="product-category" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option *ngFor="let category of productCategories" [value]="category.uuid">{{category.name}}</option>
+                        </select>
+                      </div>
+
+                  </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                  <button [disabled]="!addProductFormGroup.valid" type="submit" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Hinzufügen</button>
+                </div>
+                </form>
+              </div>
+            </form>
+          </div>        
+        </div>
+      </div>
+
+
+      <div class="mx-auto max-w-7xl py-6">
+
+        <!-- General Event Information. Must be filled out, before next step can be completed. -->
+        <div id="general-staff-list" class="mt-10 sm:mt-0">
+          <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+              <div class="px-4 sm:px-0">
+                <h3 class="text-base font-semibold leading-6 text-gray-900">Produkte löschen</h3>
+                <p class="mt-1 text-sm text-gray-600">Hier können Produkte gelöscht werden</p>
+              </div>
+            </div>
+  
+            <div class="mt-5 md:col-span-2 md:mt-0">
+                <div class="overflow-hidden shadow sm:rounded-md">
+                  <table *ngFor="let category of productsFromCategories | keyvalue" class="table-auto w-full text-left m-5">
+                    <caption>{{category.key}}</caption>
+                    <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Preis</th>
+                      <th>Löschen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let product of category.value">
+                      <td>{{product.name}}</td>
+                      <td>{{product.price}}</td>
+                      <td>
+                        <div class="flex gap-3 m-0">
+                          <button (click)="deleteProduct(product.uuid)" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Löschen</button>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a [routerLink]="['/organizer']" class="font-medium text-indigo-600 hover:text-indigo-500"> &#8592; zurück zum Dashboard</a>
+
+  </div>
+</main>
