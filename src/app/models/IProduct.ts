@@ -1,20 +1,13 @@
 
 export interface IProduct {
+    uuid: string
     name: string
     price: number
     category: string
 }
 
-
-export class Product implements IProduct {
-
+export interface ICreateProduct {
     name: string
     price: number
     category: string
-
-    constructor(name: string, price: number, category: string) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
-    }
 }
