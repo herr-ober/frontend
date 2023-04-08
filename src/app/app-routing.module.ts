@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/organizer/organizer.module').then(m => m.OrganizerModule)
   },
   {
+    path: 'waiter',
+    loadChildren: () => import('./modules/waiter/waiter.module').then(m => m.WaiterModule)
+  },
+  {
     path: '**',
     redirectTo: '404'
   }

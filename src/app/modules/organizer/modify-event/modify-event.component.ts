@@ -21,11 +21,9 @@ export class ModifyEventComponent implements OnInit {
 
   
   async updateEventDetails() {
-
-    console.log(this.eventModified.date)
-
+    //console.log(this.eventModified.date)
     await this.eventService.patchEvent( { name: this.eventModified.name, date: this.eventModified.date, location: this.eventModified.location })
-      .then(res => { })
+      .then(res => {})
       .catch()
   }
 

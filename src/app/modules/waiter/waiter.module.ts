@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NewOrderComponent } from './new-order/new-order.component';
+import { WaiterRoutingModule } from './waiter-routing.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    NewOrderComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    WaiterRoutingModule
   ]
 })
 export class WaiterModule { }
