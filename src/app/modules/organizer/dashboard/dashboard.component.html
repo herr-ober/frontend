@@ -19,17 +19,17 @@
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
             <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{event?.name}}</h5>
-              <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{event?.location}}</h6>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{event?.name}}</h5>
+              <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900">{{event?.location}}</h6>
 
-              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Startdatum: {{event?.date}}</p>
+              <p class="mb-3 font-normal text-gray-700">Startdatum: {{event?.date}}</p>
               <button [routerLink]="['modifyevent']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Event bearbeiten</button>
               
 
-                <!-- Manage Eats -->
+                <!-- Add Products -->
                 <div class="col-span-6 sm:col-span-2">
-                  <label for="manage-eats" class="block text-sm font-medium leading-6 text-gray-900">Speisenangebot verwalten:</label>
-                  <button [routerLink]="['manageeats']" name="manage-eats" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Speisenabgebot bearbeiten</button>
+                  <label for="add-products" class="block text-sm font-medium leading-6 text-gray-900">Speisenangebot verwalten:</label>
+                  <button [routerLink]="['addproduct']" name="add-products" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Speisenabgebot bearbeiten</button>
                 </div>
 
                 <!-- Startdatum des Events -->
