@@ -7,7 +7,7 @@ import { IProduct } from "src/app/models/IProduct";
 @Injectable({providedIn: 'root'})
 export class ProductService {
 
-    constructor(private apiService: ApiService, private httpClient: HttpClient) {}
+    constructor(private apiService: ApiService) {}
 
     async addProduct(event: IEvent, name: string, categoryUuid: string, price: number) {
         await this.apiService.doPostRequest<void>(`/events/${event.uuid}/products`, {name: name, price: price, categoryUuid: categoryUuid})
