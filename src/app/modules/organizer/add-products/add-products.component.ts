@@ -20,8 +20,10 @@ export class AddProductsComponent implements OnInit {
   currentEvent: IEvent = {uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
   
   productCategories: ICategory[] = [];
-  productsFromCategories!: Map<string, IProduct[]>;
   productList = Array<IProduct>();
+  productsFromCategories: Map<string, IProduct[]> = new Map([
+    ["", []],
+  ])
   
   addProductFormGroup = new FormGroup({
     name: new FormControl<string | null>(null, {validators: [Validators.required]}),
@@ -52,6 +54,7 @@ export class AddProductsComponent implements OnInit {
     console.log("2");
     this.productCategories = (await this.categoryService.getCategories()).categoryList;
     console.log("3");
+    this.productsFromCategories.delete("");
     this.productCategories.forEach(async category => {
         this.productsFromCategories.set(category.name, (await this.productService.getProductsByCategory(this.currentEvent, category.uuid)).productList)
     });

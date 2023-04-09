@@ -30,12 +30,12 @@
                     </div>
   
                     <div class="col-span-6 sm:col-span-3">
-                      <label for="product-price" class="block text-sm font-medium leading-6 text-gray-900">Preis</label>
+                      <label for="product-price" class="block text-sm font-medium leading-6 text-gray-900">Preis in €</label>
                       <input formControlName="price" type="number" name="product-price" id="product-price" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="product-category" class="block text-sm font-medium leading-6 text-gray-900">Preis</label>
+                        <label for="product-category" class="block text-sm font-medium leading-6 text-gray-900">Kategorie</label>
                         <select formControlName="category" name="product-category" id="product-category" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option *ngFor="let category of productCategories" [value]="category.uuid">{{category.name}}</option>
                         </select>
@@ -66,30 +66,34 @@
               </div>
             </div>
   
+            <!-- <ng-container *ngIf="" -->
             <div class="mt-5 md:col-span-2 md:mt-0">
-                <div class="overflow-hidden shadow sm:rounded-md">
-                  <table *ngFor="let category of productsFromCategories | keyvalue" class="table-auto w-full text-left m-5">
-                    <caption>{{category.key}}</caption>
-                    <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Preis</th>
-                      <th>Löschen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let product of category.value">
-                      <td>{{product.name}}</td>
-                      <td>{{product.price}}</td>
-                      <td>
-                        <div class="flex gap-3 m-0">
-                          <button (click)="deleteProduct(product.uuid)" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Löschen</button>
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <ng-container *ngFor="let category of productsFromCategories | keyvalue">
+                  <div *ngIf="category.value.length" class="overflow-hidden shadow sm:rounded-md">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900">{{category.key}}</h3>
+                    <table class="table-fixed w-full text-left m-5">
+                      <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Preis in €</th>
+                        <th>Löschen</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let product of category.value">
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>
+                          <div class="flex gap-3 m-0">
+                            <button (click)="deleteProduct(product.uuid)" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Löschen</button>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </ng-container>
+                
             </div>
           </div>
         </div>
