@@ -1,4 +1,3 @@
-import { ICreateOrderPositionData } from './../../../models/IOrder';
 import { CategoryService } from './../../../core/services/category.service';
 import { ICategory } from './../../../models/ICategory';
 import { IEvent } from 'src/app/models/IEvent';
@@ -21,7 +20,7 @@ export class NewOrderComponent implements OnInit {
 
   currentEvent: IEvent =  { uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
   newOrder: ICreateNewOrder = { eventUuid: "", staffUuid: "", tableUuid: "", positions: [] }
-  eventCategories: ICategory[] = []
+  productCategories: ICategory[] = []
   productsFromCategory: IProduct[] = []
 
   private reviewOrderModalVisible: boolean = false;
@@ -32,16 +31,12 @@ export class NewOrderComponent implements OnInit {
   }
 
 
-
   async switchSelectedCategory(category: string) {
-    console.log(category)
-
     await this.productService.getProductsByCategory(this.currentEvent, category)
     .then(res => {
       this.productsFromCategory = res.productList
     })
     .catch((err: HttpErrorResponse) => {})
-
   }
 
 
@@ -54,11 +49,19 @@ export class NewOrderComponent implements OnInit {
     return 0;
   }
 
+
+  /* Deletes products from array, if ordererd amout has been reduced back down to 0 */
   decrementProductInNewOrder(uuid: string): void {
     let pos = this.newOrder.positions.findIndex(e => e.productUuid === uuid);
 
     if (pos > -1 && this.newOrder.positions[pos].amount > 0) {
       this.newOrder.positions[pos].amount --;
+
+      /* Only returns products with order amouts > 0 */
+      let filtered = this.newOrder.positions.filter(function (el) {
+        return el.amount > 0;
+      });
+      this.newOrder.positions = filtered;
     }
   }
 
@@ -86,7 +89,7 @@ export class NewOrderComponent implements OnInit {
 
     await this.categoryService.getCategories()
     .then(res => {
-      this.eventCategories = res.categoryList
+      this.productCategories = res.categoryList
     })
     .catch((err: HttpErrorResponse) => {})
   }
