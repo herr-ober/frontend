@@ -32,16 +32,16 @@
                   <button [routerLink]="['addproduct']" name="add-products" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Speisenabgebot bearbeiten</button>
                 </div>
 
-                <!-- Startdatum des Events -->
+                <!-- Add Staff -->
                 <div class="col-span-6 sm:col-span-2">
                     <label for="manage-staff" class="block text-sm font-medium leading-6 text-gray-900">Mitarbeiter verwalten:</label>
                     <button id="manage-staff" name="manage-staff" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover" [routerLink]="['add-staff']">Mitarbeiter bearbeiten</button>
               </div>
 
-                <!-- Eventlocation -->
+                <!-- Add Tables -->
                 <div class="col-span-6 sm:col-span-2">
-                    <label for="manage-tables" class="block text-sm font-medium leading-6 text-gray-900">Tische verwalten:</label>
-                    <button id="manage-tables" name="manage-tables" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Tische bearbeiten</button>
+                    <label for="add-tables" class="block text-sm font-medium leading-6 text-gray-900">Tische verwalten:</label>
+                    <button [routerLink]="['addtables']" id="add-tables" name="add-tables" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Tische bearbeiten</button>
                 </div>
               
               &NonBreakingSpace;

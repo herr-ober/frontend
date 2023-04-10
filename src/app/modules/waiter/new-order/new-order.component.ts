@@ -7,7 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from 'src/app/models/IProduct';
 import { ICreateNewOrder } from 'src/app/models/IOrder';
 import { ProductService } from 'src/app/core/services/product.service';
-import { ITable } from 'src/app/models/Itable';
+import { ITable } from 'src/app/models/ITable';
 import { TableService } from 'src/app/core/services/table.service';
 
 @Component({

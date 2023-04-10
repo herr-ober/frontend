@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {ManageStaff} from "./add-staff/manage-staff.component";
 import { AddProductsComponent } from './add-products/add-products.component';
+import { AddtablesComponent } from './add-tables/add-tables.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'addproduct',
     component: AddProductsComponent
+  },
+  {
+    path: 'addtables',
+    component: AddtablesComponent
   },
   {
     path: 'add-staff',
