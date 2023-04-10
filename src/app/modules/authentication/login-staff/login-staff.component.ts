@@ -28,7 +28,7 @@ export class LoginStaffComponent implements OnInit {
       return;
     }
 
-    //API Call
+    //API Call for checking code
 
   }
 }
