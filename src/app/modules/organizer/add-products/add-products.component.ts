@@ -20,7 +20,6 @@ export class AddProductsComponent implements OnInit {
   currentEvent: IEvent = {uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
   
   productCategories: ICategory[] = [];
-  productList = Array<IProduct>();
   productsFromCategories: Map<string, IProduct[]> = new Map([
     ["", []],
   ])
@@ -49,16 +48,12 @@ export class AddProductsComponent implements OnInit {
   }
 
   async reload() {
-    console.log("1");
     this.currentEvent = await this.eventService.getEvent();
-    console.log("2");
     this.productCategories = (await this.categoryService.getCategories()).categoryList;
-    console.log("3");
     this.productsFromCategories.delete("");
     this.productCategories.forEach(async category => {
         this.productsFromCategories.set(category.name, (await this.productService.getProductsByCategory(this.currentEvent, category.uuid)).productList)
     });
-    console.log("4");
     console.log(this.productsFromCategories);
     
   }

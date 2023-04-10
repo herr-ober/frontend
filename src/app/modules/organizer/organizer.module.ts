@@ -7,6 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ModifyEventComponent} from './modify-event/modify-event.component';
 import {ManageStaff} from "./add-staff/manage-staff.component";
 import { AddProductsComponent } from './add-products/add-products.component';
+import { AddtablesComponent } from './add-tables/add-tables.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AddProductsComponent } from './add-products/add-products.component';
     CreateNewEventComponent,
     ModifyEventComponent,
     ManageStaff,
-    AddProductsComponent
+    AddProductsComponent,
+    AddtablesComponent
   ],
     imports: [
         CommonModule,
