@@ -90,9 +90,10 @@ export class NewOrderComponent implements OnInit {
 
   async submitNewOrder(){
     if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
+      console.log(this.newOrder)
+      this.orderService.postOrder(this.newOrder, this.currentEvent);
     } else {
       console.log("Fehler")
-      this.orderService.postOrder(this.newOrder);
     }
   }
 

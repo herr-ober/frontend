@@ -11,7 +11,7 @@ export class OrderService {
 
     constructor(private apiService: ApiService) { }
 
-    async postOrder(body: ICreateNewOrder): Promise<IEvent> {
-        return this.apiService.doPostRequest('/events', body)
+    async postOrder(body: ICreateNewOrder, event: IEvent): Promise<ICreateNewOrder> {
+        return this.apiService.doPostRequest(`/events/${event.uuid}/orders`, { body } )
     }
 }
