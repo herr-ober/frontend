@@ -60,7 +60,7 @@
                 <div class="grid grid-cols-2 gap-6">
                   <div class="col-span-2 sm:col-span-2">
 
-                    <div *ngFor="let position of newOrder.positions" class="grow bg-white text-sm font-medium leading-6 text-gray-900">
+                    <div *ngFor="let position of newOrder.positions" class="grow bg-white text-sm text-gray-900">
                       {{position.amount}}x: {{convertProductUuidToProductName(position.productUuid)}}
                     </div>                  
                   </div>
