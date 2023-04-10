@@ -21,12 +21,14 @@
             </div>
             <div *ngIf="submitted && loginForm.controls['token'].errors?.['minlength']">
               <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                <p>Username must be at least 8 characters long</p>
+                <p>Token must be at least 16 characters long</p>
               </div>
             </div>
         </div>   
       </div>
   
+      <div id="login-error-notification" class="hidden p-4 mb-4 text-sm text-error bg-error_background rounded-lg dark:bg-error_background dark:text-error" role="alert"></div>
+
         <button
           type="submit"
           [ngClass]="{'opacity-50 cursor-not-allowed': !loginForm.valid}"

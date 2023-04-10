@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AccountStaffService } from '../../../core/services/accountstaff.service';
+import { ILoginAccountStaff } from 'src/app/models/IAccountStaff';
 
 @Component({
   selector: 'app-login-organizer',
@@ -28,7 +30,13 @@ export class LoginStaffComponent implements OnInit {
       return;
     }
 
-    //API Call for checking code
+    //this.loginAccountStaff ()
 
+  }
+
+  displayErrorNotification(msg: string): void {
+    let eventErrorNotification = document.getElementById("login-error-notification");
+    eventErrorNotification!.innerHTML = msg;
+    eventErrorNotification!.style.display = "block";
   }
 }
