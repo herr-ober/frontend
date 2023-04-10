@@ -48,10 +48,9 @@ export class RegisterOrganizerComponent implements OnInit {
   }
 
   displayErrorNotification(msg: string): void {
-    let eventErrorNotification = document.getElementById("event-error-notification");
+    let eventErrorNotification = document.getElementById("register-error-notification");
     eventErrorNotification!.innerHTML = msg;
     eventErrorNotification!.style.display = "block";
   }
-
 }
 
