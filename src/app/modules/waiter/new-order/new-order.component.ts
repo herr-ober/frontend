@@ -9,6 +9,7 @@ import { ICreateNewOrder } from 'src/app/models/IOrder';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ITable } from 'src/app/models/Itable';
 import { TableService } from 'src/app/core/services/table.service';
+import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
   selector: 'app-new-order',
@@ -18,7 +19,7 @@ import { TableService } from 'src/app/core/services/table.service';
 
 export class NewOrderComponent implements OnInit {
 
-  constructor (private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService) {}
+  constructor (private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService) {}
 
   currentEvent: IEvent =  { uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
   newOrder: ICreateNewOrder = { eventUuid: "", staffUuid: "", tableUuid: "", positions: [] };
@@ -91,6 +92,7 @@ export class NewOrderComponent implements OnInit {
     if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
     } else {
       console.log("Fehler")
+      this.orderService.postOrder(this.newOrder);
     }
   }
 
@@ -155,13 +157,11 @@ export class NewOrderComponent implements OnInit {
   }
 
   convertProductUuidToProductName(uuid: string): string {
-
     let pos = this.allProducts.findIndex(e => e.uuid === uuid);
     return this.allProducts[pos].name;
   }
 
   convertTableUuidToTableNumber(uuid: string): any {
-
     if (uuid != "") {
       let pos = this.tablesOfEvent.findIndex(e => e.uuid === uuid);
       return this.tablesOfEvent[pos].tableNumber;
