@@ -12,3 +12,14 @@ export interface ICreateOrderPositionData {
     productUuid: string
     amount: number
 }
+
+export interface IOrder {
+
+    uuid: string
+    eventUuid: string
+    staffUuid: string
+    tableUuid: string
+    paid: boolean
+    status: string
+    positions: ICreateOrderPositionData[]
+}
