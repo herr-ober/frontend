@@ -2,8 +2,6 @@ import { IProduct } from "./IProduct";
 
 export interface ICreateNewOrder {
 
-    eventUuid: string
-    staffUuid: string
     tableUuid: string
     positions: ICreateOrderPositionData[]
 }

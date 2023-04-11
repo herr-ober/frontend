@@ -22,7 +22,7 @@ export class NewOrderComponent implements OnInit {
   constructor (private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService) {}
 
   currentEvent: IEvent =  { uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
-  newOrder: ICreateNewOrder = { eventUuid: "", staffUuid: "", tableUuid: "", positions: [] };
+  newOrder: ICreateNewOrder = { tableUuid: "", positions: [] };
   /* Super unschön, aber leider bekomme ich sonst nirgendwo her den Name des Produkts in der Bestellung */
   allProducts: IProduct[] = [];
   productCategories: ICategory[] = [];
@@ -32,6 +32,8 @@ export class NewOrderComponent implements OnInit {
 
   private reviewOrderModalVisible: boolean = false;
   private selectTableModalVisible: boolean = false;
+  private orderConfirmationModalVisible: boolean = false;
+
 
   
   ngOnInit() {
@@ -77,7 +79,6 @@ export class NewOrderComponent implements OnInit {
       this.newOrder.positions[pos].amount ++;
     /* If no order what so ever has been initialized yet ... */
     } else {
-      this.newOrder.eventUuid = this.currentEvent.uuid
       this.newOrder.positions[this.newOrder.positions.length] = { productUuid: uuid, amount: 1}
     }
   }
@@ -91,7 +92,11 @@ export class NewOrderComponent implements OnInit {
   async submitNewOrder(){
     if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
       console.log(this.newOrder)
-      this.orderService.postOrder(this.newOrder, this.currentEvent);
+
+      await this.orderService.postOrder(this.newOrder, this.currentEvent)    
+      .then(res => { this.switchReviewNewOrderModal() })
+      .catch(err => { });
+
     } else {
       console.log("Fehler")
     }
@@ -100,7 +105,7 @@ export class NewOrderComponent implements OnInit {
 
   private async reload() {
     await this.eventService.getEvent()
-    .then(res => { this.currentEvent = res; this.newOrder.eventUuid = res.uuid })
+    .then(res => { this.currentEvent = res })
     .catch((err: HttpErrorResponse) => {})
 
     await this.categoryService.getCategories()
@@ -126,6 +131,8 @@ export class NewOrderComponent implements OnInit {
         this.switchReviewNewOrderModal();
       } else if (this.selectTableModalVisible && (clickedID == "select-table-modal-background")) {
         this.switchSelectTableModal();
+      } else if (this.orderConfirmationModalVisible && (clickedID == "order-confirmation-modal-background")) {
+        this.switchOrderConfirmationModal();
       }
     }
   }
@@ -153,6 +160,19 @@ export class NewOrderComponent implements OnInit {
       } else {
         selectTableModal!.style.display = "none";
         this.selectTableModalVisible = false;
+      }
+    }
+  }
+
+  switchOrderConfirmationModal() {
+    let confirmationOrderModal = document.getElementById("order-confirmation-modal");
+    if (confirmationOrderModal !== null) {
+      if (!this.orderConfirmationModalVisible) {
+        confirmationOrderModal!.style.display = "block";
+        this.orderConfirmationModalVisible = true;
+      } else {
+        confirmationOrderModal!.style.display = "none";
+        this.orderConfirmationModalVisible = false;
       }
     }
   }
