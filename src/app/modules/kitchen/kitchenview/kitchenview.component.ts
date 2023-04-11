@@ -18,7 +18,7 @@ export class KitchenviewComponent {
       id: 1,
       status: "Waiting",
       food: [
-        { id: 1, status: "Fertig", food: "food1", amount: 5 },
+        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
         { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
       ],
       drinks: [
