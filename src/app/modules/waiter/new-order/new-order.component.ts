@@ -5,7 +5,7 @@ import { EventService } from './../../../core/services/event.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from 'src/app/models/IProduct';
-import { ICreateNewOrder } from 'src/app/models/IOrder';
+import { ICreateNewOrder, IOrder } from 'src/app/models/IOrder';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ITable } from 'src/app/models/ITable';
 import { TableService } from 'src/app/core/services/table.service';
@@ -23,12 +23,15 @@ export class NewOrderComponent implements OnInit {
 
   currentEvent: IEvent =  { uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
   newOrder: ICreateNewOrder = { tableUuid: "", positions: [] };
+  
+  submittedOrderUuid: string = "";
+  submittedOrder: IOrder = {uuid: "", eventUuid: "", staffUuid: "", tableUuid: "", paid: false, status: "", positions: []}
+
   /* Super unschön, aber leider bekomme ich sonst nirgendwo her den Name des Produkts in der Bestellung */
   allProducts: IProduct[] = [];
   productCategories: ICategory[] = [];
   productsFromCategory: IProduct[] = [];
   tablesOfEvent: ITable[] = [];
-
 
   private reviewOrderModalVisible: boolean = false;
   private selectTableModalVisible: boolean = false;
@@ -94,7 +97,10 @@ export class NewOrderComponent implements OnInit {
       console.log(this.newOrder)
 
       await this.orderService.postOrder(this.newOrder, this.currentEvent)    
-      .then(res => { this.switchReviewNewOrderModal() })
+      .then(res => { 
+        this.submittedOrderUuid = res.orderUuid
+        this.switchReviewNewOrderModal(); 
+      })
       .catch(err => { });
 
     } else {
@@ -164,10 +170,11 @@ export class NewOrderComponent implements OnInit {
     }
   }
 
-  switchOrderConfirmationModal() {
+  async switchOrderConfirmationModal() {
     let confirmationOrderModal = document.getElementById("order-confirmation-modal");
     if (confirmationOrderModal !== null) {
       if (!this.orderConfirmationModalVisible) {
+
         confirmationOrderModal!.style.display = "block";
         this.orderConfirmationModalVisible = true;
       } else {
