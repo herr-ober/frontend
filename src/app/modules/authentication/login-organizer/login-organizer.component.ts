@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountOrganizerService } from '../../../core/services/accountorganizer.service';
 import { ILoginAccountOrganizer } from 'src/app/models/IAccountOrganizer';
+import { AuthenticationService } from '../../../core/services/auth.service';
+
 
 @Component({
   selector: 'app-login-organizer',
@@ -38,7 +40,9 @@ export class LoginOrganizerComponent implements OnInit {
   async loginAccountOrganizer() {
   await this.AccountOrganizerService.loginAccountOrganizer(this.loginForm.value.email, this.loginForm.value.password)
   .then(res => {
-    console.log(res.token);
+
+    localStorage.setItem('token', res.token)
+    
     this.router.navigate(['/organizer']);
   })
     .catch(err => {
