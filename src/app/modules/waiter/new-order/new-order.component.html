@@ -130,7 +130,7 @@
                   <div class="col-span-2 sm:col-span-2">
 
                     <div *ngFor="let position of submittedOrder.positions" class="grow bg-white text-sm text-gray-900">
-                      {{position.amount}}x {{convertProductUuidToProductName(position.productUuid)}} a {{convertProductUuidToPrice(position.productUuid)}}
+                      {{position.amount}}x {{convertProductUuidToProductName(position.productUuid)}} a {{convertProductUuidToPrice(position.productUuid)}} Euro
                     </div>              
                     Totaler Bestelungswert: {{calcTotalAmountOfOrder()}} Euro   
                   </div>
