@@ -2,7 +2,6 @@ import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
 import { FormGroup, Validators, FormControl} from "@angular/forms";
 import { IEvent } from 'src/app/models/IEvent';
-import { CategoryService } from 'src/app/core/services/category.service';
 import { TableService } from 'src/app/core/services/table.service';
 import { ITable } from 'src/app/models/ITable';
 

@@ -26,6 +26,7 @@ export class NewOrderComponent implements OnInit {
   
   submittedOrderUuid: string = "";
   submittedOrder: IOrder = {uuid: "", eventUuid: "", staffUuid: "", tableUuid: "", paid: false, status: "", positions: []}
+  totalAmountSubmittedOrder: number = 0;
 
   /* Super unschön, aber leider bekomme ich sonst nirgendwo her den Name des Produkts in der Bestellung */
   allProducts: IProduct[] = [];
@@ -94,15 +95,12 @@ export class NewOrderComponent implements OnInit {
 
   async submitNewOrder(){
     if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
-      console.log(this.newOrder)
 
       await this.orderService.postOrder(this.newOrder, this.currentEvent)    
       .then(res => { 
         this.submittedOrderUuid = res.orderUuid
-        this.switchReviewNewOrderModal(); 
-      })
+        this.switchOrderConfirmationModal() })
       .catch(err => { });
-
     } else {
       console.log("Fehler")
     }
@@ -170,10 +168,16 @@ export class NewOrderComponent implements OnInit {
     }
   }
 
-  async switchOrderConfirmationModal() {
+  async switchOrderConfirmationModal() {    
+    this.switchReviewNewOrderModal();
     let confirmationOrderModal = document.getElementById("order-confirmation-modal");
+    
     if (confirmationOrderModal !== null) {
       if (!this.orderConfirmationModalVisible) {
+
+        await this.orderService.getOrderbyUuid(this.submittedOrderUuid)
+        .then(res => { this.submittedOrder = res })
+        .catch((err: HttpErrorResponse) => {})
 
         confirmationOrderModal!.style.display = "block";
         this.orderConfirmationModalVisible = true;
@@ -195,5 +199,21 @@ export class NewOrderComponent implements OnInit {
       return this.tablesOfEvent[pos].tableNumber;
     }
     return "";
+  }
+
+
+  convertProductUuidToPrice(uuid: string): number {
+    let pos = this.allProducts.findIndex(e => e.uuid === uuid);
+    return this.allProducts[pos].price  
+  }
+
+  calcTotalAmountOfOrder(): number {
+
+    let total = 0;
+
+    for (let position of this.submittedOrder.positions) {
+      total = total + position.amount * this.convertProductUuidToPrice(position.productUuid); 
+    }
+    return total;
   }
 }
