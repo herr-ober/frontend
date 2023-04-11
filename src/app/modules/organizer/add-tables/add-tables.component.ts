@@ -10,7 +10,6 @@ import { ITable } from 'src/app/models/ITable';
   templateUrl: './add-tables.component.html'
 })
 
-
 export class AddtablesComponent implements OnInit {
 
   constructor(private tableService: TableService, private eventService: EventService) { }
