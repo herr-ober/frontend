@@ -1,4 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 import { EventService } from './../../../core/services/event.service';
 import { Component, OnInit } from '@angular/core';
 import { IEvent } from 'src/app/models/IEvent';
@@ -10,7 +12,7 @@ import { IEvent } from 'src/app/models/IEvent';
 })
 export class DashboardOrganizerComponent implements OnInit {
 
-  constructor(private eventService: EventService) { }
+  constructor(private router: Router, private eventService: EventService) { }
 
   event: IEvent | undefined;
   eventExists: boolean = false;
@@ -26,5 +28,10 @@ export class DashboardOrganizerComponent implements OnInit {
       .then(res => {this.event = res})
       .catch((err: HttpErrorResponse) => {})
     this.eventExists = (this.event != undefined);
+  }
+
+  async logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['']);   
   }
 }
