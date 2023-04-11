@@ -201,16 +201,13 @@ export class NewOrderComponent implements OnInit {
     return "";
   }
 
-
   convertProductUuidToPrice(uuid: string): number {
     let pos = this.allProducts.findIndex(e => e.uuid === uuid);
     return this.allProducts[pos].price  
   }
 
   calcTotalAmountOfOrder(): number {
-
     let total = 0;
-
     for (let position of this.submittedOrder.positions) {
       total = total + position.amount * this.convertProductUuidToPrice(position.productUuid); 
     }
