@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { ITable } from 'src/app/models/ITable';
 import { TableService } from 'src/app/core/services/table.service';
 import { OrderService } from 'src/app/core/services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-order',
@@ -19,7 +20,7 @@ import { OrderService } from 'src/app/core/services/order.service';
 
 export class NewOrderComponent implements OnInit {
 
-  constructor (private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService) {}
+  constructor (private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService, private router: Router) {}
 
   currentEvent: IEvent =  { uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
   newOrder: ICreateNewOrder = { tableUuid: "", positions: [] };
@@ -28,7 +29,7 @@ export class NewOrderComponent implements OnInit {
   submittedOrder: IOrder = {uuid: "", eventUuid: "", staffUuid: "", tableUuid: "", paid: false, status: "", positions: []}
   totalAmountSubmittedOrder: number = 0;
 
-  /* Super unschön, aber leider bekomme ich sonst nirgendwo her den Name des Produkts in der Bestellung */
+  /* Super unschön, aber leider bekomme ich sonst nirgendwo her den Name des Produkts und den Preis in der Bestellung */
   allProducts: IProduct[] = [];
   productCategories: ICategory[] = [];
   productsFromCategory: IProduct[] = [];
@@ -102,8 +103,17 @@ export class NewOrderComponent implements OnInit {
         this.switchOrderConfirmationModal() })
       .catch(err => { });
     } else {
-      console.log("Fehler")
+      this.displayErrorNotification("Die Bestellung darf nicht leer sein und muss einem Tisch zugewiesen sein.")
     }
+  }
+
+  async markOrderAsPaid() {
+    await this.orderService.patchOrder( { uuid: this.submittedOrderUuid, updates: { paid: true }})
+    .then(res => { 
+      this.switchOrderConfirmationModal()
+      this.router.navigate(['/waiter']);
+    })
+    .catch(err => { })
   }
 
 
@@ -147,7 +157,6 @@ export class NewOrderComponent implements OnInit {
       if (!this.reviewOrderModalVisible) {
         reviewNewOrderModal!.style.display = "block";
         this.reviewOrderModalVisible = true;
-        console.log(this.newOrder)
       } else {
         reviewNewOrderModal!.style.display = "none";
         this.reviewOrderModalVisible = false;
@@ -169,7 +178,6 @@ export class NewOrderComponent implements OnInit {
   }
 
   async switchOrderConfirmationModal() {    
-    this.switchReviewNewOrderModal();
     let confirmationOrderModal = document.getElementById("order-confirmation-modal");
     
     if (confirmationOrderModal !== null) {
@@ -212,5 +220,11 @@ export class NewOrderComponent implements OnInit {
       total = total + position.amount * this.convertProductUuidToPrice(position.productUuid); 
     }
     return total;
+  }
+
+  displayErrorNotification(msg: string): void {
+    let eventErrorNotification = document.getElementById("review-order-notification");
+    eventErrorNotification!.innerHTML = msg;
+    eventErrorNotification!.style.display = "block";
   }
 }

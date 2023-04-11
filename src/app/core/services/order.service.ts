@@ -19,7 +19,7 @@ export class OrderService {
         return this.apiService.doGetRequest(`/events/orders/${uuid}`)
     }
 
-    async patchOrder(body: IUpdateEvent): Promise<void> {
-        return this.apiService.doPatchRequest('/events', { updates: body })
+    async patchOrder(body: any): Promise<void> {
+        return this.apiService.doPatchRequest(`/events/orders`, body)
     }
 }

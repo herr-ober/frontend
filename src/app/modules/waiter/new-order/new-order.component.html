@@ -51,6 +51,11 @@
             <div class="sm:flex sm:items-start">
 
               <div class="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+
+                <!-- Error-Message -->
+                <div id="review-order-notification" class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                </div>
+
                 <h3 class="text-lg font-medium leading-6 text-primary">Bestellung überprüfen</h3>
 
                 <p class="text-sm text-gray-900">Die aufgegebene Bestellung sowie Informationen nochmals vor der Aufgabe an die Küche überprüfen.</p>
@@ -72,7 +77,7 @@
               <button (click)="submitNewOrder()" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Abschicken</button>
             </div>
 
-          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -123,19 +128,22 @@
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 class="text-lg font-medium leading-6 text-primary">Bestellung wurde aufgegeben</h3>
 
-              <p class="text-sm text-gray-500 py-1">Übersicht über die aufegebene Bestellung:</p>
-
+              <p class="text-sm text-gray-500 py-1">Übersicht über die aufgegebene Bestellung:</p>
 
                 <div class="grid grid-cols-2 gap-6">
                   <div class="col-span-2 sm:col-span-2">
                     <div *ngFor="let position of submittedOrder.positions" class="grow bg-white text-sm text-gray-900">
                       {{position.amount}}x {{convertProductUuidToProductName(position.productUuid)}} a {{convertProductUuidToPrice(position.productUuid)}} Euro
-                    </div>              
+                    </div>   
+                    <br>           
                     Totaler Bestelungswert: {{calcTotalAmountOfOrder()}} Euro   
                   </div>
                 </div>
-
             </div>
+          </div>
+        
+          <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
+            <button (click)="markOrderAsPaid()" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Bestellung als bezhalt markieren</button>
           </div>
         </div>
       </div>
