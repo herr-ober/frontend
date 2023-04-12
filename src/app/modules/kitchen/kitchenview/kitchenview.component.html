@@ -53,7 +53,9 @@
     </div>
   </div>
   <div>
-    <div class="ml-4 text-xl"><b>In Bearbeitung</b></div>
+    <div class="flex justify-between ml-4 text-xl"><b>In Bearbeitung</b>
+      <button (click)="logout()" class="flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Logout</button>
+    </div>
     <div *ngFor="let order of dborders; let o = index" [attr.data-index]="o">
       <div *ngIf="inProgress(order)">
         <div class=" m-2 p-2 rounded-lg place-self-stretch bg-gray-300	">

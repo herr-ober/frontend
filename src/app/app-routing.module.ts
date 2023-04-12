@@ -3,7 +3,7 @@ import { WaiterModule } from './modules/waiter/waiter.module';
 import { KitchenModule } from './modules/kitchen/kitchen.module';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import { AuthGuard } from './core/services/guard.service';
+import { AuthGuard, AuthGuardStaffKitchen, AuthGuardStaffWaiter } from './core/services/guard.service';
 
 const routes: Routes = [
   {
@@ -27,14 +27,6 @@ const routes: Routes = [
   },
   {
     canActivate: [AuthGuard],
-    path: 'kitchen',
-    loadChildren: () => import('./modules/kitchen/kitchen.module').then(m => m.KitchenModule)
-  },
-  {
-    path: 'waiter',
-    loadChildren: () => import('./modules/waiter/waiter.module').then(m => m.WaiterModule)
-  },
-  {
     path: 'kitchen',
     loadChildren: () => import('./modules/kitchen/kitchen.module').then(m => m.KitchenModule)
   },

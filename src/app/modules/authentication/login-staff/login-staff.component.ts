@@ -13,11 +13,11 @@ export class LoginStaffComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private AccountStaffService: AccountStaffService, private router: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      token: ['', [Validators.required, Validators.minLength(16)]]
+      code: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -30,8 +30,32 @@ export class LoginStaffComponent implements OnInit {
       return;
     }
 
-    //this.loginAccountStaff ()
+    this.loginAccountStaff ()
 
+  }
+
+  async loginAccountStaff () {
+    await this.AccountStaffService.loginAccountStaff(this.loginForm.value.code)
+    .then(res => {
+      console.log(res.token)
+      localStorage.setItem('token', res.token)
+      //localStorage.setItem('roll', res.roll)
+      
+      this.router.navigate(['/waiter']);
+
+      /*
+      if (localStorage.getItem('roll') == "waiter") {
+        this.router.navigate(['/waiter']);
+      } else if (localStorage.getItem('roll') == "kitchen"){
+        this.router.navigate(['/kitchen']);
+      } else {
+        this.router.navigate(['']);
+      }
+      */ 
+    })
+      .catch(err => {
+        this.displayErrorNotification(err.error.message)
+      });
   }
 
   displayErrorNotification(msg: string): void {

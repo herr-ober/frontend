@@ -36,6 +36,7 @@ export class DashboardOrganizerComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['']);   
   }
+  
   openModal() {
     this.createModal = true;
     }

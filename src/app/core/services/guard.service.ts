@@ -7,12 +7,51 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        if (localStorage.getItem('roll')) {
+            alert("Not allowed to view this page")
+            this.router.navigate(['']);
+            return false;
+        }
+
         if (localStorage.getItem('token')) {
-            // logged in so return true
             return true;
         }
 
-        // not logged in so redirect to login page with the return url
+        alert("Not allowed to view this page")
+        this.router.navigate(['']);
+        return false;
+    }
+}
+
+export class AuthGuardStaffWaiter implements CanActivate {
+
+    constructor(private router: Router) { }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        //if (localStorage.getItem('roll') == "waiter") {
+            if (localStorage.getItem('token')) {
+                return true;
+            }
+        //}
+
+        alert("Not allowed to view this page")
+        this.router.navigate(['']);
+        return false;
+    }
+}
+
+export class AuthGuardStaffKitchen implements CanActivate {
+
+    constructor(private router: Router) { }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        //if (localStorage.getItem('roll') == "kitchen") {
+            if (localStorage.getItem('token')) {
+                return true;
+            }
+        //}
+
+        alert("Not allowed to view this page")
         this.router.navigate(['']);
         return false;
     }

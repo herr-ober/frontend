@@ -1,7 +1,7 @@
 export interface IAccountStaff {
-    token: string
+    code: string
 }
 
 export interface ILoginAccountStaff {
-    token: string
+    code: string
 }

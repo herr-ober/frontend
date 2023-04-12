@@ -167,4 +167,10 @@ export class WaiterviewComponent implements OnInit{
     return ""
     
   }
+
+  async logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('roll');
+    this.router.navigate(['']);   
+  }
 }
