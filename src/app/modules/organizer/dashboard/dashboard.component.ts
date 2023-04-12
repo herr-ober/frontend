@@ -18,6 +18,8 @@ export class DashboardOrganizerComponent implements OnInit {
   eventExists: boolean = false;
 
 
+  createModal: Boolean = false;
+
   ngOnInit(): void {
     this.reload();
   }
@@ -34,4 +36,7 @@ export class DashboardOrganizerComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['']);   
   }
+  openModal() {
+    this.createModal = true;
+    }
 }

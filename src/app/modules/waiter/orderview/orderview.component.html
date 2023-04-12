@@ -1,0 +1,97 @@
+<header class="bg-white shadow">
+  <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Alle Bestellungen</h1>
+  </div>
+  <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+    <button (click)="startOrder()" class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Bestellung aufnehmen</button>
+    &nbsp;
+    <button (click)="activeOrders()" class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Aktive Bestellungen</button>
+  </div>
+</header>
+<div class="container-wrapper mt-2">
+  <div *ngFor="let order of dborders; let o = index" [attr.data-index]="o">
+    <div *ngIf="isnotcompleted(order)">
+      <div class="container row-auto p-2 rounded-lg place-self-stretch bg-gray-300 flex flex-col" id="container">
+        <div class="grid grid-cols-2 content-center mb-2">
+          <div class="text-xl">
+            <b>Bestellung {{order.orderId}}  -  Tisch {{order.tablename!}}</b>
+          </div>
+          <div class="text-sm text-right content-center">
+            <div class="rounded-full bg-lime-600  text-white content px-7 py-1 inline content-center"
+              [ngStyle]="{'background-color': ostatus(order)? '#65a30d' : 'black'}">
+              {{getGermanText(order.status)}}
+            </div>
+          </div>
+        </div>
+        <div class="grid max-[370px]:grid-rows-2 min-[371px]:grid-cols-2 content-center mb-2">
+          <div>
+            <div *ngFor="let food of order.positions; let f = index" [attr.data-index]="f">
+              <div *ngIf="isfood(food.category!)" class="row-auto my-2">
+                  <div *ngIf="positionStatusWaiting(food)">
+                      <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                        {{food.amount}}
+                      </div>
+                      <div class="inline">
+                        {{food.name}}
+                      </div>
+                    </div>
+                    <div *ngIf="positionStatusReady(food)">
+                      <div class="rounded-full text-white  px-2" style="display: inline-block; background-color:#65a30d">
+                        {{food.amount}}
+                      </div>
+                      <div class="inline">
+                        {{food.name}}
+                      </div>
+                    </div>
+                    <div *ngIf="positionStatusDelivered(food)">
+                      <div class="rounded-full text-white  px-2" style="display: inline-block; background-color:#0020af">
+                        {{food.amount}}
+                      </div>
+                      <div class="inline">
+                        {{food.name}}
+                      </div>
+                    </div>
+              </div>
+
+            </div>
+            <hr style="border-top: 2px solid #000000;">
+            <div  *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
+              <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
+                  <div *ngIf="positionStatusWaiting(drink)">
+                      <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                        {{drink.amount}}
+                      </div>
+                      <div class="inline">
+                        {{drink.name}}
+                      </div>
+                    </div>
+                    <div *ngIf="positionStatusReady(drink)">
+                      <div class="rounded-full text-white  px-2" style="display: inline-block; background-color:#65a30d">
+                        {{drink.amount}}
+                      </div>
+                      <div class="inline">
+                        {{drink.name}}
+                      </div>
+                    </div>
+                    <div *ngIf="positionStatusDelivered(drink)">
+                      <div class="rounded-full text-white  px-2" style="display: inline-block; background-color:#0020af">
+                        {{drink.amount}}
+                      </div>
+                      <div class="inline">
+                        {{drink.name}}
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isready(order)" class="flex flex-col items-end justify-center">
+
+            <button (click)="pickup(order)"
+              class=" absolute rounded-lg bg-lime-600  text-white py-8 px-10  text-center inline-block content-center">
+              abholen
+          </button>
+        </div>
+      </div>
+</div>
+    
+</div>

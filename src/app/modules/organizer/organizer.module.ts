@@ -8,6 +8,10 @@ import {ModifyEventComponent} from './modify-event/modify-event.component';
 import {ManageStaff} from "./add-staff/manage-staff.component";
 import { AddProductsComponent } from './add-products/add-products.component';
 import { AddtablesComponent } from './add-tables/add-tables.component';
+import { SharedModule } from './../../shared/shared.module';
+import { AppModule } from './../../app.module';
+
+
 
 @NgModule({
   declarations: [

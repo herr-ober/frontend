@@ -227,4 +227,8 @@ export class NewOrderComponent implements OnInit {
     eventErrorNotification!.innerHTML = msg;
     eventErrorNotification!.style.display = "block";
   }
+  switchToWaiterView(){
+    this.router.navigate(['/waiter']);
+
+  }
 }
