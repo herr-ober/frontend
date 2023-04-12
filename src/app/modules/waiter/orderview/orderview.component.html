@@ -40,7 +40,6 @@
                   <div class="rounded-full text-white  px-2" style="display: inline-block; background-color:#65a30d">
                     {{food.amount}}
                   </div>
-                  <div class="inline">
                     {{food.name}}
                   </div>
                 </div>
@@ -58,15 +57,6 @@
             </div>
             <hr style="border-top: 2px solid #000000;">
             <div  *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
-              <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
-                <div *ngIf="positionStatusWaiting(drink)">
-                  <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
-                    {{drink.amount}}
-                  </div>
-                  <div class="inline">
-                    {{drink.name}}
-                  </div>
-                </div>
                 <div *ngIf="positionStatusReady(drink)">
                   <div>
                   <div class="rounded-full text-white  px-2" style="display: inline-block; background-color:#65a30d">

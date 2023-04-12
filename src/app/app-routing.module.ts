@@ -31,6 +31,14 @@ const routes: Routes = [
     loadChildren: () => import('./modules/kitchen/kitchen.module').then(m => m.KitchenModule)
   },
   {
+    path: 'waiter',
+    loadChildren: () => import('./modules/waiter/waiter.module').then(m => m.WaiterModule)
+  },
+  {
+    path: 'kitchen',
+    loadChildren: () => import('./modules/kitchen/kitchen.module').then(m => m.KitchenModule)
+  },
+  {
     path: '**',
     redirectTo: '404'
   }
