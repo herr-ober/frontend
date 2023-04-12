@@ -39,14 +39,14 @@ export class LoginStaffComponent implements OnInit {
     .then(res => {
       console.log(res.token)
       localStorage.setItem('token', res.token)
-      //localStorage.setItem('roll', res.roll)
+      //localStorage.setItem('role', res.role)
       
       this.router.navigate(['/waiter']);
 
       /*
-      if (localStorage.getItem('roll') == "waiter") {
+      if (localStorage.getItem('role') == "waiter") {
         this.router.navigate(['/waiter']);
-      } else if (localStorage.getItem('roll') == "kitchen"){
+      } else if (localStorage.getItem('role') == "kitchen"){
         this.router.navigate(['/kitchen']);
       } else {
         this.router.navigate(['']);

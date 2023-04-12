@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (localStorage.getItem('roll')) {
+        if (localStorage.getItem('role')) {
             alert("Not allowed to view this page")
             this.router.navigate(['']);
             return false;
@@ -28,7 +28,7 @@ export class AuthGuardStaffWaiter implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        //if (localStorage.getItem('roll') == "waiter") {
+        //if (localStorage.getItem('role') == "waiter") {
             if (localStorage.getItem('token')) {
                 return true;
             }
@@ -45,7 +45,7 @@ export class AuthGuardStaffKitchen implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        //if (localStorage.getItem('roll') == "kitchen") {
+        //if (localStorage.getItem('role') == "kitchen") {
             if (localStorage.getItem('token')) {
                 return true;
             }

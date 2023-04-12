@@ -184,7 +184,7 @@ export class KitchenviewComponent {
 
   async logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('roll');
+    localStorage.removeItem('role');
     this.router.navigate(['']);   
   }
 }
