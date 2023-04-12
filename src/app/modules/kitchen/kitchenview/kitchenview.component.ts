@@ -1,219 +1,185 @@
-import { Component } from "@angular/core";
-
+import { Component, HostListener, OnInit } from "@angular/core";
+import { OrderService } from "src/app/core/services/order.service";
+import { EventService } from "src/app/core/services/event.service";
+import { IOrder, IOrderList, IPositions } from "src/app/models/IOrder";
+import { IEvent } from "src/app/models/IEvent";
+import { HttpErrorResponse } from "@angular/common/http";
 @Component({
   selector: "app-kitchenview",
   templateUrl: "./kitchenview.component.html",
   styleUrls: ["./kitchenview.component.css"],
 })
 export class KitchenviewComponent {
-  heroes = [
-    { id: 1, name: "Superman" },
-    { id: 2, name: "Batman" },
-    { id: 5, name: "BatGirl" },
-    { id: 3, name: "Robin" },
-    { id: 4, name: "Flash" },
-  ];
-  dborders = [
-    {
-      id: 1,
-      status: "Waiting",
-      food: [
-        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
-      ],
-      drinks: [
-        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
-      ],
-    },
-    {
-      id: 2,
-      status: "in Bearbeitung",
-      food: [
-        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
-      ],
-      drinks: [
-        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
-      ],
-    },
-    {
-      id: 5,
-      status: "Fertig",
-      food: [
-        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
-        { id: 2, status: "Fertig", food: "food1", amount: 5 },
-      ],
-      drinks: [
-        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
-      ],
-    },
-    {
-      id: 3,
-      status: "in Bearbeitung",
-      food: [
-        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
-      ],
-      drinks: [
-        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
-      ],
-    },
-    {
-      id: 4,
-      status: "Fertig",
-      food: [
-        { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
-        { id: 2, status: "Fertig", food: "food1", amount: 5 },
-        { id: 3, status: "in Bearbeitung", food: "food1", amount: 5 },
-        { id: 4, status: "in Bearbeitung", food: "food1", amount: 5 },
-        { id: 5, status: "in Bearbeitung", food: "food1", amount: 5 },
-      ],
-      drinks: [
-        { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
-        { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
-      ],
-    },
-  ];
-  orders = this.dborders;
-  ordervergleich = this.orders;
-  constructor() {}
+  dborders: IOrderList[] = [];
+  ordervergleich = this.dborders;
+  constructor(
+    private orderService: OrderService,
+    private eventService: EventService
+  ) {}
+
+  currentEvent: IEvent = {
+    uuid: "",
+    organizerUuid: "",
+    name: "",
+    location: "",
+    date: new Date(),
+  };
 
   ngOnInit(): void {
-    this.add();
-    this.prepareorders();
+    this.onstart();
   }
 
-  prepareorders() {
-    /*for (int i = 0; i< this.orders.lengt; i++){
+  /**
+   * The function retrieves an event and calls the functions loaddata and reaload then.
+   */
+  private async onstart() {
+    await this.eventService
+      .getEvent()
+      .then((res) => {
+        this.currentEvent = res;
+      })
+      .catch((err: HttpErrorResponse) => {});
 
-    }
-    this.orders.forEach(id=> {
+    this.loaddata();
+    this.reload();
+  }
 
-      id.food.forEach(food => {
-        food.add = 1
-        
-      });
-      id.drinks.forEach(drink => {
-        drink["ready"] = false
+  async loaddata() {
+    this.dborders = await this.orderService.getKitchenOrders(this.currentEvent);
+  }
 
-      });
+  private async reload() {
+    await this.Sleep(3000);
       
-    });*/
-  }
-  async add() {
-    var a = 5;
-    while (a < 10) {
-      console.log("adding");
-      await this.Sleep(10000);
-      this.dborders.push({
-        id: a,
-        status: "Waiting",
-        food: [
-          { id: 1, status: "in Bearbeitung", food: "food1", amount: 5 },
-          { id: 2, status: "in Bearbeitung", food: "food1", amount: 5 },
-        ],
-        drinks: [
-          { id: 1, status: "in Bearbeitung", drink: "drink1", amount: 5 },
-          { id: 2, status: "in Bearbeitung", drink: "drink2", amount: 5 },
-        ],
-      });
-      a++;
-      console.log(this.dborders);
-    }
-  }
-  fertig(orderindex: number) {
-    this.orders[orderindex]!.status = "Fertig";
+
+      this.dborders = await this.orderService.getKitchenOrders(this.currentEvent);
+      this.reload()
   }
 
-  foodready(orderid: number, foodid: number) {
+  Ready(orderindex: number) {
+    this.dborders[orderindex]!.status = "Ready";
+  }
+
+  async positionready(order: IOrder, position: IPositions) {
+    await this.orderService
+      .patchPosition({ status: "Ready" }, position)
+      .then(res => {})
+      .catch();
     //this.orders[order].food[foodindex].amount
-    this.dborders[orderid].food[foodid].status = "Fertig";
-
-    this.checkorderstatus(orderid);
+    //this.dborders[orderid].positions[foodid].status = "Ready";
   }
 
-  drinkready(orderid: number, drinkid: number) {
-    this.dborders[orderid].drinks[drinkid].status = "Fertig";
-
-    this.checkorderstatus(orderid);
-  }
-
-  checkorderstatus(orderid: number) {
+  async checkorderstatus(order: IOrder) {
     let edit: Boolean = false;
-    const a = this.dborders[orderid].food.forEach(
-      (element: { id: number; status: string }) => {
-        console.log(element);
 
-        if (element.status != "Fertig") {
-          edit = true;
-          console.log("RAUUUUUUUUUUUUUUUS!");
-          return;
-        }
-      }
-    );
-    this.dborders[orderid].drinks.forEach(
-      (element: { id: number; status: string }) => {
-        console.log(element);
-        if (element.status != "Fertig") {
-          edit = true;
+    
+    let positions: IPositions[] = order.positions;
+    positions.forEach((element: { id: number; status: string }) => {
+      
 
-          return;
-        }
+      if (element.status != "Ready") {
+        edit = true;
+        return;
       }
-    );
-    console.log(a);
+    });
+    
     if (!edit) {
-      this.dborders[orderid].status = "Fertigstellen";
+      await this.orderService.patchOrder({ status: "Complete" }, order);
     }
   }
 
   inQuery(order: any): boolean {
-    return order.status == "Waiting";
+    
+    return (order.status == "Waiting" || order.status == "new");
   }
+
   inProgress(order: any) {
-    return order.status == "in Bearbeitung" || order.status == "Fertigstellen";
+    return order.status == "in Progress" || order.status == "Complete";
   }
-  isReleasable(order: any) {
-    return order.status == "Fertigstellen";
+
+  async isReleasable(order: IOrder) {
+    
+    if(order.status == "Complete"){
+      return true
+    }
+    else
+    {
+      let edit: boolean = false
+
+      let positions: IPositions[] = order.positions!;
+      positions.forEach((element: IPositions) => {
+
+        if (element.status != "Ready") {
+          edit = true;
+          return;
+        }
+      });
+      
+      //await this.checkorderstatus(order)
+      if(edit == false){
+
+        return true
+
+      }
+      return
+    }
+    return false
+    //return order.status == "Complete";
   }
+
   isready(order: any): boolean {
-    if (order.status == "Fertig") {
+    if (order.status == "Ready") {
       return true;
     } else {
       return false;
     }
   }
+
   Sleep(milliseconds: number) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
   foodstatus(food: any) {
     try {
-      return food.status == "Fertig";
+      return food.status == "Ready";
     } catch {
       return false;
     }
+
   }
+
   drinkstatus(drink: any) {
     try {
-      return drink.status == "Fertig";
+      return drink.status == "Ready";
     } catch {
       return false;
     }
   }
-  async bearbeiten(orderindex: any) {
-    //await this.Sleep(10000)
-    this.orders[orderindex].status = "in Bearbeitung";
+
+  async edit(order: IOrder) {
+    await this.orderService.patchOrder({ status: "in Progress" }, order);
   }
-  async complete(orderindex: any) {
+
+  async complete(order: IOrder) {
     //await this.Sleep(10000)
-    this.orders[orderindex].status = "Fertig";
+    await this.orderService.patchOrder({ status: "Ready" }, order);
+
+    //this.dborders[orderindex].status = "Ready";
   }
+
   ostatus(orderindex: number) {
-    return this.orders[orderindex].status == "Fertig";
+    return this.dborders[orderindex].status == "Ready";
+  }
+
+  isdrink(category: string) {
+    return !(
+      category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
+    );
+  }
+
+  isfood(category: string) {
+    return (
+      category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
+    );
   }
 }

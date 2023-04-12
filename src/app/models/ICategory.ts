@@ -3,3 +3,7 @@ export interface ICategory {
     name: string
     iconName: string
   }
+
+  export interface ICategoryMap {
+    [key: string]: string
+}

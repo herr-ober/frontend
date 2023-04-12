@@ -20,6 +20,7 @@ import { ApiInterceptor } from './core/services/api-interceptor.service';
    ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

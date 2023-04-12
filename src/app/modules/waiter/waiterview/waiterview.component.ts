@@ -6,11 +6,11 @@ import { IEvent } from "src/app/models/IEvent";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
-  selector: "app-orderview",
-  templateUrl: "./orderview.component.html",
-  styleUrls: ["./orderview.component.css"],
+  selector: 'app-waiterview',
+  templateUrl: './waiterview.component.html',
+  styleUrls: ['./waiterview.component.css']
 })
-export class OrderviewComponent implements OnInit {
+export class WaiterviewComponent implements OnInit{
   
   dborders: IOrderList[] = [];
   ordervergleich = this.dborders;
@@ -44,13 +44,13 @@ export class OrderviewComponent implements OnInit {
   }
 
   async loaddata() {
-    this.dborders = await this.orderService.getAllOrders(this.currentEvent);
+    this.dborders = await this.orderService.getWaiterOrders(this.currentEvent);
   }
 
   private async reload() {
     await this.Sleep(1000);
 
-      this.dborders = await this.orderService.getAllOrders(this.currentEvent);
+      this.dborders = await this.orderService.getWaiterOrders(this.currentEvent);
       this.reload()
   }
 

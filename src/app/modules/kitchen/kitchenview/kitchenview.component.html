@@ -6,11 +6,47 @@
         <div class="m-2 p-2 rounded-lg place-self-stretch bg-gray-300	">
           <div class="grid grid-cols-2 content-center mb-2">
             <div class="text-xl">
-              <b>Bestellung {{order.id}}</b>
+              <b>Bestellung {{o + 1}}</b>
             </div>
             <div class="text-sm text-right content-center">
               <div class="rounded-full bg-lime-600  text-white content px-7 py-1 inline content-center"
                 [ngStyle]="{'background-color': ostatus(o)? '#65a30d' : 'black'}">
+                {{order.status}}
+              </div>
+            </div>
+          </div>
+          <div class="grid max-[370px]:grid-rows-2 min-[371px]:grid-cols-2 content-center mb-2">
+            <div>
+              <div *ngFor="let food of order.positions; let f = index" [attr.data-index]="f">
+                <div *ngIf="isfood(food.category!)" class="row-auto my-2">
+                  <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                    {{food.amount}}
+                  </div>
+                  <div class="inline">
+                    {{food.name}}
+                  </div>
+                </div>
+
+              </div>
+              <hr style="border-top: 2px solid #000000;">
+              <div *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
+                <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
+                  <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                    {{drink.amount}}
+                  </div>
+                  <div class="inline">
+                    {{drink.name}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end justify-center">
+
+              <button (click)="edit(order)"
+                class=" absolute rounded-lg bg-lime-600  text-white py-8 px-10  text-center inline-block content-center">
+                Starten
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -23,7 +59,7 @@
         <div class=" m-2 p-2 rounded-lg place-self-stretch bg-gray-300	">
           <div class="grid grid-cols-2 content-center mb-2">
             <div class="text-xl">
-              <b>Bestellung {{order.id}}</b>
+              <b>Bestellung {{o}}</b>
             </div>
             <div class="text-sm text-right content-center">
               <div class="rounded-full bg-lime-600  text-white content px-7 py-1 inline content-center"
@@ -34,40 +70,40 @@
           </div>
           <div class="grid max-[370px]:grid-rows-2 min-[371px]:grid-cols-2 content-center mb-2">
             <div>
-              <div *ngFor="let food of order.food; let f = index" [attr.data-index]="f">
-                <div class="row-auto my-2">
+              <div *ngFor="let food of order.positions; let f = index" [attr.data-index]="f">
+                <div *ngIf="isfood(food.category!)" class="row-auto my-2">
 
-                  <button (click)="foodready(o,f)">
+                  <button (click)="positionready(order, food)">
                     <div class="rounded-full text-white bg-black px-2"
                       [ngStyle]="{'background-color': foodstatus(food)? '#65a30d' : 'black'}"
                       style="display: inline-block;">
                       {{food.amount}}
                     </div>
                     <div class="inline">
-                      {{food.food}}
+                      {{food.name}}
                     </div>
                   </button>
                 </div>
               </div>
               <hr style="border-top: 2px solid #000000;">
-              <div *ngFor="let drink of order.drinks; let d = index" [attr.data-index]="d">
-                <div class="row-auto my-2">
+              <div *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
+                <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
 
-                  <button (click)="drinkready(o, d)">
+                  <button (click)="positionready(order, drink)">
                     <div class="rounded-full text-white bg-black px-2"
                       [ngStyle]="{'background-color': drinkstatus(drink)? '#65a30d' : 'black'}"
                       style="display: inline-block;">
                       {{drink.amount}}
                     </div>
                     <div class="inline">
-                      {{drink.drink}}
+                      {{drink.name}}
                     </div>
                   </button>
                 </div>
               </div>
             </div>
             <div class="flex flex-col items-end justify-center" *ngIf="isReleasable(order)">
-              <button (click)="complete(o)"
+              <button (click)="complete(order)"
                 class=" absolute rounded-lg bg-lime-600  text-white py-8 px-10  text-center inline-block content-center">
                 Fertig
               </button>

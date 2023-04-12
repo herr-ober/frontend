@@ -19,7 +19,7 @@ export class StaffService {
     }
 
     async getStaffs(event: IEvent): Promise<IStaff> {
-        return firstValueFrom(this.httpClient.get<IStaff>(`http://localhost:3000/api/events/${event.uuid}/staff`))
+        return firstValueFrom(this.httpClient.get<IStaff>(`http://localhost:8081/api/events/${event.uuid}/staff`))
     }
 
     async deleteStaff(event: IEvent, uuid: string) {
