@@ -7,3 +7,7 @@ export interface ITable {
     tableNumber: number
     eventUuid: string
 }
+
+export interface ITableMap {
+    [key: string]: number
+}

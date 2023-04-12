@@ -1,9 +1,10 @@
 import { Component, HostListener, OnInit } from "@angular/core";
 import { OrderService } from "src/app/core/services/order.service";
 import { EventService } from "src/app/core/services/event.service";
-import { IOrderList, IOrder, IPositions } from "src/app/models/IOrder";
+import { IOrderList, IPositions } from "src/app/models/IOrder";
 import { IEvent } from "src/app/models/IEvent";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-orderview",
@@ -16,7 +17,8 @@ export class OrderviewComponent implements OnInit {
   ordervergleich = this.dborders;
   constructor(
     private orderService: OrderService,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router
   ) {}
 
   currentEvent: IEvent = {
@@ -75,16 +77,16 @@ export class OrderviewComponent implements OnInit {
     return orderlist;
   }
   
-  async ready(order: IOrder) {
+  async ready(order: IOrderList) {
     await this.orderService
-      .patchOrder({ status: "Ready" }, order)
+      .patchOrderBuildBody({ status: "Ready" }, order)
       .then(res => {})
       .catch();
     // this.dborders[orderindex]!.status = "Fertig";
     //Datenbank order als completed marken0
   }
 
-  isnotcompleted(order: IOrder): boolean {
+  isnotcompleted(order: IOrderList): boolean {
     if (order.status == "Completed") {
       return false;
     } else {
@@ -100,14 +102,14 @@ export class OrderviewComponent implements OnInit {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
-  ostatus(order: IOrder) {
+  ostatus(order: IOrderList) {
     
-    return order.status == "Ready";
+    return order.status == "preparation" || order.status == "new";
   }
 
-  async pickup(order: IOrder) {
+  async pickup(order: IOrderList) {
     await this.orderService
-      .patchOrder({ status: "Completed" }, order)
+      .patchOrderBuildBody({ status: "Completed" }, order)
       .then()
       .catch();
     //this.dborders[orderindex].status = "Completed";
@@ -115,20 +117,65 @@ export class OrderviewComponent implements OnInit {
 
   positionStatus(position: IPositions) {
     try {
-      return position.status == "Ready";
+      return position.status == "ready";
     } catch {
       return false;
     }
   }
 
   isdrink(category: string) {
-    return !(
+    return (
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
   }
   isfood(category: string) {
-    return (
+    return !(
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
+  }
+  startOrder() {
+    this.router.navigateByUrl('/waiter/neworder');
+
+  }
+  activeOrders() {
+    this.router.navigateByUrl('/waiter/waiterview');
+
+  }
+  positionStatusReady(position: IPositions) {
+    try {
+      return position.status == "ready";
+    } catch {
+      return false;
+    }
+  }
+  positionStatusWaiting(position: IPositions) {
+    try {
+      return position.status == "waiting";
+    } catch {
+      return false;
+    }
+  }
+  positionStatusDelivered(position: IPositions) {
+    try {
+      return position.status == "delivered";
+    } catch {
+      return false;
+    }
+  }
+  getGermanText(status: string): string{
+    if(status == "new"){
+      return "Wartend"
+
+    }
+    else if(status == "preparation"){
+      return "in Bearbeitung"
+
+    }
+    else if(status == "completed"){
+      return "Abgeschlossen"
+
+    }
+    return ""
+    
   }
 }

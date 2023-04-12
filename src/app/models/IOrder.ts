@@ -46,9 +46,11 @@ export interface IOrderView{
     positions: IPositions[]
 }
 export interface IOrderList {
+    orderId: number,
     orderUuid: string,
     staffUuid: string,
     tableUuid: string,
+    tablename?: number,
     paid: boolean,
     status: string,
     positions: IPositions[]

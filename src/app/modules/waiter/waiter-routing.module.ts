@@ -10,7 +10,7 @@ const routes: Routes = [
     {
       /* Hier ändern bei Bedarf */
       path: '',
-      component: NewOrderComponent
+      component: WaiterviewComponent
     },
     {
       path: 'neworder',

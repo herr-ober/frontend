@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from "@angular/core";
 import { OrderService } from "src/app/core/services/order.service";
 import { EventService } from "src/app/core/services/event.service";
-import { IOrder, IOrderList, IPositions } from "src/app/models/IOrder";
+import { IOrderList, IPositions } from "src/app/models/IOrder";
 import { IEvent } from "src/app/models/IEvent";
 import { HttpErrorResponse } from "@angular/common/http";
 @Component({
@@ -49,91 +49,35 @@ export class KitchenviewComponent {
   }
 
   private async reload() {
-    await this.Sleep(3000);
+    await this.Sleep(2000);
       
 
       this.dborders = await this.orderService.getKitchenOrders(this.currentEvent);
+      console.log(this.dborders)
       this.reload()
   }
 
-  Ready(orderindex: number) {
-    this.dborders[orderindex]!.status = "Ready";
-  }
 
-  async positionready(order: IOrder, position: IPositions) {
+  async positionready(order: IOrderList, position: IPositions) {
     await this.orderService
-      .patchPosition({ status: "Ready" }, position)
+      .patchPosition({ status: "ready" }, position)
       .then(res => {})
       .catch();
+      this.loaddata()
+
     //this.orders[order].food[foodindex].amount
-    //this.dborders[orderid].positions[foodid].status = "Ready";
-  }
-
-  async checkorderstatus(order: IOrder) {
-    let edit: Boolean = false;
-
-    
-    let positions: IPositions[] = order.positions;
-    positions.forEach((element: { id: number; status: string }) => {
-      
-
-      if (element.status != "Ready") {
-        edit = true;
-        return;
-      }
-    });
-    
-    if (!edit) {
-      await this.orderService.patchOrder({ status: "Complete" }, order);
-    }
+    //this.dborders[orderid].positions[foodid].status = "ready";
   }
 
   inQuery(order: any): boolean {
     
-    return (order.status == "Waiting" || order.status == "new");
+    return (order.status == "new");
   }
 
   inProgress(order: any) {
-    return order.status == "in Progress" || order.status == "Complete";
+    return order.status == "preparation";
   }
 
-  async isReleasable(order: IOrder) {
-    
-    if(order.status == "Complete"){
-      return true
-    }
-    else
-    {
-      let edit: boolean = false
-
-      let positions: IPositions[] = order.positions!;
-      positions.forEach((element: IPositions) => {
-
-        if (element.status != "Ready") {
-          edit = true;
-          return;
-        }
-      });
-      
-      //await this.checkorderstatus(order)
-      if(edit == false){
-
-        return true
-
-      }
-      return
-    }
-    return false
-    //return order.status == "Complete";
-  }
-
-  isready(order: any): boolean {
-    if (order.status == "Ready") {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   Sleep(milliseconds: number) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -141,7 +85,7 @@ export class KitchenviewComponent {
 
   foodstatus(food: any) {
     try {
-      return food.status == "Ready";
+      return food.status == "ready";
     } catch {
       return false;
     }
@@ -150,36 +94,88 @@ export class KitchenviewComponent {
 
   drinkstatus(drink: any) {
     try {
-      return drink.status == "Ready";
+      return drink.status == "ready";
     } catch {
       return false;
     }
   }
 
-  async edit(order: IOrder) {
-    await this.orderService.patchOrder({ status: "in Progress" }, order);
+  async edit(order: IOrderList) {
+    await this.orderService.patchOrderBuildBody({ status: "preparation" }, order);
+    this.loaddata()
+
   }
 
-  async complete(order: IOrder) {
+  async complete(order: IOrderList) {
     //await this.Sleep(10000)
-    await this.orderService.patchOrder({ status: "Ready" }, order);
+    await this.orderService.patchOrderBuildBody({ status: "ready" }, order);
+    this.loaddata()
 
-    //this.dborders[orderindex].status = "Ready";
+
+    //this.dborders[orderindex].status = "ready";
   }
 
   ostatus(orderindex: number) {
-    return this.dborders[orderindex].status == "Ready";
+    return this.dborders[orderindex].status == "ready";
   }
 
   isdrink(category: string) {
-    return !(
+    return (
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
   }
 
   isfood(category: string) {
-    return (
+    return !(
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
+  }
+
+  positionStatusReady(position: IPositions) {
+    try {
+      return position.status == "ready";
+    } catch {
+      return false;
+    }
+  }
+  positionStatusWaiting(position: IPositions) {
+    try {
+      return position.status == "waiting";
+    } catch {
+      return false;
+    }
+  }
+  positionStatusDelivered(position: IPositions) {
+    try {
+      return position.status == "delivered";
+    } catch {
+      return false;
+    }
+  }
+
+  async setReady(position: IPositions){
+    await this.orderService
+    .patchPosition({ status: "ready" }, position)
+    .then()
+    .catch();
+  
+  this.loaddata()
+  }
+
+  getGermanText(status: string): string{
+    if(status == "new"){
+      return "Wartend"
+
+    }
+    else if(status == "preparation"){
+      return "in Bearbeitung"
+
+    }
+    else if(status == "completed"){
+      return "Abgeschlossen"
+
+    }
+    return ""
+    
   }
 }
