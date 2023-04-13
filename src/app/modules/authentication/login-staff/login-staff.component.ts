@@ -17,7 +17,7 @@ export class LoginStaffComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      token: ['', [Validators.required, Validators.minLength(16)]]
+      token: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
