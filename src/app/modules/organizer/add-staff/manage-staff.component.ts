@@ -34,7 +34,7 @@ export class ManageStaff implements OnInit {
 
   async addStaff() {
     const event = await this.eventService.getEvent();
-    await this.staffService.addStaff(event, this.createStaffFormGroup.controls.name.value!,  this.createStaffFormGroup.controls.role.value!)
+    await this.staffService.addStaff(event, this.createStaffFormGroup.controls.name.value!,  this.createStaffFormGroup.controls.role.value!.toLowerCase())
     this.createStaffFormGroup.controls.name.setValue("");
     this.createStaffFormGroup.controls.role.setValue("Waiter");
     await this.updateStaffList();
