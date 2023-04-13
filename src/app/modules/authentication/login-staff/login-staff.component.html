@@ -9,19 +9,19 @@
       <div class="-space-y-px rounded-md shadow-sm">
         <input
             type="text"
-            placeholder="Token"
-            formControlName="token"
+            placeholder="Code"
+            formControlName="code"
             class="relative block w-full rounded-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
             >
-        <div *ngIf="loginForm.controls['token'].invalid && (loginForm.controls['token'].dirty || loginForm.controls['token'].touched)">
-            <div *ngIf="loginForm.controls['token'].errors?.['required']">
+        <div *ngIf="loginForm.controls['code'].invalid && (loginForm.controls['code'].dirty || loginForm.controls['code'].touched)">
+            <div *ngIf="loginForm.controls['code'].errors?.['required']">
               <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                  <p>Token is required</p>
+                  <p>Code is required</p>
               </div>
             </div>
-            <div *ngIf="submitted && loginForm.controls['token'].errors?.['minlength']">
+            <div *ngIf="submitted && loginForm.controls['code'].errors?.['minlength']">
               <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                <p>Token must be at least 8 characters long</p>
+                <p>Code must be at least 8 characters long</p>
               </div>
             </div>
         </div>   
@@ -43,7 +43,7 @@
         </button>
   
         <div class="text-sm">
-            <p class="font-medium text-primary">Don't have an token? - Ask your organizer for a access token.</p>
+            <p class="font-medium text-primary">Don't have an code? - Ask your organizer for a access code.</p>
           </div>
     </form>
   

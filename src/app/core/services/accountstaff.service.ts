@@ -12,8 +12,8 @@ export class AccountStaffService {
     constructor(private apiService: ApiService) { 
     }
 
-    async loginAccountStaff(token: string):Promise<any> {
-        return this.apiService.doPostRequest('/staff/login', {token: token})
+    async loginAccountStaff(code: string):Promise<any> {
+        return this.apiService.doPostRequest('/events/Staff/login', {code: code})
 
     }
 

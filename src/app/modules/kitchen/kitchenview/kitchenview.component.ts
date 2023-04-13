@@ -4,6 +4,8 @@ import { EventService } from "src/app/core/services/event.service";
 import { IOrderList, IPositions } from "src/app/models/IOrder";
 import { IEvent } from "src/app/models/IEvent";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from '@angular/router';
+
 @Component({
   selector: "app-kitchenview",
   templateUrl: "./kitchenview.component.html",
@@ -14,7 +16,8 @@ export class KitchenviewComponent {
   ordervergleich = this.dborders;
   constructor(
     private orderService: OrderService,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router,
   ) {}
 
   currentEvent: IEvent = {
@@ -177,5 +180,11 @@ export class KitchenviewComponent {
     }
     return ""
     
+  }
+
+  async logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    this.router.navigate(['']);   
   }
 }

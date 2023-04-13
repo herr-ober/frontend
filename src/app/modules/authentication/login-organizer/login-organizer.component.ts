@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountOrganizerService } from '../../../core/services/accountorganizer.service';
 import { ILoginAccountOrganizer } from 'src/app/models/IAccountOrganizer';
-import { AuthenticationService } from '../../../core/services/auth.service';
-
 
 @Component({
   selector: 'app-login-organizer',
