@@ -1,4 +1,4 @@
-import {ICreateEvent} from '../../../models/IEvent';
+import {ICreateEvent} from '../../../shared/models/IEvent';
 import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
@@ -24,7 +24,7 @@ export class CreateNewEventComponent implements OnInit {
             .then(() => {
                 this.router.navigate(['/organizer']);
             })
-            .catch(err => {
+            .catch(() => {
                 this.displayErrorNotification("Ein Fehler ist aufgetreten.")
             });
     }

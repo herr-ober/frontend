@@ -2,7 +2,7 @@ import {Router} from '@angular/router';
 
 import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
-import {IEvent} from 'src/app/models/IEvent';
+import {IEvent} from 'src/app/shared/models/IEvent';
 import { formatDate } from '@angular/common';
 
 @Component({

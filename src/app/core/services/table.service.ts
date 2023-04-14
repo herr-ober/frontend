@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
-import {IEvent} from "src/app/models/IEvent";
-import {ITable} from "src/app/models/ITable";
+import {IEvent} from "src/app/shared/models/IEvent";
+import {ITable} from "src/app/shared/models/ITable";
 
 
 @Injectable({providedIn: 'root'})

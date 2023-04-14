@@ -6,16 +6,16 @@ import {
     IPatchOrder,
     IPositions,
     IPositionStatus
-} from 'src/app/models/IOrder';
-import {IEvent} from '../../models/IEvent';
-import {ITable, ITableMap} from '../../models/ITable';
-import {IProduct} from '../../models/IProduct';
+} from 'src/app/shared/models/IOrder';
+import {IEvent} from '../../shared/models/IEvent';
+import {ITable, ITableMap} from '../../shared/models/ITable';
+import {IProduct} from '../../shared/models/IProduct';
 import {ApiService} from "./api.service";
 import {Injectable} from '@angular/core';
 import {ProductService} from './product.service';
 import {CategoryService} from './category.service';
 import {TableService} from './table.service';
-import {ICategory, ICategoryMap} from 'src/app/models/ICategory';
+import {ICategory, ICategoryMap} from 'src/app/shared/models/ICategory';
 
 
 @Injectable({

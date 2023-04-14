@@ -12,12 +12,9 @@ export class AccountOrganizerService {
 
     async postAccountOrganizer(name: string, email: string, password: string) {
         return this.apiService.doPostRequest('/accounts', {name: name, email: email, password: password})
-
     }
 
     async loginAccountOrganizer(email: string, password: string): Promise<any> {
         return this.apiService.doPostRequest('/accounts/login', {email: email, password: password})
-
     }
-
 }

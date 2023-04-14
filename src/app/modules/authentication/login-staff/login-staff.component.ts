@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AccountStaffService} from '../../../core/services/accountstaff.service';
+import {AccountStaffService} from '../../../core/services/account-staff.service';
 
 @Component({
     selector: 'app-login-organizer',

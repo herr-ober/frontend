@@ -1,4 +1,4 @@
-import {ICategory} from 'src/app/models/ICategory';
+import {ICategory} from 'src/app/shared/models/ICategory';
 import {ApiService} from './api.service';
 import {Injectable} from "@angular/core";
 

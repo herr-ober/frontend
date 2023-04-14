@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {OrderService} from "src/app/core/services/order.service";
 import {EventService} from "src/app/core/services/event.service";
-import {IOrderList, IPositions} from "src/app/models/IOrder";
+import {IOrderList, IPositions} from "src/app/shared/models/IOrder";
 import {Router} from "@angular/router";
 
 @Component({

@@ -2,7 +2,7 @@ import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {StaffService} from "../../../core/services/staff.service";
-import {IStaffItem} from "../../../models/IStaff";
+import {IStaffItem} from "../../../shared/models/IStaff";
 
 @Component({
     selector: 'app-create-new-event',

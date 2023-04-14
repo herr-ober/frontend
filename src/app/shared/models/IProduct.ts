@@ -12,6 +12,6 @@ export interface ICreateProduct {
     category: string
 }
 
-export interface IPoductMap {
+export interface IProductMap {
     [key: string]: string
 }

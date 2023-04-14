@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
-import {IEvent} from "../../models/IEvent";
-import {IProduct} from "src/app/models/IProduct";
+import {IEvent} from "../../shared/models/IEvent";
+import {IProduct} from "src/app/shared/models/IProduct";
 
 @Injectable({providedIn: 'root'})
 export class ProductService {
@@ -28,5 +28,4 @@ export class ProductService {
     async getProductsByCategory(event: IEvent, uuid: string): Promise<{ productList: IProduct[] }> {
         return this.apiService.doGetRequest(`/events/${event.uuid}/products?category=${uuid}`)
     }
-
 }

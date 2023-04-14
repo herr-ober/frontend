@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AccountOrganizerService} from '../../../core/services/accountorganizer.service';
+import {AccountOrganizerService} from '../../../core/services/account-organizer.service';
 import {Router} from '@angular/router';
 
 

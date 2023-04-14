@@ -1,12 +1,12 @@
 import {CategoryService} from '../../../core/services/category.service';
-import {ICategory} from '../../../models/ICategory';
-import {IEvent} from 'src/app/models/IEvent';
+import {ICategory} from '../../../shared/models/ICategory';
+import {IEvent} from 'src/app/shared/models/IEvent';
 import {EventService} from '../../../core/services/event.service';
 import {Component, HostListener, OnInit} from '@angular/core';
-import {IProduct} from 'src/app/models/IProduct';
-import {ICreateNewOrder, IOrder} from 'src/app/models/IOrder';
+import {IProduct} from 'src/app/shared/models/IProduct';
+import {ICreateNewOrder, IOrder} from 'src/app/shared/models/IOrder';
 import {ProductService} from 'src/app/core/services/product.service';
-import {ITable} from 'src/app/models/ITable';
+import {ITable} from 'src/app/shared/models/ITable';
 import {TableService} from 'src/app/core/services/table.service';
 import {OrderService} from 'src/app/core/services/order.service';
 import {Router} from '@angular/router';

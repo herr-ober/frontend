@@ -1,9 +1,9 @@
 import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {IEvent} from 'src/app/models/IEvent';
+import {IEvent} from 'src/app/shared/models/IEvent';
 import {TableService} from 'src/app/core/services/table.service';
-import {ITable} from 'src/app/models/ITable';
+import {ITable} from 'src/app/shared/models/ITable';
 
 @Component({
     selector: 'app-add-tables',

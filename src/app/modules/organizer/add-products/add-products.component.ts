@@ -1,10 +1,10 @@
 import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {IProduct} from 'src/app/models/IProduct';
+import {IProduct} from 'src/app/shared/models/IProduct';
 import {ProductService} from 'src/app/core/services/product.service';
-import {IEvent} from 'src/app/models/IEvent';
-import {ICategory} from 'src/app/models/ICategory';
+import {IEvent} from 'src/app/shared/models/IEvent';
+import {ICategory} from 'src/app/shared/models/ICategory';
 import {CategoryService} from 'src/app/core/services/category.service';
 
 @Component({

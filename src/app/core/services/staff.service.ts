@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
-import {IEvent} from "../../models/IEvent";
-import {IStaff} from "../../models/IStaff";
+import {IEvent} from "../../shared/models/IEvent";
+import {IStaff} from "../../shared/models/IStaff";
 
 @Injectable({providedIn: 'root'})
 export class StaffService {
