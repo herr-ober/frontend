@@ -51,10 +51,12 @@ export class WaiterviewComponent implements OnInit{
 
   private async reload() {
     await this.Sleep(2000);
-    console.log(this.dborders)
+    if(this.router.url === '/waiter' || this.router.url === '/waiter/waiterview'){
 
       this.dborders = await this.orderService.getWaiterOrders(this.currentEvent);
       this.reload()
+      
+    }
   }
 
 
