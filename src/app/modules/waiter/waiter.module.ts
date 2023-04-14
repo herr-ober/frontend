@@ -1,20 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NewOrderComponent } from './new-order/new-order.component';
-import { OrderviewComponent } from './orderview/orderview.component';
-import { WaiterRoutingModule } from './waiter-routing.module';
-import { WaiterviewComponent } from './waiterview/waiterview.component';
-
-
+import {NgModule} from '@angular/core';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {NewOrderComponent} from './new-order/new-order.component';
+import {OrderViewComponent} from './orderview/order-view.component';
+import {WaiterRoutingModule} from './waiter-routing.module';
+import {WaiterViewComponent} from './waiterview/waiter-view.component';
 
 @NgModule({
-  declarations: [
-    NewOrderComponent,
-    OrderviewComponent,
-    WaiterviewComponent
-  ],
-  imports:[CommonModule, 
-    WaiterRoutingModule]
-  
+    declarations: [
+        NewOrderComponent,
+        OrderViewComponent,
+        WaiterViewComponent
+    ],
+    imports: [CommonModule,
+        WaiterRoutingModule, NgOptimizedImage]
+
 })
-export class WaiterModule { }
+export class WaiterModule {
+}

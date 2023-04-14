@@ -8,7 +8,7 @@ import {Injectable} from '@angular/core';
 
 export class EventService {
 
-    constructor(private apiService: ApiService) { 
+    constructor(private apiService: ApiService) {
     }
 
 
@@ -17,7 +17,7 @@ export class EventService {
     }
 
     async patchEvent(body: IUpdateEvent): Promise<void> {
-        return this.apiService.doPatchRequest('/events', { updates: body })
+        return this.apiService.doPatchRequest('/events', {updates: body})
     }
 
     async postEvent(body: ICreateEvent): Promise<IEvent> {

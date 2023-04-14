@@ -10,7 +10,6 @@
           "skipTests": true
         },
         "@schematics/angular:component": {
-          "inlineStyle": true,
           "skipTests": true
         },
         "@schematics/angular:directive": {

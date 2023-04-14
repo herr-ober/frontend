@@ -1,17 +1,17 @@
 .container-wrapper {
     column-count: 1;
-  }
-  
-  .container {
+}
+
+.container {
     break-inside: avoid;
     margin-bottom: 1rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .container-wrapper {
-      column-count: 2;
-      column-gap: 1rem;
+        column-count: 2;
+        column-gap: 1rem;
     }
-  }
+}

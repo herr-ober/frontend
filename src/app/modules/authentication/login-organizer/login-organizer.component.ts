@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AccountOrganizerService} from '../../../core/services/accountorganizer.service';
+import {addWarning} from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
 
 @Component({
     selector: 'app-login-organizer',
@@ -21,12 +22,12 @@ export class LoginOrganizerComponent implements OnInit {
         });
     }
 
-    onSubmit() {
+    async onSubmit() {
         this.submitted = true;
         if (this.loginForm.invalid) {
             return;
         }
-        this.loginAccountOrganizer()
+        await this.loginAccountOrganizer()
     }
 
     async loginAccountOrganizer() {

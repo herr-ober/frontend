@@ -12,22 +12,19 @@ import {IStaffItem} from "../../../models/IStaff";
 
 export class ManageStaff implements OnInit {
 
-    constructor(private staffService: StaffService, private eventService: EventService) {
-    }
-
     editStaffUUID: string | undefined;
-
     createStaffFormGroup = new FormGroup({
         name: new FormControl<string | null>(null, {validators: [Validators.required]}),
         role: new FormControl("Waiter")
     });
-
     editStaffFormGroup = new FormGroup({
         name: new FormControl<string | null>(null, {validators: [Validators.required]}),
         role: new FormControl("Waiter")
     });
-
     staffList = Array<IStaffItem>();
+
+    constructor(private staffService: StaffService, private eventService: EventService) {
+    }
 
     async ngOnInit() {
         await this.updateStaffList();

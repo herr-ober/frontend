@@ -1,8 +1,8 @@
 export interface CreateEchoInput {
-  message: string;
+    message: string;
 }
 
 export interface Echo {
-  id: string;
-  message: string;
+    id: string;
+    message: string;
 }

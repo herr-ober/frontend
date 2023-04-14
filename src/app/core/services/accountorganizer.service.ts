@@ -1,7 +1,5 @@
-import { IAccountOrganizer, ICreateAccountOrganizer } from './../../models/IAccountOrganizer';
-import { ApiService } from "./api.service";
-import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import {ApiService} from "./api.service";
+import {Injectable} from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class AccountOrganizerService {
 
-    constructor(private apiService: ApiService) { 
+    constructor(private apiService: ApiService) {
     }
 
     async postAccountOrganizer(name: string, email: string, password: string) {
@@ -17,7 +15,7 @@ export class AccountOrganizerService {
 
     }
 
-    async loginAccountOrganizer(email: string, password: string):Promise<any> {
+    async loginAccountOrganizer(email: string, password: string): Promise<any> {
         return this.apiService.doPostRequest('/accounts/login', {email: email, password: password})
 
     }

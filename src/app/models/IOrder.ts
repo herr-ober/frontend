@@ -1,6 +1,3 @@
-import { KeyValuePipe } from "@angular/common";
-import { IProduct } from "./IProduct";
-
 export interface ICreateNewOrder {
 
     tableUuid: string
@@ -8,7 +5,7 @@ export interface ICreateNewOrder {
 }
 
 export interface ICreateOrderPositionData {
-    
+
     orderUuid?: string
     productUuid: string
     amount: number
@@ -24,20 +21,24 @@ export interface IOrder {
     status: string
     positions: ICreateOrderPositionData[]
 }
-export interface IPatchOrder{ 
-    paid?: boolean, 
-    status?: string }
 
-export interface IPositionStatus{
+export interface IPatchOrder {
+    paid?: boolean,
     status?: string
 }
+
+export interface IPositionStatus {
+    status?: string
+}
+
 export interface IOrderByCategory {
     id: number,
     status: string,
     name: string,
     amount: number
 }
-export interface IOrderView{
+
+export interface IOrderView {
     orderUuid: string,
     staffUuid: string,
     tableUuid: string,
@@ -45,6 +46,7 @@ export interface IOrderView{
     status: string,
     positions: IPositions[]
 }
+
 export interface IOrderList {
     orderId: number,
     orderUuid: string,
@@ -71,6 +73,6 @@ export interface IPositions {
 }
 
 export interface IMap {
-    [key: string]: {name: string; category: string}
+    [key: string]: { name: string; category: string }
 
 }
