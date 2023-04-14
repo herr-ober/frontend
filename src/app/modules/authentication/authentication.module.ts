@@ -6,8 +6,6 @@ import { LoginStaffComponent } from './login-staff/login-staff.component';
 import { LoginOrganizerComponent } from './login-organizer/login-organizer.component';
 import { RegisterOrganizerComponent } from './register-organizer/register-organizer.component';
 
-
-
 @NgModule({
   declarations: [
     LoginStaffComponent,

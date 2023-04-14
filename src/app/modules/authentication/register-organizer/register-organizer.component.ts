@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AccountOrganizerService } from '../../../core/services/accountorganizer.service';
-import { ICreateAccountOrganizer } from 'src/app/models/IAccountOrganizer';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AccountOrganizerService} from '../../../core/services/accountorganizer.service';
 
 
 @Component({
   selector: 'app-register-organizer',
   templateUrl: './register-organizer.component.html',
-  styleUrls: ['./register-organizer.component.css']
 })
 export class RegisterOrganizerComponent implements OnInit {
   registerForm!: FormGroup;
@@ -53,4 +51,3 @@ export class RegisterOrganizerComponent implements OnInit {
     eventErrorNotification!.style.display = "block";
   }
 }
-

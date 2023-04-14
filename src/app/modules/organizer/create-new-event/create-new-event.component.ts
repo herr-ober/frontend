@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-new-event',
   templateUrl: './create-new-event.component.html',
-  styleUrls: ['./create-new-event.component.css']
 })
 
 

@@ -7,7 +7,6 @@ import { ILoginAccountStaff } from 'src/app/models/IAccountStaff';
 @Component({
   selector: 'app-login-organizer',
   templateUrl: './login-staff.component.html',
-  styleUrls: ['./login-staff.component.css']
 })
 export class LoginStaffComponent implements OnInit {
   loginForm!: FormGroup;

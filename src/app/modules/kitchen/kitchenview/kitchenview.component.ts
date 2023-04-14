@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: "app-kitchenview",
   templateUrl: "./kitchenview.component.html",
-  styleUrls: ["./kitchenview.component.css"],
 })
 export class KitchenviewComponent {
   dborders: IOrderList[] = [];

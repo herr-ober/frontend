@@ -6,7 +6,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-modify-event',
   templateUrl: './modify-event.component.html',
-  styleUrls: ['./modify-event.component.css']
 })
 export class ModifyEventComponent implements OnInit {
 

@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { KitchenRoutingModule } from './kitchen-routing.module';
 import { KitchenviewComponent } from './kitchenview/kitchenview.component';
 
-
-
 @NgModule({
   declarations: [
     KitchenviewComponent
