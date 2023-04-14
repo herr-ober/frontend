@@ -54,10 +54,12 @@ export class KitchenviewComponent {
   private async reload() {
     await this.Sleep(2000);
       
+      if(this.router.url === '/kitchen' || this.router.url === '/kitchen/kitchenview'){
 
-      this.dborders = await this.orderService.getKitchenOrders(this.currentEvent);
-      console.log(this.dborders)
-      this.reload()
+        this.dborders = await this.orderService.getKitchenOrders(this.currentEvent);
+        this.reload()
+        
+      }
   }
 
 

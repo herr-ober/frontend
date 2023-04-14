@@ -50,10 +50,14 @@ export class OrderviewComponent implements OnInit {
   }
 
   private async reload() {
-    await this.Sleep(1000);
+    await this.Sleep(2000);
+
+    if(this.router.url === '/waiter/orderview'){
 
       this.dborders = await this.orderService.getAllOrders(this.currentEvent);
       this.reload()
+      
+    }
   }
 
   createorders() {
