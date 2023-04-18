@@ -26,19 +26,19 @@
                     <!-- Eventname -->
                     <div class="col-span-6 sm:col-span-4">
                       <label for="event-name" class="block text-sm font-medium leading-6 text-gray-900">Eventname</label>
-                      <input [(ngModel)]="eventModified.name" type="text" name="event-name" id="event-name" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6">
+                      <input [(ngModel)]="eventModified.name" type="text" name="event-name" id="event-name" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6" required>
                     </div>
     
                     <!-- Startdatum des Events -->
                     <div class="col-span-6 sm:col-span-2">
                       <label for="event-date" class="block text-sm font-medium leading-6 text-gray-900">Startdatum</label>
-                      <input [(ngModel)]="eventModified.date" type="date" name="event-date" id="event-date" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hove sm:text-sm sm:leading-6" required>
+                      <input [(ngModel)]="eventDateAsString" type="date" name="event-date" id="event-date" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hove sm:text-sm sm:leading-6" required>
                    </div>
   
                     <!-- Eventlocation -->
                     <div class="col-span-6 sm:col-span-3">
                       <label for="event-loaction" class="block text-sm font-medium leading-6 text-gray-900">Eventlocation</label>
-                      <input [(ngModel)]="eventModified.location" type="text" name="event-loaction" id="event-loaction" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6">
+                      <input [(ngModel)]="eventModified.location" type="text" name="event-loaction" id="event-loaction" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6" required>
                     </div>
                   </div>
                 </div>
