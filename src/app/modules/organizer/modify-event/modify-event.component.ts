@@ -12,17 +12,19 @@ export class ModifyEventComponent implements OnInit {
 
   constructor(private eventService: EventService) { }
 
+  /* Es sieht so aus, als könnte das HTML Date Element nur ein String in einem festgelegten Format yyyy-mm-dd verarbeiten.
+  Daher die Konvertierung siehe unten und der zusätzliche String eventDateAsString. Wenn jemand eine bessere
+  Lösung hat, dann gerne abändern */
   eventModified: IEvent =  { uuid: "", organizerUuid: "", name: "", location: "", date: new Date() };
+  eventDateAsString: string = "";
 
 
   ngOnInit(): void {
     this.reload();
   }
-
   
   async updateEventDetails() {
-    //console.log(this.eventModified.date)
-    await this.eventService.patchEvent( { name: this.eventModified.name, date: this.eventModified.date, location: this.eventModified.location })
+    await this.eventService.patchEvent( { name: this.eventModified.name, date: new Date(this.eventDateAsString), location: this.eventModified.location })
       .then(res => {})
       .catch()
   }
@@ -31,7 +33,8 @@ export class ModifyEventComponent implements OnInit {
   async reload() {
     await this.eventService.getEvent()
       .then(res => {
-        this.eventModified = res
+        this.eventModified = res;
+        this.eventDateAsString = res.date.toString().substring(0,10)
       })
       .catch((err: HttpErrorResponse) => {})
   }

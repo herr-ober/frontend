@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EventService } from './../../../core/services/event.service';
 import { Component, OnInit } from '@angular/core';
 import { IEvent } from 'src/app/models/IEvent';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-organizer-dashboard',
@@ -27,7 +28,7 @@ export class DashboardOrganizerComponent implements OnInit {
 
   async reload() {
     await this.eventService.getEvent()
-      .then(res => {this.event = res})
+      .then(res => { this.event = res })
       .catch((err: HttpErrorResponse) => {})
     this.eventExists = (this.event != undefined);
   }
@@ -39,5 +40,5 @@ export class DashboardOrganizerComponent implements OnInit {
   
   openModal() {
     this.createModal = true;
-    }
+  }
 }
