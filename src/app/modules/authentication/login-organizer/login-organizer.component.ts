@@ -9,13 +9,14 @@ import {AccountOrganizerService} from '../../../core/services/account-organizer.
 })
 export class LoginOrganizerComponent {
 
-    loginForm: FormGroup = this.formBuilder.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+    loginForm!: FormGroup;
     submitted = false;
 
     constructor(private accountOrganizerService: AccountOrganizerService, private router: Router, private formBuilder: FormBuilder) {
+        this.loginForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8)]]
+        });
     }
 
     async onSubmit() {
