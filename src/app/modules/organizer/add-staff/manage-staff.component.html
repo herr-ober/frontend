@@ -1,146 +1,168 @@
 <header class="bg-white shadow">
-  <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Mitarbeiter übersicht</h1>
-  </div>
+    <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Mitarbeiter übersicht</h1>
+    </div>
 </header>
 
 <main>
-  <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
 
-    <!-- General Event Information. Must be filled out, before next step can be completed. -->
-    <div id="general-staff-information" class="mt-10 sm:mt-0" *ngIf="!editStaffUUID">
-      <div class="md:grid md:grid-cols-3 md:gap-6">
-        <div class="md:col-span-1">
-          <div class="px-4 sm:px-0">
-            <h3 class="text-base font-semibold leading-6 text-gray-900">Mitarbeiter hinzufügen</h3>
-            <p class="mt-1 text-sm text-gray-600">Hier können neue mitarbeiter erstellt werden</p>
-         </div>
-        </div>
-
-        <div class="mt-5 md:col-span-2 md:mt-0">
-          <form>
-            <div class="overflow-hidden shadow sm:rounded-md">
-              <form (submit)="addStaff()" [formGroup]="createStaffFormGroup">
-              <div class="bg-white px-4 py-5 sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
-
-                  <div class="col-span-6 sm:col-span-4">
-                    <label for="event-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
-                    <input formControlName="name" type="text" name="event-name" id="event-name" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="event-loaction" class="block text-sm font-medium leading-6 text-gray-900">Rolle</label>
-                    <select formControlName="role" name="event-loaction" id="event-loaction" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                      <option>Waiter</option>
-                      <option>Kitchen</option>
-                    </select>
-                  </div>
-
+        <!-- General Event Information. Must be filled out, before next step can be completed. -->
+        <div *ngIf="!editStaffUUID" class="mt-10 sm:mt-0" id="general-staff-information">
+            <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                    <div class="px-4 sm:px-0">
+                        <h3 class="text-base font-semibold leading-6 text-gray-900">Mitarbeiter hinzufügen</h3>
+                        <p class="mt-1 text-sm text-gray-600">Hier können neue mitarbeiter erstellt werden</p>
+                    </div>
                 </div>
-              </div>
-              <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                <button [disabled]="!createStaffFormGroup.valid" type="submit" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Hinzufügen</button>
-              </div>
-              </form>
-            </div>
-          </form>
-        </div>        
-      </div>
-    </div>
 
-    <div id="general-staff-edit-information" class="mt-10 sm:mt-0" *ngIf="editStaffUUID">
-      <div class="md:grid md:grid-cols-3 md:gap-6">
-        <div class="md:col-span-1">
-          <div class="px-4 sm:px-0">
-            <h3 class="text-base font-semibold leading-6 text-gray-900">Mitarbeiter bearbeiten</h3>
-            <p class="mt-1 text-sm text-gray-600">Bitte trage die neuen Werte ein</p>
-          </div>
+                <div class="mt-5 md:col-span-2 md:mt-0">
+                    <form>
+                        <div class="overflow-hidden shadow sm:rounded-md">
+                            <form (submit)="addStaff()" [formGroup]="createStaffFormGroup">
+                                <div class="bg-white px-4 py-5 sm:p-6">
+                                    <div class="grid grid-cols-6 gap-6">
+
+                                        <div class="col-span-6 sm:col-span-4">
+                                            <label class="block text-sm font-medium leading-6 text-gray-900"
+                                                   for="event-name">Name</label>
+                                            <input class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="name" id="event-name" name="event-name"
+                                                   type="text">
+                                        </div>
+
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <label class="block text-sm font-medium leading-6 text-gray-900"
+                                                   for="event-loaction">Rolle</label>
+                                            <select class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="role" id="event-loaction"
+                                                    name="event-loaction">
+                                                <option>Waiter</option>
+                                                <option>Kitchen</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                    <button [disabled]="!createStaffFormGroup.valid" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                            type="submit">
+                                        Hinzufügen
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <div class="mt-5 md:col-span-2 md:mt-0">
-          <form>
-            <div class="overflow-hidden shadow sm:rounded-md">
-              <form (submit)="editStaff()" [formGroup]="editStaffFormGroup">
-                <div class="bg-white px-4 py-5 sm:p-6">
-                  <div class="grid grid-cols-6 gap-6">
+        <div *ngIf="editStaffUUID" class="mt-10 sm:mt-0" id="general-staff-edit-information">
+            <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                    <div class="px-4 sm:px-0">
+                        <h3 class="text-base font-semibold leading-6 text-gray-900">Mitarbeiter bearbeiten</h3>
+                        <p class="mt-1 text-sm text-gray-600">Bitte trage die neuen Werte ein</p>
+                    </div>
+                </div>
 
-                    <div class="col-span-6 sm:col-span-4">
-                      <label for="staff-name-edit" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
-                      <input formControlName="name" type="text" id="staff-name-edit" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <div class="mt-5 md:col-span-2 md:mt-0">
+                    <form>
+                        <div class="overflow-hidden shadow sm:rounded-md">
+                            <form (submit)="editStaff()" [formGroup]="editStaffFormGroup">
+                                <div class="bg-white px-4 py-5 sm:p-6">
+                                    <div class="grid grid-cols-6 gap-6">
+
+                                        <div class="col-span-6 sm:col-span-4">
+                                            <label class="block text-sm font-medium leading-6 text-gray-900"
+                                                   for="staff-name-edit">Name</label>
+                                            <input class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="name" id="staff-name-edit"
+                                                   type="text">
+                                        </div>
+
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <label class="block text-sm font-medium leading-6 text-gray-900"
+                                                   for="staff-role-edit">Rolle</label>
+                                            <select class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="role"
+                                                    id="staff-role-edit">
+                                                <option>Waiter</option>
+                                                <option>Kitchen</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                    <button [disabled]="!editStaffFormGroup.valid" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                            type="submit">
+                                        Speichern
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="mx-auto max-w-7xl py-6">
+
+            <!-- General Event Information. Must be filled out, before next step can be completed. -->
+            <div class="mt-10 sm:mt-0" id="general-staff-list">
+                <div class="md:grid md:grid-cols-3 md:gap-6">
+                    <div class="md:col-span-1">
+                        <div class="px-4 sm:px-0">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900">Mitarbeiter</h3>
+                            <p class="mt-1 text-sm text-gray-600">Hier können neue mitarbeiter bearbeitet / gelöscht
+                                werden</p>
+                        </div>
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <label for="staff-role-edit" class="block text-sm font-medium leading-6 text-gray-900">Rolle</label>
-                      <select formControlName="role" id="staff-role-edit" class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <option>Waiter</option>
-                        <option>Kitchen</option>
-                      </select>
+                    <div class="mt-5 md:col-span-2 md:mt-0">
+                        <div class="overflow-hidden shadow sm:rounded-md">
+                            <table class="table-auto w-full text-left m-5">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Rolle</th>
+                                    <th>Code</th>
+                                    <th>Aktionen</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let staff of staffList">
+                                    <td>{{staff.id}}</td>
+                                    <td>{{staff.name}}</td>
+                                    <td>{{staffRoleCapitalized(staff)}}</td>
+                                    <td>{{staff.code}}</td>
+                                    <td>
+                                        <div class="flex gap-3 m-0">
+                                            <button (click)="editStaffSetup(staff)"
+                                                    class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                                Bearbeiten
+                                            </button>
+                                            <button (click)="deleteStaff(staff.uuid)"
+                                                    class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                                Löschen
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-                  </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                  <button [disabled]="!editStaffFormGroup.valid" type="submit" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Speichern</button>
-                </div>
-              </form>
             </div>
-          </form>
         </div>
-      </div>
+        <br>
+        <br>
+
+        <a [routerLink]="['/organizer']" class="font-medium text-indigo-600 hover:text-indigo-500"> &#8592; zurück zum
+            Dashboard</a>
+
     </div>
-
-    <br>
-    <br>
-
-    <div class="mx-auto max-w-7xl py-6">
-
-      <!-- General Event Information. Must be filled out, before next step can be completed. -->
-      <div id="general-staff-list" class="mt-10 sm:mt-0">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <div class="md:col-span-1">
-            <div class="px-4 sm:px-0">
-              <h3 class="text-base font-semibold leading-6 text-gray-900">Mitarbeiter</h3>
-              <p class="mt-1 text-sm text-gray-600">Hier können neue mitarbeiter bearbeitet / gelöscht werden</p>
-            </div>
-          </div>
-
-          <div class="mt-5 md:col-span-2 md:mt-0">
-              <div class="overflow-hidden shadow sm:rounded-md">
-                <table class="table-auto w-full text-left m-5">
-                  <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Rolle</th>
-                    <th>Code</th>
-                    <th>Aktionen</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let staff of staffList">
-                    <td>{{staff.id}}</td>
-                    <td>{{staff.name}}</td>
-                    <td>{{staffRoleCapitalized(staff)}}</td>
-                    <td>{{staff.code}}</td>
-                    <td>
-                      <div class="flex gap-3 m-0">
-                        <button (click)="editStaffSetup(staff)" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Bearbeiten</button>
-                        <button (click)="deleteStaff(staff.uuid)" class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Löschen</button>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <br>
-
-    <a [routerLink]="['/organizer']" class="font-medium text-indigo-600 hover:text-indigo-500"> &#8592; zurück zum Dashboard</a>
-
-  </div>
 </main>

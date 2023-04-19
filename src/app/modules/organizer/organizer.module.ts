@@ -9,7 +9,6 @@ import {ManageStaff} from "./add-staff/manage-staff.component";
 import {AddProductsComponent} from './add-products/add-products.component';
 import {AddtablesComponent} from './add-tables/add-tables.component';
 
-
 @NgModule({
     declarations: [
         DashboardOrganizerComponent,
