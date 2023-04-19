@@ -6,22 +6,18 @@ import {CreateNewEventComponent} from './create-new-event/create-new-event.compo
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ModifyEventComponent} from './modify-event/modify-event.component';
 import {ManageStaff} from "./add-staff/manage-staff.component";
-import { AddProductsComponent } from './add-products/add-products.component';
-import { AddtablesComponent } from './add-tables/add-tables.component';
-import { SharedModule } from './../../shared/shared.module';
-import { AppModule } from './../../app.module';
-
-
+import {AddProductsComponent} from './add-products/add-products.component';
+import {AddtablesComponent} from './add-tables/add-tables.component';
 
 @NgModule({
-  declarations: [
-    DashboardOrganizerComponent,
-    CreateNewEventComponent,
-    ModifyEventComponent,
-    ManageStaff,
-    AddProductsComponent,
-    AddtablesComponent
-  ],
+    declarations: [
+        DashboardOrganizerComponent,
+        CreateNewEventComponent,
+        ModifyEventComponent,
+        ManageStaff,
+        AddProductsComponent,
+        AddtablesComponent
+    ],
     imports: [
         CommonModule,
         OrganizerRoutingModule,
@@ -29,4 +25,5 @@ import { AppModule } from './../../app.module';
         ReactiveFormsModule
     ]
 })
-export class OrganizerModule { }
+export class OrganizerModule {
+}

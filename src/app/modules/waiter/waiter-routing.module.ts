@@ -1,40 +1,37 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { NewOrderComponent } from "./new-order/new-order.component";
-import { OrderviewComponent } from "./orderview/orderview.component";
-import { CommonModule } from '@angular/common';
-import { WaiterviewComponent } from "./waiterview/waiterview.component";
-
+import {NgModule} from "@angular/core";
+import {NewOrderComponent} from "./new-order/new-order.component";
+import {OrderViewComponent} from "./orderview/order-view.component";
+import {CommonModule} from '@angular/common';
+import {WaiterViewComponent} from "./waiterview/waiter-view.component";
+import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
     {
-      /* Hier ändern bei Bedarf */
-      path: '',
-      component: WaiterviewComponent
+        path: '',
+        component: WaiterViewComponent
     },
     {
-      path: 'neworder',
-      component: NewOrderComponent
+        path: 'neworder',
+        component: NewOrderComponent
     },
     {
-      path: 'orderview',
-      component: OrderviewComponent
+        path: 'orderview',
+        component: OrderViewComponent
     },
     {
-      path: 'waiterview',
-      component: WaiterviewComponent
+        path: 'waiterview',
+        component: WaiterViewComponent
     },
     {
-      path: '**',
-      redirectTo: ''
+        path: '**',
+        redirectTo: ''
     }
-  ];
-  
-  @NgModule({
+];
+
+@NgModule({
     imports: [CommonModule,
-      RouterModule.forChild(routes)],
+        RouterModule.forChild(routes)],
     exports: [RouterModule]
-  })
-
-
-  export class WaiterRoutingModule { }
+})
+export class WaiterRoutingModule {
+}

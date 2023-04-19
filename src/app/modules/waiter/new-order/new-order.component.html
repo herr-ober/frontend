@@ -1,154 +1,192 @@
 <header class="bg-white shadow">
-  <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Neue Bestellung anlegen</h1>
-  </div>
-  <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
-    <button (click)="switchSelectTableModal()" class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Tisch wählen</button>
-    &nbsp;
-    <button (click)="switchReviewNewOrderModal()" class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Bestellung prüfen</button>
-    &nbsp;
-    <button (click)="switchToWaiterView()" class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Aktive Bestellungen</button>
-  </div>
+    <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Neue Bestellung anlegen</h1>
+    </div>
+    <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+        <button (click)="switchSelectTableModal()"
+                class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+            Tisch wählen
+        </button>
+        &nbsp;
+        <button (click)="switchReviewNewOrderModal()"
+                class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+            Bestellung prüfen
+        </button>
+        &nbsp;
+        <button (click)="switchToWaiterView()"
+                class="inline-flex justify-center rounded-md bg-primary py-2 px-2 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+            Aktive Bestellungen
+        </button>
+    </div>
 </header>
 
 <main>
-  <div class="mx-auto max-w-7xl py-2 sm:px-6 lg:px-8">
-    <div class="mt-1 sm:mt-0">
-      <div class="flex flex-row text-center">
-        <div *ngFor="let category of productCategories" class="grow bg-white">
+    <div class="mx-auto max-w-7xl py-2 sm:px-6 lg:px-8">
+        <div class="mt-1 sm:mt-0">
+            <div class="flex flex-row text-center">
+                <div *ngFor="let category of productCategories" class="grow bg-white">
 
-          <a (click)="switchSelectedCategory(category.uuid)" class="inline-flex rounded-md py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-            <img src="../../../../assets/images/icons/{{category.iconName}}.png" alt="{{category.name}} Bild">
-          </a>
+                    <a (click)="switchSelectedCategory(category.uuid)"
+                       class="inline-flex rounded-md py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                        <img alt="{{category.name}} Bild"
+                             fill ngSrc="../../../../assets/images/icons/{{category.iconName}}.png">
+                    </a>
 
+                </div>
+            </div>
+
+
+            <div class="grid grid-cols-2 gap-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+                <div *ngFor="let product of productsFromCategory" class="grow bg-white">
+
+                    <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <b>{{product.name}}</b><br>
+                        Preis: {{product.price}}€ <br>
+
+                        <button (click)="decrementProductInNewOrder(product.uuid)"
+                                class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                            -
+                        </button>
+                        <div class="inline-flex justify-center rounded-md bg-gray-200 py-2 px-3 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">{{getAmountOfProductInNewOrder(product.uuid)}}
+                            x
+                        </div>
+                        <button (click)="incrementProductInNewOrder(product.uuid)"
+                                class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                            +
+                        </button>
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-
-      <div class="grid grid-cols-2 gap-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
-        <div *ngFor="let product of productsFromCategory" class="grow bg-white">
-          
-          <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <b>{{product.name}}</b><br>
-            Preis: {{product.price}}€ <br>
-            
-            <button (click)="decrementProductInNewOrder(product.uuid)" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">-</button>
-            <div class="inline-flex justify-center rounded-md bg-gray-200 py-2 px-3 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">{{getAmountOfProductInNewOrder(product.uuid)}} x</div>
-            <button (click)="incrementProductInNewOrder(product.uuid)" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">+</button>
-          
-          </div>
-        </div>
-      </div> 
     </div>
-  </div>
 </main>
 
 
-<div id="review-new-order-modal" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+<div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="review-new-order-modal"
+     role="dialog">
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
-      <div id="review-new-order-modal-background" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+             id="review-new-order-modal-background">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
 
-              <div class="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+                        <div class="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
 
-                <!-- Error-Message -->
-                <div id="review-order-notification" class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-                </div>
+                            <!-- Error-Message -->
+                            <div class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                                 id="review-order-notification"
+                                 role="alert">
+                            </div>
 
-                <h3 class="text-lg font-medium leading-6 text-primary">Bestellung überprüfen</h3>
+                            <h3 class="text-lg font-medium leading-6 text-primary">Bestellung überprüfen</h3>
 
-                <p class="text-sm text-gray-900">Die aufgegebene Bestellung sowie Informationen nochmals vor der Aufgabe an die Küche überprüfen.</p>
-                <p class="text-sm py-1 font-medium leading-6 text-gray-900">Bestellung für Tisch: {{convertTableUuidToTableNumber(newOrder.tableUuid)}}</p>
-                <p class="text-sm py-1 font-medium leading-6 text-gray-900">Inhalt der Bestellung:</p>
+                            <p class="text-sm text-gray-900">Die aufgegebene Bestellung sowie Informationen nochmals vor
+                                der Aufgabe an die Küche überprüfen.</p>
+                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Bestellung für
+                                Tisch: {{convertTableUuidToTableNumber(newOrder.tableUuid)}}</p>
+                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Inhalt der Bestellung:</p>
 
-                <div class="grid grid-cols-2 gap-6">
-                  <div class="col-span-2 sm:col-span-2">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="col-span-2 sm:col-span-2">
 
-                    <div *ngFor="let position of newOrder.positions" class="grow bg-white text-sm text-gray-900">
-                      {{position.amount}}x: {{convertProductUuidToProductName(position.productUuid)}}
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
-              <button (click)="submitNewOrder()" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Abschicken</button>
-            </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="select-table-modal" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
-    <div class="fixed inset-0 z-10 overflow-y-auto">
-      <div id="select-table-modal-background" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-        
-      <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
-
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 class="text-lg font-medium leading-6 text-primary">Tisch auswählen</h3>
-
-              <p class="text-sm text-gray-500 py-1">Einen Tisch aus den nachfolgenden Tischen auswählen:</p>
-
-              <div class="grid grid-cols-4 gap-6 py-1">
-                <div *ngFor="let table of tablesOfEvent" class="grow bg-white">
-                    
-                  <div (click)="setTableOfOrder(table.uuid)" class="col-span-1 sm:col-span-2">
-                    <div  class="inline-flex rounded-md py-4 px-4 text-sm font-semibold text-black shadow-sm bg-slate-200 hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                      Tisch {{table.tableNumber}}
+                                    <div *ngFor="let position of newOrder.positions"
+                                         class="grow bg-white text-sm text-gray-900">
+                                        {{position.amount}}x: {{convertProductUuidToProductName(position.productUuid)}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+
+                    <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button (click)="submitNewOrder()"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                            Abschicken
+                        </button>
+                    </div>
+
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="select-table-modal" role="dialog">
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+             id="select-table-modal-background">
+
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg font-medium leading-6 text-primary">Tisch auswählen</h3>
+
+                            <p class="text-sm text-gray-500 py-1">Einen Tisch aus den nachfolgenden Tischen
+                                auswählen:</p>
+
+                            <div class="grid grid-cols-4 gap-6 py-1">
+                                <div *ngFor="let table of tablesOfEvent" class="grow bg-white">
+
+                                    <div (click)="setTableOfOrder(table.uuid)" class="col-span-1 sm:col-span-2">
+                                        <div class="inline-flex rounded-md py-4 px-4 text-sm font-semibold text-black shadow-sm bg-slate-200 hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                            Tisch {{table.tableNumber}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
-<div id="order-confirmation-modal" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+<div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="order-confirmation-modal"
+     role="dialog">
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
-      <div id="order-confirmation-modal-background" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-        
-      <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+             id="order-confirmation-modal-background">
 
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 class="text-lg font-medium leading-6 text-primary">Bestellung wurde aufgegeben</h3>
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
 
-              <p class="text-sm text-gray-500 py-1">Übersicht über die aufgegebene Bestellung:</p>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg font-medium leading-6 text-primary">Bestellung wurde aufgegeben</h3>
 
-                <div class="grid grid-cols-2 gap-6">
-                  <div class="col-span-2 sm:col-span-2">
-                    <div *ngFor="let position of submittedOrder.positions" class="grow bg-white text-sm text-gray-900">
-                      {{position.amount}}x {{convertProductUuidToProductName(position.productUuid)}} a {{convertProductUuidToPrice(position.productUuid)}} Euro
-                    </div>   
-                    <br>           
-                    Totaler Bestelungswert: {{calcTotalAmountOfOrder()}} Euro   
-                  </div>
+                            <p class="text-sm text-gray-500 py-1">Übersicht über die aufgegebene Bestellung:</p>
+
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="col-span-2 sm:col-span-2">
+                                    <div *ngFor="let position of submittedOrder.positions"
+                                         class="grow bg-white text-sm text-gray-900">
+                                        {{position.amount}}x {{convertProductUuidToProductName(position.productUuid)}}
+                                        a {{convertProductUuidToPrice(position.productUuid)}} Euro
+                                    </div>
+                                    <br>
+                                    Totaler Bestelungswert: {{calcTotalAmountOfOrder()}} Euro
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button (click)="markOrderAsPaid()"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                            Bestellung als bezhalt markieren
+                        </button>
+                    </div>
                 </div>
             </div>
-          </div>
-        
-          <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
-            <button (click)="markOrderAsPaid()" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Bestellung als bezhalt markieren</button>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

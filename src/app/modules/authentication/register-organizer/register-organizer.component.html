@@ -1,101 +1,121 @@
 <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <div class="w-full max-w-md space-y-8">
-    <div>
-      <img class="mx-auto h-[16rem] w-auto" src="/assets/images/Logo_HerrOber.png" alt="Your Company">
-      <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Register your account</h2>
-    </div>
+    <div class="w-full max-w-md space-y-8">
+        <div>
+            <img alt="Your Company" class="mx-auto h-[16rem] w-auto" height="1000"
+                 ngSrc="/assets/images/Logo_HerrOber.png" width="1000">
+            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Register your account</h2>
+        </div>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mt-8 space-y-6">
-    <div class="-space-y-px rounded-md shadow-sm">
-      <input
-          type="text"
-          placeholder="Username"
-          formControlName="username"
-          class="relative block w-full rounded-t-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-          >
-      <div *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">
-          <div *ngIf="registerForm.controls['username'].errors?.['required']">
-            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                <p>Username is required</p>
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="mt-8 space-y-6">
+            <div class="-space-y-px rounded-md shadow-sm">
+                <input
+                        class="relative block w-full rounded-t-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                        formControlName="username"
+                        placeholder="Username"
+                        type="text"
+                >
+                <div *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">
+                    <div *ngIf="registerForm.controls['username'].errors?.['required']">
+                        <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                             role="alert">
+                            <p>Username is required</p>
+                        </div>
+                    </div>
+                    <div *ngIf="submitted && registerForm.controls['username'].errors?.['minlength']">
+                        <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                             role="alert">
+                            <p>Username must be at least 6 characters long</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="-space-y-px rounded-md shadow-sm">
+                    <input
+                            class="relative block w-full  border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                            formControlName="email"
+                            placeholder="Email"
+                            type="text"
+                    >
+                    <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+                        <div *ngIf="registerForm.controls['email'].errors?.['required']">
+                            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                 role="alert">
+                                <p>Email is required</p>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && registerForm.controls['email'].errors?.['email']">
+                            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                 role="alert">
+                                <p>Invalid Email address</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input
+                            class="relative block w-full rounded-b-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                            formControlName="password"
+                            placeholder="Password"
+                            type="password"
+                    >
+                    <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                        <div *ngIf="registerForm.controls['password'].errors?.['required']">
+                            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                 role="alert">
+                                <p>Password is required</p>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && registerForm.controls['password'].errors?.['minlength']">
+                            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                 role="alert">
+                                <p>Password must be at least 8 characters long</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div *ngIf="submitted && registerForm.controls['username'].errors?.['minlength']">
-            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-              <p>Username must be at least 6 characters long</p>
+
+            <div class="hidden p-4 mb-4 text-sm text-error bg-error_background rounded-lg dark:bg-error_background dark:text-error"
+                 id="register-error-notification"
+                 role="alert">
             </div>
-          </div>
-      </div>   
 
-      <div class="-space-y-px rounded-md shadow-sm">
-          <input
-              type="text"
-              placeholder="Email"
-              formControlName="email"
-              class="relative block w-full  border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-              >
-          <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
-              <div *ngIf="registerForm.controls['email'].errors?.['required']">
-                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                  <p>Email is required</p>
-                </div>
-              </div>
-              <div *ngIf="submitted && registerForm.controls['email'].errors?.['email']">
-                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                  <p>Invalid Email address</p>
-                </div>
-              </div>
-          </div>
-
-          <input
-              type="password"
-              placeholder="Password"
-              formControlName="password"
-              class="relative block w-full rounded-b-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-              >
-          <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
-              <div *ngIf="registerForm.controls['password'].errors?.['required']">
-                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                  <p>Password is required</p>
-                </div>
-              </div>
-              <div *ngIf="submitted && registerForm.controls['password'].errors?.['minlength']">
-                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2" role="alert">
-                  <p>Password must be at least 8 characters long</p>
-                </div>
-              </div>
-          </div>
-      </div>
-    </div>
-
-    <div id="register-error-notification" class="hidden p-4 mb-4 text-sm text-error bg-error_background rounded-lg dark:bg-error_background dark:text-error" role="alert">
-    </div>
-
-        <button
-          type="submit"
-          [ngClass]="{'opacity-50 cursor-not-allowed': !registerForm.valid}"
-          class="group relative flex w-full justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
+            <button
+                    [ngClass]="{'opacity-50 cursor-not-allowed': !registerForm.valid}"
+                    class="group relative flex w-full justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    type="submit"
+            >
             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                <svg class="h-5 w-5 text-primary_border group-hover:text-primary_border" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                <svg aria-hidden="true" class="h-5 w-5 text-primary_border group-hover:text-primary_border"
+                     fill="currentColor" viewBox="0 0 20 20">
+                  <path clip-rule="evenodd"
+                        d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                        fill-rule="evenodd"/>
                 </svg>
               </span>
-            Register
-        </button>
-  
-        <div class="text-sm">
-            <a href="/auth/login/organizer" class="font-medium text-primary hover:text-primary_hover hover:underline">Have an account?</a>
+                Register
+            </button>
+
+            <div class="text-sm">
+                <a class="font-medium text-primary hover:text-primary_hover hover:underline"
+                   href="/auth/login/organizer">Have an account?</a>
+            </div>
+        </form>
+
+        <div class=" bg-primary_background border-t-4 border-primary rounded-b text-primary px-4 py-3 shadow-md"
+             role="alert">
+            <div class="flex">
+                <div class="py-1">
+                    <svg class="fill-current h-6 w-6 text-primary mr-4" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-bold">Are you a staff member?</p>
+                    <a class="font-medium text-primary hover:text-primary_hover hover:underline"
+                       href="/auth/login/staff">Login here</a>
+                </div>
+            </div>
         </div>
-    </form>
-
-  <div class=" bg-primary_background border-t-4 border-primary rounded-b text-primary px-4 py-3 shadow-md" role="alert">
-    <div class="flex">
-      <div class="py-1"><svg class="fill-current h-6 w-6 text-primary mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-      <div>
-        <p class="font-bold">Are you a staff member?</p>
-        <a href="/auth/login/staff" class="font-medium text-primary hover:text-primary_hover hover:underline">Login here</a>
-      </div>
     </div>
-  </div>
 </div>
-

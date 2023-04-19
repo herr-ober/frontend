@@ -1,60 +1,83 @@
 <header class="bg-white shadow">
-  <div class="flex justify-between mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="flex-initial text-3xl font-bold tracking-tight text-primary">Dashboard: Eventverwaltung</h1>
-    <button (click)="logout()" class="flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Logout</button>
-  </div>
+    <div class="flex justify-between mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+        <h1 class="flex-initial text-3xl font-bold tracking-tight text-primary">Dashboard: Eventverwaltung</h1>
+        <button (click)="logout()"
+                class="flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+            Logout
+        </button>
+    </div>
 
 </header>
 
 
 <main>
-  <div *ngIf="!eventExists; else modifyEvent" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-    Es sieht so aus, als wäre noch kein Event angelegt. Nutze den Button und lege ein neues Event an!
-    <br>
-    <br>
-    <a [routerLink]="['createevent']" class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Neues Event anlegen</a>
-  </div>
-
-  <ng-template #modifyEvent>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-primary_background dark:border-primary_border">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{event?.name}}</h5>
-              <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900">{{event?.location}}</h6>
-
-              <p class="mb-3 font-normal text-gray-700">Startdatum: {{event?.date | date:'dd.MM.yyyy'}}</p>
-
-              
-              <button [routerLink]="['modifyevent']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Event bearbeiten</button>
-              
-
-                <!-- Add Products -->
-                <div class="col-span-6 sm:col-span-2">
-                  <label for="add-products" class="block text-sm font-medium leading-6 text-gray-900">Speisenangebot verwalten:</label>
-                  <button [routerLink]="['addproduct']" name="add-products" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Speisenabgebot bearbeiten</button>
-                </div>
-
-                <!-- Add Staff -->
-                <div class="col-span-6 sm:col-span-2">
-                    <label for="manage-staff" class="block text-sm font-medium leading-6 text-gray-900">Mitarbeiter verwalten:</label>
-                    <button id="manage-staff" name="manage-staff" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover" [routerLink]="['add-staff']">Mitarbeiter bearbeiten</button>
-              </div>
-
-                <!-- Add Tables -->
-                <div class="col-span-6 sm:col-span-2">
-                    <label for="add-tables" class="block text-sm font-medium leading-6 text-gray-900">Tische verwalten:</label>
-                    <button [routerLink]="['addtables']" id="add-tables" name="add-tables" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Tische bearbeiten</button>
-                </div>
-              
-              &NonBreakingSpace;
-              
-              <button class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Event löschen</button>
-            </div>
-          </div>
-        </div>
-      </div>    
+    <div *ngIf="!eventExists; else modifyEvent" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        Es sieht so aus, als wäre noch kein Event angelegt. Nutze den Button und lege ein neues Event an!
+        <br>
+        <br>
+        <a [routerLink]="['createevent']"
+           class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Neues
+            Event anlegen</a>
     </div>
-  </ng-template>
+
+    <ng-template #modifyEvent>
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <div class="flex flex-col">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-primary_background dark:border-primary_border">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{event?.name}}</h5>
+                            <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900">{{event?.location}}</h6>
+
+                            <p class="mb-3 font-normal text-gray-700">
+                                Startdatum: {{event?.date | date:'dd.MM.yyyy'}}</p>
+
+
+                            <button [routerLink]="['modifyevent']"
+                                    class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+                                Event bearbeiten
+                            </button>
+
+
+                            <!-- Add Products -->
+                            <div class="col-span-6 sm:col-span-2">
+                                <label class="block text-sm font-medium leading-6 text-gray-900">Speisenangebot
+                                    verwalten:</label>
+                                <button [routerLink]="['addproduct']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover"
+                                        name="add-products">
+                                    Speisenabgebot bearbeiten
+                                </button>
+                            </div>
+
+                            <!-- Add Staff -->
+                            <div class="col-span-6 sm:col-span-2">
+                                <label class="block text-sm font-medium leading-6 text-gray-900" for="manage-staff">Mitarbeiter
+                                    verwalten:</label>
+                                <button [routerLink]="['add-staff']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover"
+                                        id="manage-staff"
+                                        name="manage-staff">Mitarbeiter bearbeiten
+                                </button>
+                            </div>
+
+                            <!-- Add Tables -->
+                            <div class="col-span-6 sm:col-span-2">
+                                <label class="block text-sm font-medium leading-6 text-gray-900" for="add-tables">Tische
+                                    verwalten:</label>
+                                <button [routerLink]="['addtables']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover" id="add-tables"
+                                        name="add-tables">
+                                    Tische bearbeiten
+                                </button>
+                            </div>
+
+                            &NonBreakingSpace;
+
+                            <button class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+                                Event löschen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </main>

@@ -1,11 +1,11 @@
 :host {
-  display: flex;
-  flex-flow: column;
-  min-height: 100vh;
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
 }
 
 .main-content {
-  padding-left: 15px;
-  padding-right: 15px;
-  flex: 1;
+    padding-left: 15px;
+    padding-right: 15px;
+    flex: 1;
 }

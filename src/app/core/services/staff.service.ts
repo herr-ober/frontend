@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
-import {IEvent} from "../../models/IEvent";
-import {IStaff} from "../../models/IStaff";
+import {IEvent} from "../../shared/models/IEvent";
+import {IStaff} from "../../shared/models/IStaff";
 
 @Injectable({providedIn: 'root'})
 export class StaffService {
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService) {
+    }
 
     async addStaff(event: IEvent, name: string, role: string) {
         await this.apiService.doPostRequest<void>(`/events/${event.uuid}/staff`, {name: name, role: role})

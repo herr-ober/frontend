@@ -1,56 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AccountOrganizerService } from '../../../core/services/accountorganizer.service';
-import { ILoginAccountOrganizer } from 'src/app/models/IAccountOrganizer';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AccountOrganizerService} from '../../../core/services/account-organizer.service';
 
 @Component({
-  selector: 'app-login-organizer',
-  templateUrl: './login-organizer.component.html',
-  styleUrls: ['./login-organizer.component.css']
+    selector: 'app-login-organizer',
+    templateUrl: './login-organizer.component.html',
 })
-export class LoginOrganizerComponent implements OnInit {
-  loginForm!: FormGroup;
-  submitted = false;
+export class LoginOrganizerComponent {
 
-  constructor(private AccountOrganizerService: AccountOrganizerService, private router: Router, private formBuilder: FormBuilder) { }
-
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+    loginForm: FormGroup = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]]
     });
-  }
+    submitted = false;
 
-  get f() { return this.loginForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-
-    if (this.loginForm.invalid) {
-      return;
+    constructor(private accountOrganizerService: AccountOrganizerService, private router: Router, private formBuilder: FormBuilder) {
     }
 
-    this.loginAccountOrganizer()
+    async onSubmit() {
+        this.submitted = true;
+        if (this.loginForm.invalid) {
+            return;
+        }
+        await this.loginAccountOrganizer()
+    }
 
-  }
+    async loginAccountOrganizer() {
+        await this.accountOrganizerService.loginAccountOrganizer(this.loginForm.value.email, this.loginForm.value.password)
+            .then(res => {
+                localStorage.setItem('token', res.token)
+                this.router.navigate(['/organizer']);
+            })
+            .catch(err => {
+                this.displayErrorNotification(err.error.message)
+            });
+    }
 
-  async loginAccountOrganizer() {
-  await this.AccountOrganizerService.loginAccountOrganizer(this.loginForm.value.email, this.loginForm.value.password)
-  .then(res => {
-
-    localStorage.setItem('token', res.token)
-    
-    this.router.navigate(['/organizer']);
-  })
-    .catch(err => {
-      this.displayErrorNotification(err.error.message)
-    });
-  }
-
-  displayErrorNotification(msg: string): void {
-    let eventErrorNotification = document.getElementById("login-error-notification");
-    eventErrorNotification!.innerHTML = msg;
-    eventErrorNotification!.style.display = "block";
-  }
+    displayErrorNotification(msg: string): void {
+        let eventErrorNotification = document.getElementById("login-error-notification");
+        eventErrorNotification!.innerHTML = msg;
+        eventErrorNotification!.style.display = "block";
+    }
 }

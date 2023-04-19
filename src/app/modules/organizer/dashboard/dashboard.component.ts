@@ -1,44 +1,37 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
-import { EventService } from './../../../core/services/event.service';
-import { Component, OnInit } from '@angular/core';
-import { IEvent } from 'src/app/models/IEvent';
-import { formatDate } from '@angular/common';
+import {EventService} from '../../../core/services/event.service';
+import {Component, OnInit} from '@angular/core';
+import {IEvent} from 'src/app/shared/models/IEvent';
 
 @Component({
-  selector: 'app-organizer-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-organizer-dashboard',
+    templateUrl: './dashboard.component.html',
 })
 export class DashboardOrganizerComponent implements OnInit {
 
-  constructor(private router: Router, private eventService: EventService) { }
+    event: IEvent | undefined;
+    eventExists: boolean = false;
+    createModal: Boolean = false;
 
-  event: IEvent | undefined;
-  eventExists: boolean = false;
+    constructor(private router: Router, private eventService: EventService) {
+    }
 
+    async ngOnInit() {
+        await this.reload();
+    }
 
-  createModal: Boolean = false;
+    async reload() {
+        this.event = await this.eventService.getEvent();
+        this.eventExists = (this.event != undefined);
+    }
 
-  ngOnInit(): void {
-    this.reload();
-  }
+    async logout() {
+        localStorage.removeItem('token');
+        await this.router.navigate(['']);
+    }
 
-
-  async reload() {
-    await this.eventService.getEvent()
-      .then(res => { this.event = res })
-      .catch((err: HttpErrorResponse) => {})
-    this.eventExists = (this.event != undefined);
-  }
-
-  async logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['']);   
-  }
-  
-  openModal() {
-    this.createModal = true;
-  }
+    openModal() {
+        this.createModal = true;
+    }
 }

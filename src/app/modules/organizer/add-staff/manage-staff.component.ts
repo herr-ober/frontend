@@ -2,7 +2,7 @@ import {EventService} from '../../../core/services/event.service';
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {StaffService} from "../../../core/services/staff.service";
-import {IStaffItem} from "../../../models/IStaff";
+import {IStaffItem} from "../../../shared/models/IStaff";
 
 @Component({
     selector: 'app-create-new-event',
@@ -12,22 +12,19 @@ import {IStaffItem} from "../../../models/IStaff";
 
 export class ManageStaff implements OnInit {
 
-    constructor(private staffService: StaffService, private eventService: EventService) {
-    }
-
     editStaffUUID: string | undefined;
-
     createStaffFormGroup = new FormGroup({
         name: new FormControl<string | null>(null, {validators: [Validators.required]}),
         role: new FormControl("Waiter")
     });
-
     editStaffFormGroup = new FormGroup({
         name: new FormControl<string | null>(null, {validators: [Validators.required]}),
         role: new FormControl("Waiter")
     });
-
     staffList = Array<IStaffItem>();
+
+    constructor(private staffService: StaffService, private eventService: EventService) {
+    }
 
     async ngOnInit() {
         await this.updateStaffList();
