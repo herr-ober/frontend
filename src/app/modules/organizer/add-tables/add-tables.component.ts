@@ -16,7 +16,7 @@ export class AddtablesComponent implements OnInit {
     tableList: ITable[] = [];
     addTablesFormGroup = new FormGroup({
         tableNumber: new FormControl<number | null>(null, {validators: [Validators.required]}),
-        multipleTables: new FormControl<boolean | null>(null, {validators: [Validators.required]})
+        multipleTables: new FormControl<boolean>(false, {validators: [Validators.required]})
     });
 
     constructor(private tableService: TableService, private eventService: EventService) {
@@ -34,7 +34,7 @@ export class AddtablesComponent implements OnInit {
         }
         await this.reload();
         this.addTablesFormGroup.controls.tableNumber.setValue(null);
-        this.addTablesFormGroup.controls.multipleTables.setValue(null);
+        this.addTablesFormGroup.controls.multipleTables.setValue(false);
     }
 
     async deleteTable(tableUuid: string) {
