@@ -30,8 +30,10 @@ export class LoginOrganizerComponent {
     async loginAccountOrganizer() {
         await this.accountOrganizerService.loginAccountOrganizer(this.loginForm.value.email, this.loginForm.value.password)
             .then(res => {
-                localStorage.setItem('token', res.token)
-                this.router.navigate(['/organizer']);
+                localStorage.setItem("name", "organizer")
+                localStorage.setItem("role", "organizer")
+                localStorage.setItem("token", res.token)
+                this.router.navigate(["/organizer"]);
             })
             .catch(err => {
                 this.displayErrorNotification(err.error.message)

@@ -1,5 +1,7 @@
 import {NgModule} from '@angular/core';
-import {AuthGuard} from './core/services/guard.service';
+import {AuthGuardOrganizer} from './core/services/authguard/organizer.service';
+import {AuthGuardStaffWaiter} from './core/services/authguard/staff-waiter.service';
+import {AuthGuardStaffKitchen} from './core/services/authguard/staff-kitchen.service';
 import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
@@ -14,22 +16,23 @@ const routes: Routes = [
     },
     {
         path: 'organizer',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuardOrganizer],
         loadChildren: () => import('./modules/organizer/organizer.module').then(m => m.OrganizerModule),
     },
     {
         path: 'waiter',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuardStaffWaiter],
         loadChildren: () => import('./modules/waiter/waiter.module').then(m => m.WaiterModule)
     },
     {
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuardStaffKitchen],
         path: 'kitchen',
         loadChildren: () => import('./modules/kitchen/kitchen.module').then(m => m.KitchenModule)
     },
     {
         path: '**',
-        redirectTo: '404'
+        pathMatch: 'full',
+        redirectTo: 'auth'
     }
 ];
 

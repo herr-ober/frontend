@@ -139,8 +139,7 @@ export class KitchenViewComponent implements OnInit, OnDestroy {
     }
 
     async logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('role');
-        await this.router.navigate(['']);
+        localStorage.clear();
+        await this.router.navigate(["/auth/login/staff"]);
     }
 }
