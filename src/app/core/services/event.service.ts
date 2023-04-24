@@ -23,9 +23,7 @@ export class EventService {
         return this.apiService.doPatchRequest('/events', {updates: body})
     }
 
-    /*
-    async deleteEvent(): Promise<IEvent> {
-        return this.apiService.doGetRequest('/events')
+    async deleteEvent(): Promise<void> {
+        return this.apiService.doDeleteRequest('/events', {})
     }
-    */
 }
