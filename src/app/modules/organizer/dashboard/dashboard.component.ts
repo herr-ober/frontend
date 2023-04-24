@@ -27,8 +27,8 @@ export class DashboardOrganizerComponent implements OnInit {
     }
 
     async logout() {
-        localStorage.removeItem('token');
-        await this.router.navigate(['']);
+        localStorage.clear();
+        await this.router.navigate(["/auth/login/organizer"]);
     }
 
     openModal() {

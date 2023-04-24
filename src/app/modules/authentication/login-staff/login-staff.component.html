@@ -3,7 +3,7 @@
         <div>
             <img alt="Your Company" class="mx-auto h-[16rem] w-auto" height="1000"
                  ngSrc="/assets/images/Logo_HerrOber.png" width="1000">
-            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Login to your account</h2>
+            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Anmelden - Mitarbeiter</h2>
         </div>
 
         <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="mt-8 space-y-6">
@@ -18,13 +18,13 @@
                     <div *ngIf="loginForm.controls['code'].errors?.['required']">
                         <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Code is required</p>
+                            <p>Code ist erforderlich</p>
                         </div>
                     </div>
                     <div *ngIf="submitted && loginForm.controls['code'].errors?.['minlength']">
                         <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Code must be at least 8 characters long</p>
+                            <p>Code muss mindestens 8 Zeichen lang sein</p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             </button>
 
             <div class="text-sm">
-                <p class="font-medium text-primary">Don't have an code? - Ask your organizer for a access code.</p>
+                <p class="font-medium text-primary">Du hast noch keinen Code? - Dann frage bei deinem Veranstalter nach.</p>
             </div>
         </form>
 
@@ -65,9 +65,9 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="font-bold">Are you a organizer?</p>
+                    <p class="font-bold">Bist du ein Veranstalter?</p>
                     <a class="font-medium text-primary hover:text-primary_hover hover:underline"
-                       href="/auth/login/organizer">Login here</a>
+                       href="/auth/login/organizer">Hier anmelden</a>
                 </div>
             </div>
         </div>

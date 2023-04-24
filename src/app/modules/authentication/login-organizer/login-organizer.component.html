@@ -3,7 +3,7 @@
         <div>
             <img alt="Your Company" class="mx-auto h-[16rem] w-auto" height="1000"
                  ngSrc="/assets/images/Logo_HerrOber.png" width="1000">
-            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Login to your account</h2>
+            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Anmelden - Veranstalter</h2>
         </div>
 
         <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="mt-8 space-y-6">
@@ -11,20 +11,20 @@
                 <input
                         class="relative block w-full rounded-t-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                         formControlName="email"
-                        placeholder="Email"
+                        placeholder="E-Mail"
                         type="text"
                 >
                 <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
                     <div *ngIf="loginForm.controls['email'].errors?.['required']">
                         <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Email is required</p>
+                            <p>E-Mail ist erforderlich</p>
                         </div>
                     </div>
                     <div *ngIf="submitted && loginForm.controls['email'].errors?.['email']">
                         <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Invalid Email address</p>
+                            <p>Ungültige E-Mail Adresse</p>
                         </div>
                     </div>
                 </div>
@@ -32,20 +32,20 @@
                 <input
                         class="relative block w-full rounded-b-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                         formControlName="password"
-                        placeholder="Password"
+                        placeholder="Passwort"
                         type="password"
                 >
                 <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
                     <div *ngIf="loginForm.controls['password'].errors?.['required']">
                         <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Password is required</p>
+                            <p>Passwort ist erforderlich</p>
                         </div>
                     </div>
                     <div *ngIf="submitted && loginForm.controls['password'].errors?.['minlength']">
                         <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Password must be at least 8 characters long</p>
+                            <p>Passwort muss mindestens 8 Zeichen lang sein</p>
                         </div>
                     </div>
                 </div>
@@ -69,12 +69,12 @@
                         fill-rule="evenodd"/>
                 </svg>
               </span>
-                Login
+                Anmelden
             </button>
 
             <div class="text-sm">
                 <a class="font-medium text-primary hover:text-primary_hover hover:underline"
-                   href="/auth/register/organizer">Don't have an account?</a>
+                   href="/auth/register/organizer">Konto erstellen?</a>
             </div>
         </form>
 
@@ -88,9 +88,9 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="font-bold">Are you a staff member?</p>
+                    <p class="font-bold">Bist du ein Mitarbeiter?</p>
                     <a class="font-medium text-primary hover:text-primary_hover hover:underline"
-                       href="/auth/login/staff">Login here</a>
+                       href="/auth/login/staff">Hier anmelden</a>
                 </div>
             </div>
         </div>

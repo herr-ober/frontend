@@ -35,21 +35,18 @@ export class LoginStaffComponent implements OnInit {
     async loginAccountStaff() {
         await this.AccountStaffService.loginAccountStaff(this.loginForm.value.code)
             .then(res => {
-                console.log(res.token)
-                localStorage.setItem('token', res.token)
-                //localStorage.setItem('role', res.role)
-
-                this.router.navigate(['/waiter']);
-
-                /*
-                if (localStorage.getItem('role') == "waiter") {
-                  this.router.navigate(['/waiter']);
-                } else if (localStorage.getItem('role') == "kitchen"){
-                  this.router.navigate(['/kitchen']);
+                localStorage.setItem("name", res.name)
+                localStorage.setItem("role", res.role)
+                localStorage.setItem("token", res.token)
+                               
+                if (localStorage.getItem("role") == "waiter") {
+                  this.router.navigate(["/waiter"]);
+                } else if (localStorage.getItem("role") == "kitchen"){
+                  this.router.navigate(["/kitchen"]);
                 } else {
-                  this.router.navigate(['']);
+                  this.router.navigate(["/auth"]);
                 }
-                */
+
             })
             .catch(err => {
                 this.displayErrorNotification(err.error.message)

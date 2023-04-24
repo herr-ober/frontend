@@ -3,7 +3,7 @@
         <div>
             <img alt="Your Company" class="mx-auto h-[16rem] w-auto" height="1000"
                  ngSrc="/assets/images/Logo_HerrOber.png" width="1000">
-            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Register your account</h2>
+            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-primary">Registrieren - Veranstalter</h2>
         </div>
 
         <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="mt-8 space-y-6">
@@ -11,20 +11,20 @@
                 <input
                         class="relative block w-full rounded-t-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                         formControlName="username"
-                        placeholder="Username"
+                        placeholder="Nutzername"
                         type="text"
                 >
                 <div *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">
                     <div *ngIf="registerForm.controls['username'].errors?.['required']">
                         <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Username is required</p>
+                            <p>Nutzername ist erforderlich</p>
                         </div>
                     </div>
                     <div *ngIf="submitted && registerForm.controls['username'].errors?.['minlength']">
                         <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                              role="alert">
-                            <p>Username must be at least 6 characters long</p>
+                            <p>Nutzername muss mindestens 6 Zeichen lang sein</p>
                         </div>
                     </div>
                 </div>
@@ -33,20 +33,20 @@
                     <input
                             class="relative block w-full  border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                             formControlName="email"
-                            placeholder="Email"
+                            placeholder="E-Mail"
                             type="text"
                     >
                     <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
                         <div *ngIf="registerForm.controls['email'].errors?.['required']">
                             <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                                  role="alert">
-                                <p>Email is required</p>
+                                <p>E-Mail ist erforderlich</p>
                             </div>
                         </div>
                         <div *ngIf="submitted && registerForm.controls['email'].errors?.['email']">
                             <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                                  role="alert">
-                                <p>Invalid Email address</p>
+                                <p>Ungültige E-Mail Adresse</p>
                             </div>
                         </div>
                     </div>
@@ -54,20 +54,20 @@
                     <input
                             class="relative block w-full rounded-b-md border-0 py-1.5 text-primary ring-1 ring-inset ring-primary_border placeholder:text-placeholder focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                             formControlName="password"
-                            placeholder="Password"
+                            placeholder="Passwort"
                             type="password"
                     >
                     <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
                         <div *ngIf="registerForm.controls['password'].errors?.['required']">
                             <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                                  role="alert">
-                                <p>Password is required</p>
+                                <p>Passwort ist erforderlich</p>
                             </div>
                         </div>
                         <div *ngIf="submitted && registerForm.controls['password'].errors?.['minlength']">
                             <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
                                  role="alert">
-                                <p>Password must be at least 8 characters long</p>
+                                <p>Passwort muss mindestens 8 Zeichen lang sein</p>
                             </div>
                         </div>
                     </div>
@@ -92,12 +92,12 @@
                         fill-rule="evenodd"/>
                 </svg>
               </span>
-                Register
+                Registrieren
             </button>
 
             <div class="text-sm">
                 <a class="font-medium text-primary hover:text-primary_hover hover:underline"
-                   href="/auth/login/organizer">Have an account?</a>
+                   href="/auth/login/organizer">Hast du ein Account?</a>
             </div>
         </form>
 
@@ -111,9 +111,9 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="font-bold">Are you a staff member?</p>
+                    <p class="font-bold">Bist du ein Mitarbeiter?</p>
                     <a class="font-medium text-primary hover:text-primary_hover hover:underline"
-                       href="/auth/login/staff">Login here</a>
+                       href="/auth/login/staff">Hier anmelden</a>
                 </div>
             </div>
         </div>
