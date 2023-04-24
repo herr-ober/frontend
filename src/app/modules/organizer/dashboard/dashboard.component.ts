@@ -1,7 +1,7 @@
 import {Router} from '@angular/router';
 
 import {EventService} from '../../../core/services/event.service';
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {IEvent} from 'src/app/shared/models/IEvent';
 
 @Component({
@@ -12,10 +12,13 @@ export class DashboardOrganizerComponent implements OnInit {
 
     event: IEvent | undefined;
     eventExists: boolean = false;
-    createModal: Boolean = false;
+
+    private confirmEventDeletionModalVisible: boolean = false;
+
 
     constructor(private router: Router, private eventService: EventService) {
     }
+
 
     async ngOnInit() {
         await this.reload();
@@ -31,7 +34,31 @@ export class DashboardOrganizerComponent implements OnInit {
         await this.router.navigate(["/auth/login/organizer"]);
     }
 
-    openModal() {
-        this.createModal = true;
+    async endEvent() {
+        await this.eventService.deleteEvent();
+        window.location.reload();
+    }
+
+    switchConfirmEventDeletionModal() {
+        let confirmEventDeletionModal = document.getElementById("confirm-event-deletion-modal");
+        if (confirmEventDeletionModal !== null) {
+            if (!this.confirmEventDeletionModalVisible) {
+                confirmEventDeletionModal!.style.display = "block";
+                this.confirmEventDeletionModalVisible = true;
+            } else {
+                confirmEventDeletionModal!.style.display = "none";
+                this.confirmEventDeletionModalVisible = false;
+            }
+        }
+    }
+
+    @HostListener('document:click', ['$event'])
+    async onClick(e: MouseEvent) {
+        let clickedID: String = (e.target as Element).id;
+        if (clickedID !== null) {
+            if (this.confirmEventDeletionModalVisible && (clickedID == "confirm-event-deletion-modal-background")) {
+                this.switchConfirmEventDeletionModal();
+            }
+        }
     }
 }

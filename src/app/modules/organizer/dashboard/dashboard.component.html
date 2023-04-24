@@ -71,7 +71,7 @@
 
                             &NonBreakingSpace;
 
-                            <button class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+                            <button (click)="switchConfirmEventDeletionModal()" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
                                 Event löschen
                             </button>
                         </div>
@@ -81,3 +81,38 @@
         </div>
     </ng-template>
 </main>
+
+<div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="confirm-event-deletion-modal"
+     role="dialog">
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+             id="confirm-event-deletion-modal-background">
+
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg font-medium leading-6 text-primary">Event löschen?</h3>
+
+                            <p class="text-sm text-gray-500 py-1">Soll dein Event wirklich gelöscht werden? Dies kann nicht rückgängig gemacht werden.</p>
+                        </div>
+                    </div>
+
+                    <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button (click)="endEvent()"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                            Ja, löschen
+                        </button>
+
+                        <button (click)="switchConfirmEventDeletionModal()"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                            Nein, abbrechen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
