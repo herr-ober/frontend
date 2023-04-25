@@ -35,10 +35,11 @@ export class LoginStaffComponent implements OnInit {
     async loginAccountStaff() {
         await this.AccountStaffService.loginAccountStaff(this.loginForm.value.code)
             .then(res => {
+                localStorage.setItem("uuid", res.uuid)
                 localStorage.setItem("name", res.name)
                 localStorage.setItem("role", res.role)
                 localStorage.setItem("token", res.token)
-                               
+                       
                 if (localStorage.getItem("role") == "waiter") {
                   this.router.navigate(["/waiter"]);
                 } else if (localStorage.getItem("role") == "kitchen"){
