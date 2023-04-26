@@ -11,7 +11,7 @@
 
 
 <main>
-    <div *ngIf="!eventExists; else modifyEvent" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div *ngIf="!eventExists; else modifyEvent" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 text-secondary">
         Es sieht so aus, als wäre noch kein Event angelegt. Nutze den Button und lege ein neues Event an!
         <br>
         <br>
@@ -25,9 +25,9 @@
             <div class="flex flex-col">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-primary_background dark:border-primary_border">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{event?.name}}</h5>
-                            <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900">{{event?.location}}</h6>
+                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg dark:bg-white shadow ">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-primary">{{event?.name}}</h5>
+                            <h6 class="mb-2 text-xl font-bold tracking-tight text-primary">{{event?.location}}</h6>
 
                             <p class="mb-3 font-normal text-gray-700">
                                 Startdatum: {{event?.date | date:'dd.MM.yyyy'}}</p>
@@ -41,7 +41,7 @@
 
                             <!-- Add Products -->
                             <div class="col-span-6 sm:col-span-2">
-                                <label class="block text-sm font-medium leading-6 text-gray-900">Speisenangebot
+                                <label class="block text-sm font-medium leading-6 text-secondary">Speisenangebot
                                     verwalten:</label>
                                 <button [routerLink]="['addproduct']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover"
                                         name="add-products">
@@ -51,7 +51,7 @@
 
                             <!-- Add Staff -->
                             <div class="col-span-6 sm:col-span-2">
-                                <label class="block text-sm font-medium leading-6 text-gray-900" for="manage-staff">Mitarbeiter
+                                <label class="block text-sm font-medium leading-6 text-secondary" for="manage-staff">Mitarbeiter
                                     verwalten:</label>
                                 <button [routerLink]="['add-staff']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover"
                                         id="manage-staff"
@@ -61,7 +61,7 @@
 
                             <!-- Add Tables -->
                             <div class="col-span-6 sm:col-span-2">
-                                <label class="block text-sm font-medium leading-6 text-gray-900" for="add-tables">Tische
+                                <label class="block text-sm font-medium leading-6 text-secondary" for="add-tables">Tische
                                     verwalten:</label>
                                 <button [routerLink]="['addtables']" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover" id="add-tables"
                                         name="add-tables">
@@ -71,9 +71,13 @@
 
                             &NonBreakingSpace;
 
-                            <button (click)="switchConfirmEventDeletionModal()" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
-                                Event löschen
-                            </button>
+                            <!-- Delete Event -->
+                            <div class="col-span-6 sm:col-span-2">
+                                <button (click)="switchConfirmEventDeletionModal()" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+                                    Event löschen
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -96,7 +100,7 @@
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3 class="text-lg font-medium leading-6 text-primary">Event löschen?</h3>
 
-                            <p class="text-sm text-gray-500 py-1">Soll dein Event wirklich gelöscht werden? Dies kann nicht rückgängig gemacht werden.</p>
+                            <p class="text-sm text-secondary py-1">Soll dein Event wirklich gelöscht werden? Dies kann nicht rückgängig gemacht werden.</p>
                         </div>
                     </div>
 
