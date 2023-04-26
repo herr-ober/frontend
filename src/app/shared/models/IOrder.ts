@@ -49,7 +49,7 @@ export interface IOrderView {
     positions: IPositions[]
 }
 
-export interface IOrderList {
+export interface IOrderFull {
     orderId: number,
     orderUuid: string,
     staffUuid: string,
@@ -71,11 +71,12 @@ export interface IPositions {
     amount: number,
     status: string,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    price: number
 
 }
 
 export interface IMap {
-    [key: string]: { name: string; category: string }
+    [key: string]: { name: string; category: string; price: number }
 
 }

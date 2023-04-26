@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from "@angular/core";
 import { OrderService } from "src/app/core/services/order.service";
 import { EventService } from "src/app/core/services/event.service";
-import { IOrderList, IPositions } from "src/app/shared/models/IOrder";
+import { IOrderFull, IPositions } from "src/app/shared/models/IOrder";
 import { IEvent } from "src/app/shared/models/IEvent";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class OrderViewComponent implements OnInit {
   
-  dborders: IOrderList[] = [];
+  dborders: IOrderFull[] = [];
   ordervergleich = this.dborders;
   constructor(
     private orderService: OrderService,
@@ -74,7 +74,7 @@ export class OrderViewComponent implements OnInit {
     return orderlist;
   }
   
-  async ready(order: IOrderList) {
+  async ready(order: IOrderFull) {
     await this.orderService
       .patchOrderBuildBody({ status: "Ready" }, order)
       .then(res => {})
@@ -83,7 +83,7 @@ export class OrderViewComponent implements OnInit {
     //Datenbank order als completed marken0
   }
 
-  isnotcompleted(order: IOrderList): boolean {
+  isnotcompleted(order: IOrderFull): boolean {
     if (order.status == "Completed") {
       return false;
     } else {
@@ -99,12 +99,12 @@ export class OrderViewComponent implements OnInit {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
-  ostatus(order: IOrderList) {
+  ostatus(order: IOrderFull) {
     
     return order.status == "preparation" || order.status == "new";
   }
 
-  async pickup(order: IOrderList) {
+  async pickup(order: IOrderFull) {
     await this.orderService
       .patchOrderBuildBody({ status: "Completed" }, order)
       .then()

@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from "@angular/core";
 import { OrderService } from "src/app/core/services/order.service";
 import { EventService } from "src/app/core/services/event.service";
-import { IOrderList, IPositions } from "src/app/shared/models/IOrder";
+import { IOrderFull, IPositions } from "src/app/shared/models/IOrder";
 import { IEvent } from "src/app/shared/models/IEvent";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: "./kitchen-view.component.html"
 })
 export class KitchenViewComponent {
-  dborders: IOrderList[] = [];
+  dborders: IOrderFull[] = [];
   ordervergleich = this.dborders;
   constructor(
     private orderService: OrderService,
@@ -54,7 +54,7 @@ export class KitchenViewComponent {
   }
 
 
-  async positionready(order: IOrderList, position: IPositions) {
+  async positionready(order: IOrderFull, position: IPositions) {
     await this.orderService
       .patchPosition({ status: "ready" }, position)
       .then(res => {})
@@ -96,13 +96,13 @@ export class KitchenViewComponent {
     }
   }
 
-  async edit(order: IOrderList) {
+  async edit(order: IOrderFull) {
     await this.orderService.patchOrderBuildBody({ status: "preparation" }, order);
     this.loaddata()
 
   }
 
-  async complete(order: IOrderList) {
+  async complete(order: IOrderFull) {
     //await this.Sleep(10000)
     await this.orderService.patchOrderBuildBody({ status: "ready" }, order);
     this.loaddata()
