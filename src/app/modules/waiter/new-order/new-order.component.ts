@@ -1,7 +1,6 @@
 import { StaffService } from './../../../core/services/staff.service';
 import {CategoryService} from '../../../core/services/category.service';
 import {ICategory} from '../../../shared/models/ICategory';
-import {IEvent} from 'src/app/shared/models/IEvent';
 import {EventService} from '../../../core/services/event.service';
 import {Component, HostListener, OnInit} from '@angular/core';
 import {IProduct} from 'src/app/shared/models/IProduct';
@@ -19,27 +18,20 @@ import {Router} from '@angular/router';
 
 export class NewOrderComponent implements OnInit {
 
-    //currentEvent: IEvent = {uuid: "", organizerUuid: "", name: "", location: "", date: new Date()};
     currentEventUuid: string = ""
 
-    newOrder: ICreateNewOrder = {tableUuid: "", positions: []};
+    newOrder: ICreateNewOrder = { tableUuid: "", positions: [], notes: undefined };
+    tableNumberEnteredManually: number = 0;
+
     submittedOrderUuid: string = "";
-    submittedOrder: IOrder = {
-        uuid: "",
-        eventUuid: "",
-        staffUuid: "",
-        tableUuid: "",
-        paid: false,
-        status: "",
-        positions: []
-    }
+    submittedOrder: IOrder = { uuid: "", eventUuid: "", staffUuid: "", tableUuid: "", paid: false, status: "", positions: [], notes: ""}
     totalAmountSubmittedOrder: number = 0;
+
     /* Super unschön, aber leider bekomme ich sonst nirgendwo her der Name des Produkts und den Preis in der Bestellung */
     allProducts: IProduct[] = [];
     productCategories: ICategory[] = [];
     productsFromCategory: IProduct[] = [];
     tablesOfEvent: ITable[] = [];
-    tableNumberManually: number = 0;
 
     private reviewOrderModalVisible: boolean = false;
     private selectTableModalVisible: boolean = false;
@@ -48,10 +40,7 @@ export class NewOrderComponent implements OnInit {
     constructor(private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService, private staffService: StaffService, private router: Router) {
     }
 
-    async ngOnInit() {
-        //this.currentEvent = await this.eventService.getEvent();
-        
-        
+    async ngOnInit() {       
         this.productCategories = (await this.categoryService.getCategories()).categoryList;
         this.tablesOfEvent = (await this.tableServive.getTables(localStorage.getItem("eventUuid")!)).tableList;
         
@@ -101,7 +90,7 @@ export class NewOrderComponent implements OnInit {
     }
 
     setTableOfOrderManualInput() {
-        let pos = this.tablesOfEvent.findIndex(e => e.tableNumber === this.tableNumberManually);
+        let pos = this.tablesOfEvent.findIndex(e => e.tableNumber === this.tableNumberEnteredManually);
         if (pos > -1) {
             this.setTableOfOrder(this.tablesOfEvent[pos].uuid);
         }
@@ -162,7 +151,7 @@ export class NewOrderComponent implements OnInit {
             if (!this.selectTableModalVisible) {
                 selectTableModal!.style.display = "block";
                 this.selectTableModalVisible = true;
-                this.tableNumberManually = this.convertTableUuidToTableNumber(this.newOrder.tableUuid);
+                this.tableNumberEnteredManually = this.convertTableUuidToTableNumber(this.newOrder.tableUuid);
             } else {
                 selectTableModal!.style.display = "none";
                 this.selectTableModalVisible = false;
