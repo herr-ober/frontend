@@ -114,7 +114,8 @@ export class NewOrderComponent implements OnInit {
             await this.orderService.postOrder(this.newOrder, {uuid: localStorage.getItem("eventUuid")!, organizerUuid: "", name: "", location: "", date: new Date()})
                 .then(res => {
                     this.submittedOrderUuid = res.orderUuid
-                    this.switchOrderConfirmationModal()
+                    this.switchReviewNewOrderModal();
+                    this.switchOrderConfirmationModal();
                 });
         } else {
             this.displayErrorNotificationOrderReview("Die Bestellung darf nicht leer sein und muss einem Tisch zugewiesen sein.")
@@ -124,7 +125,6 @@ export class NewOrderComponent implements OnInit {
     async markOrderAsPaid() {
         await this.orderService.patchOrder({uuid: this.submittedOrderUuid, updates: {paid: true}})
             .then(() => {
-                this.switchOrderConfirmationModal()
                 this.router.navigate(['/waiter']);
             });
     }
