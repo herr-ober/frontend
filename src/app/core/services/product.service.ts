@@ -9,8 +9,8 @@ export class ProductService {
     constructor(private apiService: ApiService) {
     }
 
-    async addProduct(event: IEvent, name: string, categoryUuid: string, price: number) {
-        await this.apiService.doPostRequest<void>(`/events/${event.uuid}/products`, {
+    async addProduct(eventUuid: string, name: string, categoryUuid: string, price: number) {
+        await this.apiService.doPostRequest<void>(`/events/${eventUuid}/products`, {
             name: name,
             price: price,
             categoryUuid: categoryUuid
@@ -21,11 +21,11 @@ export class ProductService {
         await this.apiService.doDeleteRequest<void>(`/events/products`, {uuid: productUuid})
     }
 
-    async getProducts(event: IEvent): Promise<{ productList: IProduct[] }> {
-        return this.apiService.doGetRequest(`/events/${event.uuid}/products`)
+    async getProducts(eventUuid: string): Promise<{ productList: IProduct[] }> {
+        return this.apiService.doGetRequest(`/events/${eventUuid}/products`)
     }
 
-    async getProductsByCategory(event: IEvent, uuid: string): Promise<{ productList: IProduct[] }> {
-        return this.apiService.doGetRequest(`/events/${event.uuid}/products?category=${uuid}`)
+    async getProductsByCategory(eventUuid: string, uuid: string): Promise<{ productList: IProduct[] }> {
+        return this.apiService.doGetRequest(`/events/${eventUuid}/products?category=${uuid}`)
     }
 }

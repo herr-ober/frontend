@@ -28,9 +28,9 @@ export class AddtablesComponent implements OnInit {
 
     async addTables() {
         if (this.addTablesFormGroup.controls.multipleTables.value!) {
-            await this.tableService.addTables(this.currentEvent, this.addTablesFormGroup.controls.tableNumber.value!)
+            await this.tableService.addTables(this.currentEvent.uuid, this.addTablesFormGroup.controls.tableNumber.value!)
         } else {
-            await this.tableService.addTable(this.currentEvent, this.addTablesFormGroup.controls.tableNumber.value!)
+            await this.tableService.addTable(this.currentEvent.uuid, this.addTablesFormGroup.controls.tableNumber.value!)
         }
         await this.reload();
         this.addTablesFormGroup.controls.tableNumber.setValue(null);
@@ -38,13 +38,13 @@ export class AddtablesComponent implements OnInit {
     }
 
     async deleteTable(tableUuid: string) {
-        await this.tableService.deleteTable(this.currentEvent, tableUuid);
+        await this.tableService.deleteTable(this.currentEvent.uuid, tableUuid);
         await this.reload();
     }
 
     async reload() {
         this.currentEvent = await this.eventService.getEvent();
-        this.tableList = (await this.tableService.getTables(this.currentEvent)).tableList;
+        this.tableList = (await this.tableService.getTables(this.currentEvent.uuid)).tableList;
         this.tableList.sort(function (a, b) {
             return a.tableNumber - b.tableNumber;
         })

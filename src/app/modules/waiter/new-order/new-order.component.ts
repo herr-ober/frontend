@@ -1,3 +1,4 @@
+import { StaffService } from './../../../core/services/staff.service';
 import {CategoryService} from '../../../core/services/category.service';
 import {ICategory} from '../../../shared/models/ICategory';
 import {IEvent} from 'src/app/shared/models/IEvent';
@@ -18,7 +19,9 @@ import {Router} from '@angular/router';
 
 export class NewOrderComponent implements OnInit {
 
-    currentEvent: IEvent = {uuid: "", organizerUuid: "", name: "", location: "", date: new Date()};
+    //currentEvent: IEvent = {uuid: "", organizerUuid: "", name: "", location: "", date: new Date()};
+    currentEventUuid: string = ""
+
     newOrder: ICreateNewOrder = {tableUuid: "", positions: []};
     submittedOrderUuid: string = "";
     submittedOrder: IOrder = {
@@ -40,19 +43,22 @@ export class NewOrderComponent implements OnInit {
     private selectTableModalVisible: boolean = false;
     private orderConfirmationModalVisible: boolean = false;
 
-    constructor(private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService, private router: Router) {
+    constructor(private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService, private staffService: StaffService, private router: Router) {
     }
 
     async ngOnInit() {
-        this.currentEvent = await this.eventService.getEvent();
+        //this.currentEvent = await this.eventService.getEvent();
+        
+        
         this.productCategories = (await this.categoryService.getCategories()).categoryList;
-        this.tablesOfEvent = (await this.tableServive.getTables(this.currentEvent)).tableList;
+        this.tablesOfEvent = (await this.tableServive.getTables(localStorage.getItem("eventUuid")!)).tableList;
+        
         /* Unschön, aber muss leider, wie oben erklärt, sein ... */
-        this.allProducts = (await this.productService.getProducts(this.currentEvent)).productList;
+        this.allProducts = (await this.productService.getProducts(localStorage.getItem("eventUuid")!)).productList;
     }
 
     async switchSelectedCategory(category: string) {
-        this.productsFromCategory = (await this.productService.getProductsByCategory(this.currentEvent, category)).productList;
+        this.productsFromCategory = (await this.productService.getProductsByCategory(localStorage.getItem("eventUuid")!, category)).productList;
     }
 
     getAmountOfProductInNewOrder(uuid: string): number {
@@ -96,7 +102,7 @@ export class NewOrderComponent implements OnInit {
     async submitNewOrder() {
         if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
 
-            await this.orderService.postOrder(this.newOrder, this.currentEvent)
+            await this.orderService.postOrder(this.newOrder, {uuid: localStorage.getItem("eventUuid")!, organizerUuid: "", name: "", location: "", date: new Date()})
                 .then(res => {
                     this.submittedOrderUuid = res.orderUuid
                     this.switchOrderConfirmationModal()
@@ -204,4 +210,10 @@ export class NewOrderComponent implements OnInit {
     async switchToWaiterView() {
         await this.router.navigate(['/waiter']);
     }
+
+    async logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        this.router.navigate(['']);   
+      }
 }
