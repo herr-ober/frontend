@@ -14,7 +14,7 @@
       <div *ngIf="isnotcompleted(order)">
         <div class="container row-auto p-2 rounded-lg place-self-stretch bg-gray-300 flex flex-col" id="container">
           <div class="grid grid-cols-2 content-center mb-2">
-            <div class="text-xl">
+            <div class="text-xl text-primary">
               <b>Bestellung {{order.orderId}}  -  Tisch {{order.tablename!}}</b>
             </div>
             <div class="text-sm text-right content-center">
@@ -29,7 +29,7 @@
               <div *ngFor="let food of order.positions; let f = index" [attr.data-index]="f">
                 <div *ngIf="isfood(food.category!)" class="row-auto my-2">
                     <div *ngIf="positionStatusWaiting(food)">
-                        <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                        <div class="rounded-full text-white bg-primary px-2" style="display: inline-block;">
                           {{food.amount}}
                         </div>
                         <div class="inline">
@@ -59,7 +59,7 @@
               <div  *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
                 <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
                     <div *ngIf="positionStatusWaiting(drink)">
-                        <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                        <div class="rounded-full text-white bg-primary px-2" style="display: inline-block;">
                           {{drink.amount}}
                         </div>
                         <div class="inline">
@@ -87,8 +87,8 @@
               <div *ngIf="order.notes">
 
                 <hr style="border-top: 2px solid #000000;">
-                  <div><b>Zu Beachten:</b></div>
-                  <div>{{order.notes}}</div>
+                  <div class="text-primary"><b>Zu Beachten:</b></div>
+                  <div class="text-primary">{{order.notes}}</div>
                 </div>
             </div>
             <div *ngIf="isready(order)" class="flex flex-col items-end justify-center">
