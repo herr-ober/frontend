@@ -35,7 +35,8 @@ export class LoginStaffComponent implements OnInit {
     async loginAccountStaff() {
         await this.AccountStaffService.loginAccountStaff(this.loginForm.value.code)
             .then(res => {
-                localStorage.setItem("uuid", res.uuid)
+                localStorage.setItem("staffUuid", res.uuid)
+                localStorage.setItem("eventUuid", res.eventUuid)
                 localStorage.setItem("name", res.name)
                 localStorage.setItem("role", res.role)
                 localStorage.setItem("token", res.token)
