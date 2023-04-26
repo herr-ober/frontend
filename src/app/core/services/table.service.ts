@@ -10,19 +10,19 @@ export class TableService {
     constructor(private apiService: ApiService) {
     }
 
-    async getTables(event: IEvent): Promise<{ tableList: ITable[] }> {
-        return this.apiService.doGetRequest(`/events/${event.uuid}/tables`)
+    async getTables(eventUuid: string): Promise<{ tableList: ITable[] }> {
+        return this.apiService.doGetRequest(`/events/${eventUuid}/tables`)
     }
 
-    async addTable(event: IEvent, tableNumber: number) {
-        await this.apiService.doPostRequest<void>(`/events/${event.uuid}/tables`, {tableNumber: tableNumber})
+    async addTable(eventUuid: string, tableNumber: number) {
+        await this.apiService.doPostRequest<void>(`/events/${eventUuid}/tables`, {tableNumber: tableNumber})
     }
 
-    async addTables(event: IEvent, tableNumber: number) {
-        await this.apiService.doPostRequest<void>(`/events/${event.uuid}/tables/bulk`, {tableNumber: tableNumber})
+    async addTables(eventUuid: string, tableNumber: number) {
+        await this.apiService.doPostRequest<void>(`/events/${eventUuid}/tables/bulk`, {tableNumber: tableNumber})
     }
 
-    async deleteTable(event: IEvent, tableUuid: string) {
-        await this.apiService.doDeleteRequest<void>(`/events/${event.uuid}/tables`, {uuid: tableUuid})
+    async deleteTable(eventUuid: string, tableUuid: string) {
+        await this.apiService.doDeleteRequest<void>(`/events/${eventUuid}/tables`, {uuid: tableUuid})
     }
 }

@@ -25,7 +25,7 @@ export class StaffService {
         await this.apiService.doDeleteRequest<void>(`/events/staff`, {uuid: uuid})
     }
 
-    async detEventUuidFromStaff(event: IEvent, uuid: string) {
-        await this.apiService.doDeleteRequest<void>(`/events/staff`, {uuid: uuid})
+    async getEventUuidFromStaff(uuid: string): Promise<string> {
+        return this.apiService.doGetRequest<string>(`/events/staff/${uuid}`)
     }
 }

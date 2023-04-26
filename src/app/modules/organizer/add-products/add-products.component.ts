@@ -34,7 +34,7 @@ export class AddProductsComponent implements OnInit {
     }
 
     async addProduct() {
-        await this.productService.addProduct(this.currentEvent, this.addProductFormGroup.controls.name.value!, this.addProductFormGroup.controls.category.value!, this.addProductFormGroup.controls.price.value!)
+        await this.productService.addProduct(this.currentEvent.uuid, this.addProductFormGroup.controls.name.value!, this.addProductFormGroup.controls.category.value!, this.addProductFormGroup.controls.price.value!)
         await this.reload();
         this.addProductFormGroup.controls.name.setValue(null);
         this.addProductFormGroup.controls.price.setValue(null);
