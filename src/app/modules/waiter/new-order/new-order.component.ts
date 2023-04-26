@@ -39,6 +39,8 @@ export class NewOrderComponent implements OnInit {
     productCategories: ICategory[] = [];
     productsFromCategory: IProduct[] = [];
     tablesOfEvent: ITable[] = [];
+    tableNumberManually: number = 0;
+
     private reviewOrderModalVisible: boolean = false;
     private selectTableModalVisible: boolean = false;
     private orderConfirmationModalVisible: boolean = false;
@@ -94,21 +96,28 @@ export class NewOrderComponent implements OnInit {
     }
 
     setTableOfOrder(uuid: string) {
-        console.log(uuid)
         this.newOrder.tableUuid = uuid;
         this.switchSelectTableModal();
     }
 
+    setTableOfOrderManualInput() {
+        let pos = this.tablesOfEvent.findIndex(e => e.tableNumber === this.tableNumberManually);
+        if (pos > -1) {
+            this.setTableOfOrder(this.tablesOfEvent[pos].uuid);
+        }
+        else
+            this.displayErrorNotificationSelectTable("Der angeforderte Tisch existiert nicht.")
+    }
+
     async submitNewOrder() {
         if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
-
             await this.orderService.postOrder(this.newOrder, {uuid: localStorage.getItem("eventUuid")!, organizerUuid: "", name: "", location: "", date: new Date()})
                 .then(res => {
                     this.submittedOrderUuid = res.orderUuid
                     this.switchOrderConfirmationModal()
                 });
         } else {
-            this.displayErrorNotification("Die Bestellung darf nicht leer sein und muss einem Tisch zugewiesen sein.")
+            this.displayErrorNotificationOrderReview("Die Bestellung darf nicht leer sein und muss einem Tisch zugewiesen sein.")
         }
     }
 
@@ -153,6 +162,7 @@ export class NewOrderComponent implements OnInit {
             if (!this.selectTableModalVisible) {
                 selectTableModal!.style.display = "block";
                 this.selectTableModalVisible = true;
+                this.tableNumberManually = this.convertTableUuidToTableNumber(this.newOrder.tableUuid);
             } else {
                 selectTableModal!.style.display = "none";
                 this.selectTableModalVisible = false;
@@ -201,8 +211,14 @@ export class NewOrderComponent implements OnInit {
         return total;
     }
 
-    displayErrorNotification(msg: string): void {
+    displayErrorNotificationOrderReview(msg: string): void {
         let eventErrorNotification = document.getElementById("review-order-notification");
+        eventErrorNotification!.innerHTML = msg;
+        eventErrorNotification!.style.display = "block";
+    }
+
+    displayErrorNotificationSelectTable(msg: string): void {
+        let eventErrorNotification = document.getElementById("select-table-notification");
         eventErrorNotification!.innerHTML = msg;
         eventErrorNotification!.style.display = "block";
     }
