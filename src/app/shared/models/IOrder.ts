@@ -55,7 +55,8 @@ export interface IOrderList {
     tablename?: number,
     paid: boolean,
     status: string,
-    positions: IPositions[]
+    positions: IPositions[],
+    notes?: string
 }
 
 export interface IPositions {
