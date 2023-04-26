@@ -22,6 +22,8 @@
     </div>
 </header>
 
+<br>
+
 <main>
     <div class="mx-auto max-w-7xl py-2 sm:px-6 lg:px-8">
         <div class="mt-1 sm:mt-0">
@@ -34,6 +36,8 @@
     
             </div>
           </div>
+          
+          <br>
 
 
             <div class="grid grid-cols-2 gap-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
@@ -83,11 +87,11 @@
 
                             <h3 class="text-lg font-medium leading-6 text-primary">Bestellung überprüfen</h3>
                             
-                            <p class="text-sm text-gray-900">Die aufgegebene Bestellung sowie Informationen nochmals vor
-                                der Aufgabe an die Küche überprüfen.</p>
+                            <p class="text-sm text-gray-900">Die aufgegebene Bestellung sowie Informationen nochmals vor der Aufgabe an die Küche überprüfen.</p>
+
+                            <br>
                             
-                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Bestellung für
-                                Tisch: {{convertTableUuidToTableNumber(newOrder.tableUuid)}}</p>
+                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Bestellung für Tisch: {{convertTableUuidToTableNumber(newOrder.tableUuid)}}</p>
                             <p class="text-sm py-1 font-medium leading-6 text-gray-900">Inhalt der Bestellung:</p>
 
                             <div class="grid grid-cols-2 gap-6">
@@ -99,10 +103,17 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Sonderwünsche für Bestellung:</p>
+                            <input [(ngModel)]="newOrder.notes" type="text" id="notes-for-order" name="notes-for-order" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6">
+                        
                         </div>
                     </div>
 
-                    <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
+                    <br>
+
+                    <div class="py-1 sm:flex sm:flex-row-reverse">
                         <button (click)="submitNewOrder()"
                                 class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
                             Abschicken
@@ -137,7 +148,7 @@
 
                             <div class="grid grid-cols-4 gap-6 py-1 flex items-center">
                                 <label class="block text-sm font-medium leading-6 text-gray-900" for="table-number-input">Tischnummer:</label>
-                                <input [(ngModel)]="tableNumberManually" type="number" id="table-number-input" name="table-number-input" min="1" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6">
+                                <input [(ngModel)]="tableNumberEnteredManually" type="number" id="table-number-input" name="table-number-input" min="1" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6">
                                 <button (click)="setTableOfOrderManualInput()" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Speichern</button>
                             </div>
 
@@ -178,6 +189,12 @@
 
                             <p class="text-sm text-gray-900">Übersicht über die aufgegebene Bestellung:</p>
 
+                            <br>
+
+                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Notiz an die Küche:</p>
+                            <p class="text-sm text-gray-900">{{submittedOrder.notes}}</p>                            
+
+                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Inhalt der Bestellung:</p>
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="col-span-2 sm:col-span-2">
                                     <div *ngFor="let position of submittedOrder.positions"
@@ -186,7 +203,7 @@
                                         a {{convertProductUuidToPrice(position.productUuid)}} Euro
                                     </div>
                                     <br>
-                                    Totaler Bestelungswert: {{calcTotalAmountOfOrder()}} Euro
+                                    Totaler Bestellungswert: {{calcTotalAmountOfOrder()}} Euro
                                 </div>
                             </div>
                         </div>

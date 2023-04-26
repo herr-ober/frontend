@@ -2,6 +2,7 @@ export interface ICreateNewOrder {
 
     tableUuid: string
     positions: ICreateOrderPositionData[]
+    notes?: string
 }
 
 export interface ICreateOrderPositionData {
@@ -20,6 +21,7 @@ export interface IOrder {
     paid: boolean
     status: string
     positions: ICreateOrderPositionData[]
+    notes?: string
 }
 
 export interface IPatchOrder {
