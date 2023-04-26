@@ -50,7 +50,6 @@ export class NewOrderComponent implements OnInit {
         //this.currentEvent = await this.eventService.getEvent();
         
         
-
         this.productCategories = (await this.categoryService.getCategories()).categoryList;
         this.tablesOfEvent = (await this.tableServive.getTables(localStorage.getItem("eventUuid")!)).tableList;
         
@@ -103,7 +102,7 @@ export class NewOrderComponent implements OnInit {
     async submitNewOrder() {
         if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
 
-            await this.orderService.postOrder(this.newOrder, {uuid: this.currentEventUuid, organizerUuid: "", name: "", location: "", date: new Date()})
+            await this.orderService.postOrder(this.newOrder, {uuid: localStorage.getItem("eventUuid")!, organizerUuid: "", name: "", location: "", date: new Date()})
                 .then(res => {
                     this.submittedOrderUuid = res.orderUuid
                     this.switchOrderConfirmationModal()
@@ -211,4 +210,10 @@ export class NewOrderComponent implements OnInit {
     async switchToWaiterView() {
         await this.router.navigate(['/waiter']);
     }
+
+    async logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        this.router.navigate(['']);   
+      }
 }
