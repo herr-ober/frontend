@@ -14,11 +14,7 @@ export class OrderViewComponent implements OnInit, OnDestroy {
     orderList: IOrderList[] = [];
     update: number | undefined;
 
-    constructor(
-        private orderService: OrderService,
-        private eventService: EventService,
-        private router: Router
-    ) {
+    constructor(private orderService: OrderService, private eventService: EventService, private router: Router) {
     }
 
     ngOnInit() {
@@ -31,8 +27,9 @@ export class OrderViewComponent implements OnInit, OnDestroy {
     }
 
     async loadData() {
-        const event = await this.eventService.getEvent();
-        this.orderList = await this.orderService.getAllOrders(event);
+        //Hier muss aus Local Storage die UUID rein
+        //const event = await this.eventService.getEvent();
+        this.orderList = await this.orderService.getAllOrders(localStorage.getItem("eventUuid")!);
     }
 
     createorders() {
@@ -143,6 +140,5 @@ export class OrderViewComponent implements OnInit, OnDestroy {
 
         }
         return ""
-
     }
 }

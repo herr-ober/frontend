@@ -19,6 +19,10 @@ export class EventService {
         return this.apiService.doGetRequest('/events')
     }
 
+    async getEventbyUuid(): Promise<IEvent> {
+        return this.apiService.doGetRequest('/events')
+    }
+
     async patchEvent(body: IUpdateEvent): Promise<void> {
         return this.apiService.doPatchRequest('/events', {updates: body})
     }

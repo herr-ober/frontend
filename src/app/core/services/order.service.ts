@@ -62,25 +62,25 @@ export class OrderService {
         return this.apiService.doGetRequest(`/events/orders/${order.orderUuid}`)
     }
 
-    async getOrdersByStatus(event: IEvent, status: string): Promise<IOrderList[]> {
-        return this.apiService.doGetRequest(`/events/${event.uuid}/orders/${status}`)
+    async getOrdersByStatus(eventUuid: string, status: string): Promise<IOrderList[]> {
+        return this.apiService.doGetRequest(`/events/${eventUuid}/orders/${status}`)
     }
 
-    async getOrders(event: IEvent): Promise<IOrderList[]> {
-        return this.apiService.doGetRequest(`/events/${event.uuid}/orders`)
+    async getOrders(eventUuid: string): Promise<IOrderList[]> {
+        return this.apiService.doGetRequest(`/events/${eventUuid}/orders`)
     }
 
 
-    async getAllOrders(event: IEvent): Promise<IOrderList[]> {
+    async getAllOrders(eventUuid: string): Promise<IOrderList[]> {
 
-        let orders: IOrderList[] = await this.getOrdersByStatus(event, "preparation")
-        let add: IOrderList[] = await this.getOrdersByStatus(event, "new")
+        let orders: IOrderList[] = await this.getOrdersByStatus(eventUuid, "preparation")
+        let add: IOrderList[] = await this.getOrdersByStatus(eventUuid, "new")
         orders = orders.concat(add)
-        add = await this.getOrdersByStatus(event, "completed")
+        add = await this.getOrdersByStatus(eventUuid, "completed")
         orders = orders.concat(add)
 
         if (!this.gotproducts) {
-            await this.getProducts(event)
+            await this.getProducts(eventUuid)
         }
 
 
@@ -99,11 +99,11 @@ export class OrderService {
 
     }
 
-    async getWaiterOrders(event: IEvent): Promise<IOrderList[]> {
-        let orders: IOrderList[] = await this.getOrdersByStatus(event, "preparation")
+    async getWaiterOrders(eventUuid: string): Promise<IOrderList[]> {
+        let orders: IOrderList[] = await this.getOrdersByStatus(eventUuid, "preparation")
 
         if (!this.gotproducts) {
-            await this.getProducts(event)
+            await this.getProducts(eventUuid)
         }
 
         orders.forEach((order: IOrderList) => {
@@ -133,13 +133,13 @@ export class OrderService {
         READY = 'ready',
         DELIVERED = 'delivered'
       }*/
-    async getKitchenOrders(event: IEvent): Promise<IOrderList[]> {
-        let orders: IOrderList[] = await this.getOrdersByStatus(event, "new")
-        let add: IOrderList[] = await this.getOrdersByStatus(event, "preparation")
+    async getKitchenOrders(eventUuid: string): Promise<IOrderList[]> {
+        let orders: IOrderList[] = await this.getOrdersByStatus(eventUuid, "new")
+        let add: IOrderList[] = await this.getOrdersByStatus(eventUuid, "preparation")
         orders = orders.concat(add)
 
         if (!this.gotproducts) {
-            await this.getProducts(event)
+            await this.getProducts(eventUuid)
         }
 
 
@@ -159,8 +159,8 @@ export class OrderService {
 
     }
 
-    async getTable(event: IEvent) {
-        let tables: ITable[] = (await this.tableService.getTables(event)).tableList
+    async getTable(eventUuid: string) {
+        let tables: ITable[] = (await this.tableService.getTables(eventUuid)).tableList
 
         tables.forEach((table: ITable) => {
             this.table[table.uuid] = table.tableNumber
@@ -176,10 +176,10 @@ export class OrderService {
     }
 
 
-    async getProducts(event: IEvent) {
+    async getProducts(eventUuid: string) {
         await this.getCategory();
-        await this.getTable(event);
-        let products: IProduct[] = (await this.productSevice.getProducts(event))
+        await this.getTable(eventUuid);
+        let products: IProduct[] = (await this.productSevice.getProducts(eventUuid))
             .productList;
         products.forEach((product: IProduct) => {
             const uuid: string = product.uuid.toString();
