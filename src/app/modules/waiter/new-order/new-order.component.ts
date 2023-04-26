@@ -59,7 +59,7 @@ export class NewOrderComponent implements OnInit {
     }
 
     async switchSelectedCategory(category: string) {
-        this.productsFromCategory = (await this.productService.getProductsByCategory({uuid: this.currentEventUuid, organizerUuid: "", name: "", location: "", date: new Date()}, category)).productList;
+        this.productsFromCategory = (await this.productService.getProductsByCategory(localStorage.getItem("eventUuid")!, category)).productList;
     }
 
     getAmountOfProductInNewOrder(uuid: string): number {

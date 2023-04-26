@@ -51,7 +51,7 @@ export class AddProductsComponent implements OnInit {
         this.productCategories = (await this.categoryService.getCategories()).categoryList;
         this.productsFromCategories.delete("");
         for (const category of this.productCategories) {
-            this.productsFromCategories.set(category.name, (await this.productService.getProductsByCategory(this.currentEvent, category.uuid)).productList)
+            this.productsFromCategories.set(category.name, (await this.productService.getProductsByCategory(this.currentEvent.uuid, category.uuid)).productList)
         }
         console.log(this.productsFromCategories);
     }

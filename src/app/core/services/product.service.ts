@@ -25,7 +25,7 @@ export class ProductService {
         return this.apiService.doGetRequest(`/events/${eventUuid}/products`)
     }
 
-    async getProductsByCategory(event: IEvent, uuid: string): Promise<{ productList: IProduct[] }> {
-        return this.apiService.doGetRequest(`/events/${event.uuid}/products?category=${uuid}`)
+    async getProductsByCategory(eventUuid: string, uuid: string): Promise<{ productList: IProduct[] }> {
+        return this.apiService.doGetRequest(`/events/${eventUuid}/products?category=${uuid}`)
     }
 }
