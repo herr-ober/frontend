@@ -12,13 +12,9 @@ import {Router} from '@angular/router';
 export class WaiterViewComponent implements OnInit, OnDestroy {
 
     orderList: IOrderList[] = [];
-    update: number | undefined;
+    update: any;
 
-    constructor(
-        private orderService: OrderService,
-        private eventService: EventService,
-        private router: Router
-    ) {
+    constructor(private orderService: OrderService, private eventService: EventService, private router: Router) {
     }
 
     ngOnInit() {
@@ -30,8 +26,8 @@ export class WaiterViewComponent implements OnInit, OnDestroy {
     }
 
     async loadData() {
-        const event = await this.eventService.getEvent();
-        this.orderList = await this.orderService.getWaiterOrders(event);
+        //const event = await this.eventService.getEvent();
+        this.orderList = await this.orderService.getWaiterOrders(localStorage.getItem("eventUuid")!);
     }
 
     async ready(order: IOrderList) {

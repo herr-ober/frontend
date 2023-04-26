@@ -101,6 +101,7 @@ export class OrderService {
 
     async getWaiterOrders(eventUuid: string): Promise<IOrderList[]> {
         let orders: IOrderList[] = await this.getOrdersByStatus(eventUuid, "preparation")
+        console.log("Hallo" + orders)
 
         if (!this.gotproducts) {
             await this.getProducts(eventUuid)

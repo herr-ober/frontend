@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 export class OrderViewComponent implements OnInit, OnDestroy {
 
     orderList: IOrderList[] = [];
-    update: number | undefined;
+    update: any;
 
     constructor(private orderService: OrderService, private eventService: EventService, private router: Router) {
     }

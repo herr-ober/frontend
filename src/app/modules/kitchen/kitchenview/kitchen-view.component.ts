@@ -11,13 +11,9 @@ import {Router} from "@angular/router";
 export class KitchenViewComponent implements OnInit, OnDestroy {
 
     orderList: IOrderList[] = [];
-    update: number | undefined;
+    update: any;
 
-    constructor(
-        private orderService: OrderService,
-        private eventService: EventService,
-        private router: Router,
-    ) {
+    constructor(private orderService: OrderService, private eventService: EventService, private router: Router) {
     }
 
     ngOnInit() {
@@ -29,8 +25,8 @@ export class KitchenViewComponent implements OnInit, OnDestroy {
     }
 
     async loadData() {
-        const event = await this.eventService.getEvent();
-        this.orderList = await this.orderService.getKitchenOrders(event);
+        //const event = await this.eventService.getEvent();
+        this.orderList = await this.orderService.getKitchenOrders(localStorage.getItem("eventUuid")!);
     }
 
     async positionready(order: IOrderList, position: IPositions) {

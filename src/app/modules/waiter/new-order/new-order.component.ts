@@ -50,13 +50,12 @@ export class NewOrderComponent implements OnInit {
         //this.currentEvent = await this.eventService.getEvent();
         
         
-        this.currentEventUuid = await this.staffService.getEventUuidFromStaff(localStorage.getItem("uuid")!)
 
         this.productCategories = (await this.categoryService.getCategories()).categoryList;
-        this.tablesOfEvent = (await this.tableServive.getTables(this.currentEventUuid)).tableList;
+        this.tablesOfEvent = (await this.tableServive.getTables(localStorage.getItem("eventUuid")!)).tableList;
         
         /* Unschön, aber muss leider, wie oben erklärt, sein ... */
-        this.allProducts = (await this.productService.getProducts(this.currentEventUuid)).productList;
+        this.allProducts = (await this.productService.getProducts(localStorage.getItem("eventUuid")!)).productList;
     }
 
     async switchSelectedCategory(category: string) {
