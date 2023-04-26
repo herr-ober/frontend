@@ -135,6 +135,12 @@
                     </div>
                   </div>
                 </div>
+                <div *ngIf="order.notes!=undefined">
+
+                    <hr style="border-top: 2px solid #000000;">
+                      <div><b>Zu Beachten:</b></div>
+                      <div>{{order.notes}}</div>
+                    </div>
               </div>
               <!--<div class="flex flex-col items-end justify-center" *ngIf="isReleasable(order)">
                 <button (click)="complete(order)"
