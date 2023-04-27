@@ -4,12 +4,13 @@ import {ICategory} from '../../../shared/models/ICategory';
 import {EventService} from '../../../core/services/event.service';
 import {Component, HostListener, OnInit} from '@angular/core';
 import {IProduct} from 'src/app/shared/models/IProduct';
-import {ICreateNewOrder, IOrder} from 'src/app/shared/models/IOrder';
+import {ICreateNewOrder, IOrder, IOrderFull, IPositions} from 'src/app/shared/models/IOrder';
 import {ProductService} from 'src/app/core/services/product.service';
 import {ITable} from 'src/app/shared/models/ITable';
 import {TableService} from 'src/app/core/services/table.service';
 import {OrderService} from 'src/app/core/services/order.service';
 import {Router} from '@angular/router';
+import { splitBill } from './split-bill';
 
 @Component({
     selector: 'app-new-order',
@@ -27,6 +28,7 @@ export class NewOrderComponent implements OnInit {
     submittedOrder: IOrder = { uuid: "", eventUuid: "", staffUuid: "", tableUuid: "", paid: false, status: "", positions: [], notes: ""}
     totalAmountSubmittedOrder: number = 0;
 
+
     /* Super unschön, aber leider bekomme ich sonst nirgendwo her der Name des Produkts und den Preis in der Bestellung */
     allProducts: IProduct[] = [];
     productCategories: ICategory[] = [];
@@ -36,6 +38,8 @@ export class NewOrderComponent implements OnInit {
     private reviewOrderModalVisible: boolean = false;
     private selectTableModalVisible: boolean = false;
     private orderConfirmationModalVisible: boolean = false;
+
+    billSplitter = new splitBill;
 
     constructor(private eventService: EventService, private categoryService: CategoryService, private productService: ProductService, private tableServive: TableService, private orderService: OrderService, private staffService: StaffService, private router: Router) {
     }
@@ -106,10 +110,24 @@ export class NewOrderComponent implements OnInit {
                     this.switchReviewNewOrderModal();
                     this.switchOrderConfirmationModal();
                 });
+            this.billSplitter.submittedOrderPositions = new Map((await this.orderService.getFullOrder(localStorage.getItem("eventUuid")!, this.submittedOrderUuid)).positions.map(position => [position.name, position]))
+            this.billSplitter.openPaymentSubmitted = this.billSplitter.calcSum(this.billSplitter.submittedOrderPositions);
         } else {
             this.displayErrorNotificationOrderReview("Die Bestellung darf nicht leer sein und muss einem Tisch zugewiesen sein.")
         }
     }
+
+    //split-bill
+    addToPayment(name: string) {
+        this.billSplitter.addToTempPayment(name);
+    }
+    reduceFromPayment(name: string){
+        this.billSplitter.reduceFromTempPayment(name);
+    }
+    clearPayment(){
+        this.billSplitter.resetTempPayment();
+    }
+    //split-bill
 
     async markOrderAsPaid() {
         await this.orderService.patchOrder({uuid: this.submittedOrderUuid, updates: {paid: true}})
