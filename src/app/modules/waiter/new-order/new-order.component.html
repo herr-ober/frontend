@@ -1,6 +1,6 @@
 <header class="bg-white shadow">
     <div class="flex justify-between mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Neue Bestellung anlegen</h1>
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-primary">Neue Bestellung anlegen</h1>
         <button (click)="logout()" class="flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Logout</button>
 
     </div>
@@ -43,15 +43,15 @@
             <div class="grid grid-cols-2 gap-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
                 <div *ngFor="let product of productsFromCategory" class="grow bg-white">
 
-                    <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-primary_background">
                         <b>{{product.name}}</b><br>
                         Preis: {{product.price}}€ <br>
 
                         <button (click)="decrementProductInNewOrder(product.uuid)"
-                                class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                class="mr-1 inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                             -
                         </button>
-                        <div class="inline-flex justify-center rounded-md bg-gray-200 py-2 px-3 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">{{getAmountOfProductInNewOrder(product.uuid)}}
+                        <div class="mr-1 inline-flex justify-center rounded-md bg-gray-200 py-2 px-3 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">{{getAmountOfProductInNewOrder(product.uuid)}}
                             x
                         </div>
                         <button (click)="incrementProductInNewOrder(product.uuid)"
@@ -69,7 +69,7 @@
 
 <div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="review-new-order-modal"
      role="dialog">
-    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 bg-bg-primary bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
              id="review-new-order-modal-background">
@@ -80,33 +80,33 @@
                         <div class="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
 
                             <!-- Error-Message -->
-                            <div class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                            <div class="hidden p-4 mb-4 text-sm text-error bg-error_background rounded-lg"
                                  id="review-order-notification"
                                  role="alert">
                             </div>
 
                             <h3 class="text-lg font-medium leading-6 text-primary">Bestellung überprüfen</h3>
                             
-                            <p class="text-sm text-gray-900">Die aufgegebene Bestellung sowie Informationen nochmals vor der Aufgabe an die Küche überprüfen.</p>
+                            <p class="text-sm text-secondary">Die aufgegebene Bestellung sowie Informationen nochmals vor der Aufgabe an die Küche überprüfen.</p>
 
                             <br>
                             
-                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Bestellung für Tisch: {{convertTableUuidToTableNumber(newOrder.tableUuid)}}</p>
-                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Inhalt der Bestellung:</p>
+                            <p class="text-sm py-1 font-medium leading-6 text-primary">Bestellung für Tisch: {{convertTableUuidToTableNumber(newOrder.tableUuid)}}</p>
+                            <p class="text-sm py-1 font-medium leading-6 text-primary">Inhalt der Bestellung:</p>
 
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="col-span-2 sm:col-span-2">
 
                                     <div *ngFor="let position of newOrder.positions"
-                                         class="grow bg-white text-sm text-gray-900">
+                                         class="grow bg-white text-sm text-primary">
                                         {{position.amount}}x: {{convertProductUuidToProductName(position.productUuid)}}
                                     </div>
                                 </div>
                             </div>
 
 
-                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Sonderwünsche für Bestellung:</p>
-                            <input [(ngModel)]="newOrder.notes" type="text" id="notes-for-order" name="notes-for-order" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6">
+                            <p class="text-sm py-1 font-medium leading-6 text-primary">Sonderwünsche für Bestellung:</p>
+                            <input [(ngModel)]="newOrder.notes" type="text" id="notes-for-order" name="notes-for-order" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_border sm:text-sm sm:leading-6">
                         
                         </div>
                     </div>
@@ -127,7 +127,7 @@
 </div>
 
 <div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="select-table-modal" role="dialog">
-    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 bg-bg-primary bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
              id="select-table-modal-background">
@@ -138,17 +138,17 @@
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             
                             <!-- Error-Message -->
-                            <div class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" id="select-table-notification" role="alert">
+                            <div class="hidden p-4 mb-4 text-sm text-error bg-error_background rounded-lg" id="select-table-notification" role="alert">
                             </div>
 
 
                             <h3 class="text-lg font-medium leading-6 text-primary">Tisch auswählen</h3>
-                            <p class="text-sm text-gray-900">Einen Tisch eingeben oder aus den nachfolgenden Tischen auswählen.</p>
+                            <p class="text-sm text-secondary">Einen Tisch eingeben oder aus den nachfolgenden Tischen auswählen.</p>
 
 
                             <div class="grid grid-cols-4 gap-6 py-1 flex items-center">
-                                <label class="block text-sm font-medium leading-6 text-gray-900" for="table-number-input">Tischnummer:</label>
-                                <input [(ngModel)]="tableNumberEnteredManually" type="number" id="table-number-input" name="table-number-input" min="1" class="mt-2 block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_hover sm:text-sm sm:leading-6">
+                                <label class="block text-sm font-medium leading-6 text-primary" for="table-number-input">Tischnummer:</label>
+                                <input [(ngModel)]="tableNumberEnteredManually" type="number" id="table-number-input" name="table-number-input" min="1" class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_border sm:text-sm sm:leading-6">
                                 <button (click)="setTableOfOrderManualInput()" class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Speichern</button>
                             </div>
 
@@ -158,7 +158,7 @@
                                 <div *ngFor="let table of tablesOfEvent" class="grow bg-white">
 
                                     <div (click)="setTableOfOrder(table.uuid)" class="col-span-1 sm:col-span-2">
-                                        <div class="inline-flex rounded-md py-4 px-4 text-sm font-semibold text-black shadow-sm bg-slate-200 hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                        <div class="inline-flex rounded-md py-4 px-4 text-sm font-semibold text-primary shadow-sm bg-slate-200 hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                                             Tisch {{table.tableNumber}}
                                         </div>
                                     </div>
@@ -175,7 +175,7 @@
 
 <div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="order-confirmation-modal"
      role="dialog">
-    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 bg-bg-primary bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
              id="order-confirmation-modal-background">
@@ -187,18 +187,18 @@
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3 class="text-lg font-medium leading-6 text-primary">Bestellung wurde aufgegeben</h3>
 
-                            <p class="text-sm text-gray-900">Übersicht über die aufgegebene Bestellung:</p>
+                            <p class="text-sm text-primary">Übersicht über die aufgegebene Bestellung:</p>
 
                             <br>
 
-                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Notiz an die Küche:</p>
-                            <p class="text-sm text-gray-900">{{submittedOrder.notes}}</p>                            
+                            <p class="text-sm py-1 font-medium leading-6 text-primary">Notiz an die Küche:</p>
+                            <p class="text-sm text-primary">{{submittedOrder.notes}}</p>                            
 
-                            <p class="text-sm py-1 font-medium leading-6 text-gray-900">Inhalt der Bestellung:</p>
+                            <p class="text-sm py-1 font-medium leading-6 text-primary">Inhalt der Bestellung:</p>
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="col-span-2 sm:col-span-2">
                                     <div *ngFor="let position of submittedOrder.positions"
-                                         class="grow bg-white text-sm text-gray-900">
+                                         class="grow bg-white text-sm text-primary">
                                         {{position.amount}}x {{convertProductUuidToProductName(position.productUuid)}}
                                         a {{convertProductUuidToPrice(position.productUuid)}} Euro
                                     </div>

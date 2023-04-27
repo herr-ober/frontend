@@ -1,6 +1,6 @@
-<div class="grid sm:grid-cols-1 md:grid-cols-2 md:divide-x-[3px] ">
+<div class="shadow grid sm:grid-cols-1 md:grid-cols-2 md:divide-x-[3px] ">
     <div>
-      <div class="ml-4 text-xl"><b>Wartend</b></div>
+      <div class="pt-3 ml-4 text-xl text-primary"><b>Wartend</b></div>
       <div *ngFor="let order of dborders ; let o = index" [attr.data-index]="o">
         <div *ngIf="inQuery(order)">
           <div class="m-2 p-2 rounded-lg place-self-stretch bg-gray-300	">
@@ -19,7 +19,7 @@
               <div>
                 <div *ngFor="let food of order.positions; let f = index" [attr.data-index]="f">
                   <div *ngIf="isfood(food.category!)" class="row-auto my-2">
-                    <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                    <div class="rounded-full text-white bg-primary px-2" style="display: inline-block;">
                       {{food.amount}}
                     </div>
                     <div class="inline">
@@ -31,7 +31,7 @@
                 <hr style="border-top: 2px solid #000000;">
                 <div *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
                   <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
-                    <div class="rounded-full text-white bg-black px-2" style="display: inline-block;">
+                    <div class="rounded-full text-white bg-primary px-2" style="display: inline-block;">
                       {{drink.amount}}
                     </div>
                     <div class="inline">
@@ -53,8 +53,8 @@
       </div>
     </div>
     <div>
-      <div class="flex justify-between ml-4 text-xl"><b>In Bearbeitung</b>
-        <button (click)="logout()" class="flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Logout</button>
+      <div class="pt-3 flex justify-between ml-4 text-xl text-primary"><b>In Bearbeitung</b>
+        <button (click)="logout()" class="mr-3 flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Logout</button>
       </div>
       <div *ngFor="let order of dborders; let o = index" [attr.data-index]="o">
         <div *ngIf="inProgress(order)">

@@ -14,10 +14,14 @@ module.exports = {
                 primary_border: "#8fb2fc",
 
                 //Color for all secondary components
-                secondary: "#FCA311",
+                secondary: "#4b5563",
                 secondary_hover: "#FCB441",
-                secondary_background: "#fcdeae",
-                secondary_border: "#fcdeae",
+
+                //Color for highlight
+                highlight: "#FCA311",
+                highlight_hover: "#FCB441",
+                highlight_background: "#fcdeae",
+                highlight_border: "#fcdeae",
 
                 //Color for error
                 error: "#991b1b",

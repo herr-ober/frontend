@@ -1,6 +1,6 @@
 <header class="bg-white shadow">
     <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Produkte</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-primary">Produkte</h1>
     </div>
 </header>
 
@@ -12,8 +12,8 @@
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1">
                     <div class="px-4 sm:px-0">
-                        <h3 class="text-base font-semibold leading-6 text-gray-900">Produkte hinzufügen</h3>
-                        <p class="mt-1 text-sm text-gray-600">Hier können neue Produkte erstellt werden</p>
+                        <h3 class="text-base font-semibold leading-6 text-primary">Produkte hinzufügen</h3>
+                        <p class="mt-1 text-sm text-secondary">Hier können neue Produkte erstellt werden</p>
                     </div>
                 </div>
 
@@ -25,28 +25,28 @@
                                     <div class="grid grid-cols-6 gap-6">
 
                                         <div class="col-span-6 sm:col-span-4">
-                                            <label class="block text-sm font-medium leading-6 text-gray-900"
+                                            <label class="block text-sm font-medium leading-6 text-primary"
                                                    for="product-name">Name</label>
-                                            <input class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            <input class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-placeholder focus:ring-2 focus:ring-inset focus:ring-primary_border sm:text-sm sm:leading-6"
                                                    formControlName="name" id="product-name"
                                                    name="product-name"
                                                    type="text">
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium leading-6 text-gray-900"
+                                            <label class="block text-sm font-medium leading-6 text-primary"
                                                    for="product-price">Preis in
                                                 €</label>
-                                            <input class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            <input class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-placeholder focus:ring-2 focus:ring-inset focus:ring-primary_border sm:text-sm sm:leading-6"
                                                    formControlName="price" id="product-price"
                                                    name="product-price"
                                                    type="number">
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium leading-6 text-gray-900"
+                                            <label class="block text-sm font-medium leading-6 text-primary"
                                                    for="product-category">Kategorie</label>
-                                            <select class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            <select class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-placeholder focus:ring-2 focus:ring-inset focus:ring-primary_border sm:text-sm sm:leading-6"
                                                     formControlName="category"
                                                     id="product-category"
                                                     name="product-category">
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
                                     <button [disabled]="!addProductFormGroup.valid"
-                                            class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                            class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                                             type="submit">
                                         Hinzufügen
                                     </button>
@@ -79,8 +79,8 @@
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <div class="md:col-span-1">
                         <div class="px-4 sm:px-0">
-                            <h3 class="text-base font-semibold leading-6 text-gray-900">Produkte löschen</h3>
-                            <p class="mt-1 text-sm text-gray-600">Hier können Produkte gelöscht werden</p>
+                            <h3 class="text-base font-semibold leading-6 text-primary">Produkte löschen</h3>
+                            <p class="mt-1 text-sm text-secondary">Hier können Produkte gelöscht werden</p>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                     <div class="mt-5 md:col-span-2 md:mt-0">
                         <ng-container *ngFor="let category of productsFromCategories | keyvalue">
                             <div *ngIf="category.value.length" class="overflow-hidden shadow sm:rounded-md">
-                                <h3 class="text-base font-semibold leading-6 text-gray-900">{{category.key}}</h3>
+                                <h3 class="text-base font-semibold leading-6 text-primary">{{category.key}}</h3>
                                 <table class="table-fixed w-full text-left m-5">
                                     <thead>
                                     <tr>
@@ -104,7 +104,7 @@
                                         <td>
                                             <div class="flex gap-3 m-0">
                                                 <button (click)="deleteProduct(product.uuid)"
-                                                        class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                                        class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                                                     Löschen
                                                 </button>
                                             </div>
@@ -120,7 +120,7 @@
             </div>
         </div>
 
-        <a [routerLink]="['/organizer']" class="font-medium text-indigo-600 hover:text-indigo-500"> &#8592; zurück zum
+        <a [routerLink]="['/organizer']" class="font-medium text-primary hover:text-primary_hover"> &#8592; zurück zum
             Dashboard</a>
 
     </div>
