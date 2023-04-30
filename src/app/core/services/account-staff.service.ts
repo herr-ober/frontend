@@ -14,5 +14,4 @@ export class AccountStaffService {
         return this.apiService.doPostRequest('/events/Staff/login', {code: code})
 
     }
-
 }

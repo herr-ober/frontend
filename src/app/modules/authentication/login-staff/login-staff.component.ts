@@ -8,14 +8,11 @@ import {AccountStaffService} from '../../../core/services/account-staff.service'
     templateUrl: './login-staff.component.html',
 })
 export class LoginStaffComponent implements OnInit {
+    
     loginForm!: FormGroup;
     submitted = false;
 
     constructor(private AccountStaffService: AccountStaffService, private router: Router, private formBuilder: FormBuilder) {
-    }
-
-    get f() {
-        return this.loginForm.controls;
     }
 
     ngOnInit() {
@@ -24,6 +21,7 @@ export class LoginStaffComponent implements OnInit {
         });
     }
 
+    //Checks whether the specified validators apply
     async onSubmit() {
         this.submitted = true;
         if (this.loginForm.invalid) {
@@ -32,6 +30,7 @@ export class LoginStaffComponent implements OnInit {
         await this.loginAccountStaff()
     }
 
+    //Retrieves account values and writes them to browser storage
     async loginAccountStaff() {
         await this.AccountStaffService.loginAccountStaff(this.loginForm.value.code)
             .then(res => {
@@ -40,7 +39,8 @@ export class LoginStaffComponent implements OnInit {
                 localStorage.setItem("name", res.name)
                 localStorage.setItem("role", res.role)
                 localStorage.setItem("token", res.token)
-                       
+                    
+                //Forwards person according to appropriate role
                 if (localStorage.getItem("role") == "waiter") {
                   this.router.navigate(["/waiter"]);
                 } else if (localStorage.getItem("role") == "kitchen"){
@@ -55,6 +55,7 @@ export class LoginStaffComponent implements OnInit {
             });
     }
 
+    //Gets the error messages from the backend and returns them to the login
     displayErrorNotification(msg: string): void {
         let eventErrorNotification = document.getElementById("login-error-notification");
         eventErrorNotification!.innerHTML = msg;
