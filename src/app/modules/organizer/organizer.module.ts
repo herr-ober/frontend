@@ -8,6 +8,7 @@ import {ModifyEventComponent} from './modify-event/modify-event.component';
 import {ManageStaff} from "./add-staff/manage-staff.component";
 import {AddProductsComponent} from './add-products/add-products.component';
 import {AddtablesComponent} from './add-tables/add-tables.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import {AddtablesComponent} from './add-tables/add-tables.component';
         ModifyEventComponent,
         ManageStaff,
         AddProductsComponent,
-        AddtablesComponent
+        AddtablesComponent,
+        AccountComponent
     ],
     imports: [
         CommonModule,
