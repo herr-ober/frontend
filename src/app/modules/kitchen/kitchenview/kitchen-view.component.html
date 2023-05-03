@@ -1,6 +1,6 @@
 <div class="shadow grid sm:grid-cols-1 md:grid-cols-2 md:divide-x-[3px] ">
     <div>
-      <div class="pt-3 ml-4 text-xl text-primary"><b>Wartend</b></div>
+      <div class="pt-3 h-12 ml-4 text-xl text-primary"><b>Wartend</b></div>
       <div *ngFor="let order of dborders ; let o = index" [attr.data-index]="o">
         <div *ngIf="inQuery(order)">
           <div class="m-2 p-2 rounded-lg place-self-stretch bg-gray-300	">
@@ -54,7 +54,10 @@
     </div>
     <div>
       <div class="pt-3 flex justify-between ml-4 text-xl text-primary"><b>In Bearbeitung</b>
-        <button (click)="logout()" class="mr-3 flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Logout</button>
+        <div>
+          <button (click)="switchLockProductsModal()" class="mr-3 flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Lock Products</button>
+          <button (click)="logout()" class="mr-3 flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">Logout</button>
+        </div>
       </div>
       <div *ngFor="let order of dborders; let o = index" [attr.data-index]="o">
         <div *ngIf="inProgress(order)">
@@ -154,3 +157,58 @@
       </div>
     </div>
   </div>
+
+
+  <div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="lock-products-modal" role="dialog">
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+             id="lock-products-modal-background">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                          <div class="mt-5 md:col-span-2 md:mt-0">
+                            <ng-container *ngFor="let category of productsFromCategories | keyvalue">
+                                <div *ngIf="category.value.length" class="overflow-hidden shadow sm:rounded-md">
+                                    <h3 class="text-base font-semibold leading-6 text-primary">{{category.key}}</h3>
+                                    <table class="table-fixed w-full text-left m-5">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Verfügbar</th>
+                                            <th>Aktion</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let product of category.value">
+                                            <td>{{product.name}}</td>
+                                            <td *ngIf="product.available">ja</td>
+                                            <td *ngIf="product.available==false">nein</td>
+                                            <td>
+                                                <div class="flex gap-3 m-0">
+                                                    <button *ngIf="product.available" (click)="lockProduct(product.uuid)"
+                                                            class="w-24 inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+                                                        sperren
+                                                    </button>
+                                                    <button *ngIf="product.available==false" (click)="unlockProduct(product.uuid)"
+                                                            class="w-24 inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+                                                        entsperren
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-container>
+    
+                        </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,16 +5,31 @@ import { IOrderFull, IPositions } from "src/app/shared/models/IOrder";
 import { IEvent } from "src/app/shared/models/IEvent";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from '@angular/router';
+import { CategoryService } from "src/app/core/services/category.service";
+import { ProductService } from "src/app/core/services/product.service";
+import { ICategory } from "src/app/shared/models/ICategory";
+import { IProduct } from "src/app/shared/models/IProduct";
 
 @Component({
   selector: "app-kitchen-view",
   templateUrl: "./kitchen-view.component.html"
 })
-export class KitchenViewComponent {
+export class KitchenViewComponent{
   dborders: IOrderFull[] = [];
   ordervergleich = this.dborders;
+
+  productCategories: ICategory[] = [];
+  productsFromCategories: Map<string, IProduct[]> = new Map([
+      ["", []],
+  ])
+
+  private lockProductsModalVisible: boolean = false;
+
   constructor(
     private orderService: OrderService,
+    private eventService: EventService,
+    private categoryService: CategoryService,
+    private productService: ProductService,
     private router: Router,
   ) {}
 
@@ -175,6 +190,50 @@ export class KitchenViewComponent {
     
   }
 
+
+  //lock products
+  @HostListener('document:click', ['$event'])
+  async onClick(e: MouseEvent) {
+      let clickedID: String = (e.target as Element).id;
+      if (clickedID !== null) {
+          if (this.lockProductsModalVisible && (clickedID == "lock-products-modal-background")) {
+              this.switchLockProductsModal();
+          }
+      }
+  }
+
+  switchLockProductsModal() {
+      this.loadProducts();
+      let lockProductsModal = document.getElementById("lock-products-modal");
+      if (lockProductsModal !== null) {
+          if (!this.lockProductsModalVisible) {
+              lockProductsModal!.style.display = "block";
+              this.lockProductsModalVisible = true;
+          } else {
+              lockProductsModal!.style.display = "none";
+              this.lockProductsModalVisible = false;
+          }
+      }
+  }
+
+  async loadProducts() {
+    this.productCategories = (await this.categoryService.getCategories()).categoryList;
+    this.productsFromCategories.delete("");
+    for (const category of this.productCategories) {
+        this.productsFromCategories.set(category.name, (await this.productService.getProductsByCategory(localStorage.getItem("eventUuid")!, category.uuid)).productList)
+    }
+}
+  async lockProduct(uuid: string){
+    await this.productService.updateProduct({uuid: uuid, updates: {available: false}})
+    await this.loadProducts()
+  }
+
+  async unlockProduct(uuid: string){
+    await this.productService.updateProduct({uuid: uuid, updates: {available: true}})
+    await this.loadProducts()
+  }
+
+  	//lock Products
   async logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('roll');
