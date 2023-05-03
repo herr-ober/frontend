@@ -43,22 +43,30 @@
             <div class="grid grid-cols-2 gap-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
                 <div *ngFor="let product of productsFromCategory" class="grow bg-white">
 
-                    <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-primary_background">
+                    <!-- <div [ngClass]="product.available === true ? 'bg-gray-900' : 'bg-white'" class="max-w-sm p-2 border border-gray-200 rounded-lg shadow dark:bg-primary_background">     -->
+
+
+                    <div class="max-w-sm p-2 relative z-0 border border-gray-200 bg-white rounded-lg shadow dark:bg-primary_background">     
+
                         <b>{{product.name}}</b><br>
                         Preis: {{product.price}}€ <br>
 
-                        <button (click)="decrementProductInNewOrder(product.uuid)"
-                                class="mr-1 inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                            -
-                        </button>
-                        <div class="mr-1 inline-flex justify-center rounded-md bg-gray-200 py-2 px-3 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">{{getAmountOfProductInNewOrder(product.uuid)}}
-                            x
-                        </div>
-                        <button (click)="incrementProductInNewOrder(product.uuid)"
-                                class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                            +
-                        </button>
+                        <div *ngIf="product.available == true ; else notAvailable">
 
+                            <button (click)="decrementProductInNewOrder(product.uuid)"
+                            class=" z-10 mr-1 inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                -
+                            </button>
+                            <div class="z-10 mr-1 inline-flex justify-center rounded-md bg-gray-200 py-2 px-3 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">{{getAmountOfProductInNewOrder(product.uuid)}}
+                                x
+                            </div>
+                            <button (click)="incrementProductInNewOrder(product.uuid)"
+                                    class="z-10 inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                +
+                            </button>
+                        </div>
+
+                        <ng-template #notAvailable>Produkt ausverkauft.</ng-template>
                     </div>
                 </div>
             </div>
