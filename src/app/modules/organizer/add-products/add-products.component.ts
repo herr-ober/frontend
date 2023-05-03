@@ -53,6 +53,5 @@ export class AddProductsComponent implements OnInit {
         for (const category of this.productCategories) {
             this.productsFromCategories.set(category.name, (await this.productService.getProductsByCategory(this.currentEvent.uuid, category.uuid)).productList)
         }
-        console.log(this.productsFromCategories);
     }
 }

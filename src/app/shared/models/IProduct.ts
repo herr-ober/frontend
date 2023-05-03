@@ -4,6 +4,7 @@ export interface IProduct {
     price: number
     category: string
     categoryUuid?: string
+    available?: boolean
 }
 
 export interface ICreateProduct {
@@ -14,4 +15,12 @@ export interface ICreateProduct {
 
 export interface IProductMap {
     [key: string]: string
+}
+
+export interface IProductUpdate {
+    uuid: string
+    updates: {
+        price?: number
+        available?: boolean
+    }
 }
