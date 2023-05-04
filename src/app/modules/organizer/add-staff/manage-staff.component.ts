@@ -26,10 +26,12 @@ export class ManageStaff implements OnInit {
     constructor(private staffService: StaffService, private eventService: EventService) {
     }
 
+    // Loads all staff members when page is opened
     async ngOnInit() {
         await this.updateStaffList();
     }
 
+    // Used to add new staff member
     async addStaff() {
         const event = await this.eventService.getEvent();
         await this.staffService.addStaff(event, this.createStaffFormGroup.controls.name.value!, this.createStaffFormGroup.controls.role.value!.toLowerCase())
@@ -38,12 +40,14 @@ export class ManageStaff implements OnInit {
         await this.updateStaffList();
     }
 
+    // Changes ui to change staff member
     async editStaffSetup(staffItem: IStaffItem) {
         this.editStaffUUID = staffItem.uuid;
         this.editStaffFormGroup.controls.name.setValue(staffItem.name);
         this.editStaffFormGroup.controls.role.setValue(this.staffRoleCapitalized(staffItem));
     }
 
+    // Used to edit staff member
     async editStaff() {
         const event = await this.eventService.getEvent();
         const uuid = this.editStaffUUID;
@@ -53,16 +57,19 @@ export class ManageStaff implements OnInit {
         await this.updateStaffList();
     }
 
+    // Used to delete staff member
     async deleteStaff(uuid: string) {
         await this.staffService.deleteStaff(await this.eventService.getEvent(), uuid);
         await this.updateStaffList();
     }
 
+    // Fetches all staff members from the backend
     async updateStaffList() {
         const staff = await this.staffService.getStaffs(await this.eventService.getEvent());
         this.staffList = staff.staffList;
     }
 
+    // This returns the staff role with the first letter capitalized
     staffRoleCapitalized(staffItem: IStaffItem): string {
         const role = staffItem.role.toLowerCase();
         return role[0].toUpperCase() + role.slice(1);
