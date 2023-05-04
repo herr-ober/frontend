@@ -1,16 +1,18 @@
 export interface IAccountOrganizer {
-    account: {
-        uuid: string
-        email: string
-        name: string
-        passwordHash: string
-    }
+    uuid: string
+    email: string
+    name: string
+    password: string
 }
 
 export interface ICreateAccountOrganizer {
     name: string
     email: string
     password: string
+}
+
+export interface IDeleteAccountOrganizer {
+    uuid: string
 }
 
 export interface ILoginAccountOrganizer {

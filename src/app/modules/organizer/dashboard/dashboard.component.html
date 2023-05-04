@@ -1,10 +1,16 @@
 <header class="bg-white shadow">
     <div class="flex justify-between mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="flex-initial text-3xl font-bold tracking-tight text-primary">Dashboard: Eventverwaltung</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-primary">Dashboard: Eventverwaltung</h1>
+        <div class="flex gap-2">
+            <button (click)="account()"
+            class="rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+            Account
+        </button>
         <button (click)="logout()"
-                class="flex-initial rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+                class="rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
             Logout
         </button>
+        </div>
     </div>
 
 </header>

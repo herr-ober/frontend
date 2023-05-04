@@ -29,6 +29,10 @@ export class DashboardOrganizerComponent implements OnInit {
         this.eventExists = (this.event != undefined);
     }
 
+    async account() {
+        await this.router.navigate(["/organizer/account"]);
+    }
+
     async logout() {
         localStorage.clear();
         await this.router.navigate(["/auth/login/organizer"]);
