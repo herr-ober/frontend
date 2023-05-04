@@ -2,35 +2,41 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from 'src/app/core/services/account.service';
 import {IAccountOrganizer} from "../../../shared/models/IAccountOrganizer";
 
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
 })
 export class AccountComponent implements OnInit{
 
-    eventModified: IEvent = {uuid: "", organizerUuid: "", name: "", location: "", date: new Date()};
-    eventDateAsString: string = "";
+    accountModified: IAccountOrganizer = {uuid: "", name: "", email: "", password: ""};
 
-    constructor(private eventService: EventService) {
+
+    constructor(private accountService: AccountService) {
     }
 
     ngOnInit(): void {
         this.reload();
     }
 
-    async updateEventDetails() {
-        await this.eventService.patchEvent({
-            name: this.eventModified.name,
-            date: new Date(this.eventDateAsString),
-            location: this.eventModified.location
+    async updateAccount() {
+        await this.accountService.patchAccount({
+            name: this.accountModified.name,
+            email: this.accountModified.email,
+            password: this.accountModified.password
         });
     }
 
+    async deleteAccount() {
+        await this.accountService.deleteAccount({
+            uuid: this.accountModified.uuid
+        });
+    }
 
     async reload() {
-        const event = await this.eventService.getEvent();
-        this.eventModified = event;
-        this.eventDateAsString = event.date.toString().substring(0, 10);
+        const account = await this.accountService.getAccount();
+        this.accountModified = account;
+        console.log(this.accountModified)
     }
 }
 

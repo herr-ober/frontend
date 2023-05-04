@@ -1,5 +1,4 @@
-import {IAccountOrganizer} from '../../shared/models/IAccountOrganizer';
-import {IEvent} from '../../shared/models/IEvent';
+import {IAccountOrganizer, ICreateAccountOrganizer ,IDeleteAccountOrganizer} from '../../shared/models/IAccountOrganizer';
 import {ApiService} from "./api.service";
 import {Injectable} from '@angular/core';
 
@@ -16,11 +15,11 @@ export class AccountService {
         return this.apiService.doGetRequest('/accounts ')
     }
 
-    async patchAccount(body: IAccountOrganizer): Promise<void> {
+    async patchAccount(body: ICreateAccountOrganizer): Promise<void> {
         return this.apiService.doPatchRequest('/accounts ', {updates: body})
     }
 
-    async deleteAccount(): Promise<void> {
+    async deleteAccount(body: IDeleteAccountOrganizer): Promise<void> {
         return this.apiService.doDeleteRequest('/accounts ', {})
     }
 }

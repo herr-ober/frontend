@@ -35,6 +35,7 @@ export class LoginOrganizerComponent implements OnInit{
     async loginAccountOrganizer() {
         await this.accountOrganizerService.loginAccountOrganizer(this.loginForm.value.email, this.loginForm.value.password)
             .then(res => {
+                localStorage.setItem("accountUuid", res.accountUuid)
                 localStorage.setItem("name", "organizer")
                 localStorage.setItem("role", "organizer")
                 localStorage.setItem("token", res.token)
