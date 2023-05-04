@@ -30,7 +30,6 @@ export class AccountComponent implements OnInit{
         this.reload();
     }
 
-
     //Checks whether the specified validators apply
     async onSubmit() {
         this.submitted = true;
@@ -38,6 +37,7 @@ export class AccountComponent implements OnInit{
         this.updateAccount()
     }
     
+    //Sends the account values to the backend and updates account
     async updateAccount() {
         this.submitted = true;
         if (this.accountForm.invalid) return;
@@ -52,14 +52,15 @@ export class AccountComponent implements OnInit{
         .catch(err => {
             this.displayErrorNotification(err.error.message)
         }); 
-       
     }
 
+    //Deletes account and removes the event
     async deleteAccount() {
         await this.accountService.deleteAccount();
         this.router.navigate(['/auth/register/organizer']);
     }
 
+    //Opens and close the Modal
     switchConfirmAccountDeletionModal() {
         let confirmEventDeletionModal = document.getElementById("confirm-account-deletion-modal");
         if (confirmEventDeletionModal !== null) {
@@ -73,6 +74,7 @@ export class AccountComponent implements OnInit{
         }
     }
 
+    //Get the current account informations and load them in the page
     async reload() {
         const account = await this.accountService.getAccount();
         this.accountForm.controls["username"].setValue(account.name)
@@ -86,6 +88,3 @@ export class AccountComponent implements OnInit{
         eventErrorNotification!.style.display = "block";
     }
 }
-
-
-
