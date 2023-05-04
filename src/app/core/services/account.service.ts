@@ -19,7 +19,7 @@ export class AccountService {
         return this.apiService.doPatchRequest('/accounts ', {updates: body})
     }
 
-    async deleteAccount(body: IDeleteAccountOrganizer): Promise<void> {
+    async deleteAccount(): Promise<void> {
         return this.apiService.doDeleteRequest('/accounts ', {})
     }
 }

@@ -1,72 +1,126 @@
 <header class="bg-white shadow">
     <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-primary">Dein Event bearbeiten</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-primary">Dein Account bearbeiten</h1>
     </div>
 </header>
 
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-
-
         <div class="mt-10 sm:mt-0">
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1">
                     <div class="px-4 sm:px-0">
-                        <h3 class="text-base font-semibold leading-6 text-primary">Eventinformationen</h3>
-                        <p class="mt-1 text-sm text-secondary">Bearbeite und verändere hier grundlegende Informationen
-                            deines Events.</p>
+                        <h3 class="text-base font-semibold leading-6 text-primary">Account</h3>
+                        <p class="mt-1 text-sm text-secondary">Ändere hier deine Account Informationen und dein Passwort.</p>
                     </div>
                 </div>
 
                 <div class="mt-5 md:col-span-2 md:mt-0">
-                    <form>
-                        <div class="overflow-hidden shadow sm:rounded-md">
-                            <div class="bg-white px-4 py-5 sm:p-6">
-                                <div class="grid grid-cols-6 gap-6">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="accountForm" class="overflow-hidden shadow sm:rounded-md">
+                        <div class="bg-white px-4 py-5 sm:p-6">
+                            <div class="grid grid-cols-6 gap-6">
+                                <div class="col-span-6">
 
-                                    <!-- Eventname -->
-                                    <div class="col-span-6 sm:col-span-4">
-                                        <label class="block text-sm font-medium leading-6 text-primary"
-                                               for="event-name">Eventname</label>
-                                        <input [(ngModel)]="accountModified.name" class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_border  sm:text-sm sm:leading-6" id="event-name"
-                                               name="event-name"
-                                               required
-                                               type="text">
-                                    </div>
-                                    
-                                   <!-- Eventname -->
-                                   <div class="col-span-6 sm:col-span-4">
                                     <label class="block text-sm font-medium leading-6 text-primary"
-                                           for="event-name">Eventname</label>
-                                    <input [(ngModel)]="accountModified.email" class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_border  sm:text-sm sm:leading-6" id="event-name"
-                                           name="event-name"
-                                           required
-                                           type="text">
-                                    </div>
+                                            for="account-username">Username</label>
+                                    <input
+                                        class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray-300  focus:ring-2 focus:ring-inset focus:ring-primary_border  sm:text-sm sm:leading-6"
+                                        formControlName="username"
+                                        placeholder="Nutzername"
+                                        type="text"
+                                    >  
 
-                                    <!-- Eventname -->
-                                    <div class="col-span-6 sm:col-span-4">
+                                    <div *ngIf="accountForm.controls['username'].invalid && (accountForm.controls['username'].dirty || accountForm.controls['username'].touched)">
+                                        <div *ngIf="accountForm.controls['username'].errors?.['required']">
+                                            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                                role="alert">
+                                                <p>Nutzername ist erforderlich</p>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="submitted && accountForm.controls['username'].errors?.['minlength']">
+                                            <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                                role="alert">
+                                                <p>Nutzername muss mindestens 6 Zeichen lang sein</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="-space-y-px rounded-md shadow-sm">
                                         <label class="block text-sm font-medium leading-6 text-primary"
-                                            for="event-name">Eventname</label>
-                                        <input [(ngModel)]="accountModified.password" class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray  focus:ring-2 focus:ring-inset focus:ring-primary_border  sm:text-sm sm:leading-6" id="event-name"
-                                            name="event-name"
-                                            required
-                                            type="text">
+                                        for="account-email">E-Mail</label>
+                                        <input
+                                            class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray-300  focus:ring-2 focus:ring-inset focus:ring-primary_border  sm:text-sm sm:leading-6"
+                                            formControlName="email"
+                                            placeholder="E-Mail"
+                                            type="text"
+                                        >
+                                        <div *ngIf="accountForm.controls['email'].invalid && (accountForm.controls['email'].dirty || accountForm.controls['email'].touched)">
+                                            <div *ngIf="accountForm.controls['email'].errors?.['required']">
+                                                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                                    role="alert">
+                                                    <p>E-Mail ist erforderlich</p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="submitted && accountForm.controls['email'].errors?.['email']">
+                                                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                                    role="alert">
+                                                    <p>Ungültige E-Mail Adresse</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        <label class="block text-sm font-medium leading-6 text-primary"
+                                        for="account-password">Password</label>
+
+                                        <input
+                                            class="mt-2 block w-full rounded-md border-0 py-1.5 text-secondary shadow-sm ring-1 ring-inset ring-gray-300  focus:ring-2 focus:ring-inset focus:ring-primary_border  sm:text-sm sm:leading-6"
+                                            formControlName="password"
+                                            placeholder="Passwort"
+                                            type="password"
+                                        >
+                                        <div *ngIf="accountForm.controls['password'].invalid && (accountForm.controls['password'].dirty || accountForm.controls['password'].touched)">
+                                            <div *ngIf="accountForm.controls['password'].errors?.['required']">
+                                                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                                    role="alert">
+                                                    <p>Passwort ist erforderlich</p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="submitted && accountForm.controls['password'].errors?.['minlength']">
+                                                <div class="bg-warning_background border-l-4 border-warning text-warning rounded-md p-4 py-1.5 my-2"
+                                                    role="alert">
+                                                    <p>Passwort muss mindestens 8 Zeichen lang sein</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-6 gap-6"></div>  
+
+                                        <div class="hidden p-4 mb-4 text-sm text-error bg-error_background rounded-lg dark:bg-error_background dark:text-error"
+                                        id="account-error-notification"
+                                        role="alert">
+                                        
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                                <button (click)="updateAccount()"
-                                        class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
-                                    Account aktualisieren
-                                </button>
-                            </div>
-                            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                                <button (click)="deleteAccount()"
-                                        class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
-                                    Account löschen
-                                </button>
-                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-6 gap-6"></div>
+
+                        <div class="flex justify-between bg-gray-50 px-4 py-3 text-right sm:px-6">
+                            <button (click)="switchConfirmAccountDeletionModal()"
+                                    class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover">
+                                Account löschen
+                            </button>
+
+                            <button
+                                [ngClass]="{'opacity-50 cursor-not-allowed': !accountForm.valid}"
+                                class="inline-flex justify-center rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-primary_hover"
+                                type="submit"
+                                >
+                                Änderungen speichern
+                        </button>
                         </div>
                     </form>
                 </div>
@@ -80,3 +134,38 @@
 
     </div>
 </main>
+
+<div aria-labelledby="modal-title" aria-modal="true" class="relative z-10 hidden" id="confirm-account-deletion-modal"
+     role="dialog">
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+             id="confirm-account-deletion-modal-background">
+
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg font-medium leading-6 text-primary">Account löschen?</h3>
+
+                            <p class="text-sm text-secondary py-1">Soll dein Account und dein Event wirklich gelöscht werden? Dies kann nicht rückgängig gemacht werden.</p>
+                        </div>
+                    </div>
+
+                    <div class="py-1 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button (click)="deleteAccount()"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                            Ja, löschen
+                        </button>
+
+                        <button (click)="switchConfirmAccountDeletionModal()"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                            Nein, abbrechen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

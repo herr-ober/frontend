@@ -38,7 +38,7 @@ export class RegisterOrganizerComponent implements OnInit {
             })
             .catch(err => {
                 this.displayErrorNotification(err.error.message)
-            });
+            }); 
     }
 
     //Gets the error messages from the backend and returns them to the login
