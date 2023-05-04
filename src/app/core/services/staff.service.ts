@@ -19,7 +19,7 @@ export class StaffService {
         await this.apiService.doPatchRequest<void>(`/events/staff`, {uuid: uuid, updates: {name: name, role: role}})
     }
 
-    // Calls the server endpoint to get all staff mebers
+    // Calls the server endpoint to get all staff members
     async getStaffs(event: IEvent): Promise<IStaff> {
         return this.apiService.doGetRequest<IStaff>(`/events/${event.uuid}/staff`)
     }
