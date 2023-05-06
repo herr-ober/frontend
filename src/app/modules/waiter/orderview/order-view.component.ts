@@ -35,10 +35,10 @@ export class OrderViewComponent implements OnInit {
   private async onstart() {
 
     this.reload();
-    this.loaddata();
+    this.loadData();
   }
 
-  async loaddata() {
+  async loadData() {
     this.dborders = await this.orderService.getAllOrders(localStorage.getItem("eventUuid")!);
   }
 
@@ -53,7 +53,7 @@ export class OrderViewComponent implements OnInit {
     }
   }
 
-  createorders() {
+  createOrders() {
     var orderlist: any[] = [];
     this.dborders.forEach((order) => {
       if (order.status == "Ready") {
@@ -83,7 +83,7 @@ export class OrderViewComponent implements OnInit {
     //Datenbank order als completed marken0
   }
 
-  isnotcompleted(order: IOrderFull): boolean {
+  isNotCompleted(order: IOrderFull): boolean {
     if (order.status == "Completed") {
       return false;
     } else {
@@ -91,7 +91,7 @@ export class OrderViewComponent implements OnInit {
     }
   }
 
-  isready(order: any): boolean {
+  isReady(order: any): boolean {
     return order.status == "Ready";
   }
 
@@ -99,12 +99,12 @@ export class OrderViewComponent implements OnInit {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
-  ostatus(order: IOrderFull) {
+  oStatus(order: IOrderFull) {
     
     return order.status == "preparation" || order.status == "new";
   }
 
-  async pickup(order: IOrderFull) {
+  async pickUp(order: IOrderFull) {
     await this.orderService
       .patchOrderBuildBody({ status: "Completed" }, order)
       .then()
@@ -120,12 +120,12 @@ export class OrderViewComponent implements OnInit {
     }
   }
 
-  isdrink(category: string) {
+  isDrink(category: string) {
     return (
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
   }
-  isfood(category: string) {
+  isFood(category: string) {
     return !(
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
