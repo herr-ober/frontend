@@ -11,10 +11,7 @@ import { Router } from "@angular/router";
 export class WaiterViewComponent implements OnInit {
   dborders: IOrderFull[] = [];
   ordervergleich = this.dborders;
-  constructor(
-    private orderService: OrderService,
-    private router: Router
-  ) {}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   currentEvent: IEvent = {
     uuid: "",
@@ -30,8 +27,8 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * loads the data once at start and on explicit call
-  */
+   * loads the data once at start and on explicit call
+   */
   async loadData() {
     this.dborders = await this.orderService.getWaiterOrders(
       localStorage.getItem("eventUuid")!
@@ -39,8 +36,8 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * reloads the data each 2 seconds
-  */
+   * reloads the data each 2 seconds
+   */
   private async reload() {
     await this.Sleep(2000);
     if (
@@ -55,8 +52,15 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * checks if the order status equals completed
-  */
+   * sleeps for x milliseconds
+   */
+  Sleep(milliseconds: number) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  }
+
+  /*
+   * checks if the order status not equals completed
+   */
   isNotCompleted(order: IOrderFull): boolean {
     if (order.status == "Completed") {
       return false;
@@ -66,40 +70,22 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * checks if the order status equals ready
-  */
+   * checks if the order status equals ready
+   */
   isReady(order: any): boolean {
     return order.status == "ready";
   }
 
   /*
-  * sleeps for x milliseconds
-  */
-  Sleep(milliseconds: number) {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  }
-
-  /*
-  * checks if the order status equals preparation
-  */
+   * checks if the order status equals preparation
+   */
   oStatus(order: IOrderFull) {
     return order.status == "preparation";
   }
 
   /*
-  * changes the position status to completed
-  */
-  async pickUp(order: IOrderFull) {
-    await this.orderService
-      .patchOrderBuildBody({ status: "Completed" }, order)
-      .then()
-      .catch();
-    this.loadData();
-  }
-
-  /*
-  * checks if the position status equals ready
-  */
+   * checks if the position status equals ready
+   */
   positionStatusReady(position: IPositions) {
     try {
       return position.status == "ready";
@@ -109,8 +95,8 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * checks if the position status equals waiting
-  */
+   * checks if the position status equals waiting
+   */
   positionStatusWaiting(position: IPositions) {
     try {
       return position.status == "waiting";
@@ -120,8 +106,8 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * checks if the position status equals delivered
-  */
+   * checks if the position status equals delivered
+   */
   positionStatusDelivered(position: IPositions) {
     try {
       return position.status == "delivered";
@@ -131,8 +117,26 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * changes the position status to delivered
-  */
+   * checks if the position is a drink
+   */
+  isDrink(category: string) {
+    return (
+      category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
+    );
+  }
+
+  /*
+   * checks if the position is a food
+   */
+  isFood(category: string) {
+    return !(
+      category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
+    );
+  }
+
+  /*
+   * changes the position status to delivered
+   */
   async setDelivered(position: IPositions) {
     await this.orderService
       .patchPosition({ status: "delivered" }, position)
@@ -142,26 +146,19 @@ export class WaiterViewComponent implements OnInit {
   }
 
   /*
-  * checks if the position is a drink
-  */
-  isDrink(category: string) {
-    return (
-      category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
-    );
+   * changes the position status to completed
+   */
+  async pickUp(order: IOrderFull) {
+    await this.orderService
+      .patchOrderBuildBody({ status: "Completed" }, order)
+      .then()
+      .catch();
+    this.loadData();
   }
 
   /*
-  * checks if the position is a food
-  */
-  isFood(category: string) {
-    return !(
-      category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
-    );
-  }
-
-  /*
-  * Navigates
-  */
+   * Navigates
+   */
   startOrder() {
     this.router.navigateByUrl("/waiter/neworder");
   }
