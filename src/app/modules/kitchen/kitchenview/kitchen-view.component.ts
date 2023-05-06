@@ -43,8 +43,8 @@ export class KitchenViewComponent {
   }
 
   /*
-  * loads the data once at start and on explicit call
-  */
+   * loads the data once at start and on explicit call
+   */
   async loaddata() {
     this.dborders = await this.orderService.getKitchenOrders(
       localStorage.getItem("eventUuid")!
@@ -52,8 +52,8 @@ export class KitchenViewComponent {
   }
 
   /*
-  * reloads the data each 2 seconds
-  */
+   * reloads the data each 2 seconds
+   */
   private async reload() {
     await this.Sleep(2000);
     if (
@@ -68,55 +68,36 @@ export class KitchenViewComponent {
   }
 
   /*
-  * checks if order status equals new
-  */
-  inQuery(order: any): boolean {
-    return order.status == "new";
-  }
-
-  /*
-  * checks if order status equals preparation
-  */
-  inProgress(order: any) {
-    return order.status == "preparation";
-  }
-
-  /*
-  * sleeps for x milliseconds
-  */
+   * sleeps for x milliseconds
+   */
   Sleep(milliseconds: number) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
   /*
-  * mark order as in preparation
-  */
-  async edit(order: IOrderFull) {
-    await this.orderService.patchOrderBuildBody(
-      { status: "preparation" },
-      order
-    );
-    this.loaddata();
+   * checks if order status equals new
+   */
+  inQuery(order: any): boolean {
+    return order.status == "new";
   }
 
   /*
-  * completes the order and refreshes the data
-  */
-  async complete(order: IOrderFull) {
-    await this.orderService.patchOrderBuildBody({ status: "ready" }, order);
-    this.loaddata();
+   * checks if order status equals preparation
+   */
+  inProgress(order: any) {
+    return order.status == "preparation";
   }
 
   /*
-  * checks if the order status equals ready
-  */
+   * checks if the order status equals ready
+   */
   oStatus(orderindex: number) {
     return this.dborders[orderindex].status == "ready";
   }
 
   /*
-  * checks if the position is a drink
-  */
+   * checks if the position is a drink
+   */
   isDrink(category: string) {
     return (
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
@@ -124,8 +105,8 @@ export class KitchenViewComponent {
   }
 
   /*
-  * checks if the position is a food
-  */
+   * checks if the position is a food
+   */
   isFood(category: string) {
     return !(
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
@@ -133,19 +114,8 @@ export class KitchenViewComponent {
   }
 
   /*
-  * changes the position status to ready
-  */
-  positionStatusReady(position: IPositions) {
-    try {
-      return position.status == "ready";
-    } catch {
-      return false;
-    }
-  }
-
-  /*
-  * changes the position status to waiting
-  */
+   * checks if the position status is waiting
+   */
   positionStatusWaiting(position: IPositions) {
     try {
       return position.status == "waiting";
@@ -155,8 +125,19 @@ export class KitchenViewComponent {
   }
 
   /*
-  * changes the position status to delivered
-  */
+   * checks if the position status is ready
+   */
+  positionStatusReady(position: IPositions) {
+    try {
+      return position.status == "ready";
+    } catch {
+      return false;
+    }
+  }
+
+  /*
+   * checks if the position status is delivered
+   */
   positionStatusDelivered(position: IPositions) {
     try {
       return position.status == "delivered";
@@ -164,10 +145,9 @@ export class KitchenViewComponent {
       return false;
     }
   }
-
   /*
-  * changes the order status to ready
-  */
+   * changes the position status to ready
+   */
   async setReady(position: IPositions) {
     await this.orderService
       .patchPosition({ status: "ready" }, position)
@@ -175,10 +155,28 @@ export class KitchenViewComponent {
       .catch();
     this.loaddata();
   }
+  /*
+   * mark order as in preparation
+   */
+  async edit(order: IOrderFull) {
+    await this.orderService.patchOrderBuildBody(
+      { status: "preparation" },
+      order
+    );
+    this.loaddata();
+  }
 
   /*
-  * Translates Status-text to German
-  */
+   * completes the order and refreshes the data
+   */
+  async complete(order: IOrderFull) {
+    await this.orderService.patchOrderBuildBody({ status: "ready" }, order);
+    this.loaddata();
+  }
+
+  /*
+   * Translates Status-text to German
+   */
   getGermanText(status: string): string {
     if (status == "new") {
       return "Wartend";
