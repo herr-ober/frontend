@@ -35,10 +35,10 @@ export class WaiterViewComponent implements OnInit{
   private async onstart() {
 
     this.reload();
-    this.loaddata();
+    this.loadData();
   }
 
-  async loaddata() {
+  async loadData() {
     this.dborders = await this.orderService.getWaiterOrders(localStorage.getItem("eventUuid")!);
   }
 
@@ -61,13 +61,13 @@ export class WaiterViewComponent implements OnInit{
       .patchOrderBuildBody({ status: "ready" }, order)
       .then(res => {})
       .catch();
-      this.loaddata()
+      this.loadData()
 
     // this.dborders[orderindex]!.status = "Fertig";
     //Datenbank order als completed marken0
   }
 
-  isnotcompleted(order: IOrderFull): boolean {
+  isNotCompleted(order: IOrderFull): boolean {
     if (order.status == "Completed") {
       return false;
     } else {
@@ -75,7 +75,7 @@ export class WaiterViewComponent implements OnInit{
     }
   }
 
-  isready(order: any): boolean {
+  isReady(order: any): boolean {
     return order.status == "ready";
   }
 
@@ -83,17 +83,17 @@ export class WaiterViewComponent implements OnInit{
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
-  ostatus(order: IOrderFull) {
+  oStatus(order: IOrderFull) {
     
     return order.status == "preparation";
   }
 
-  async pickup(order: IOrderFull) {
+  async pickUp(order: IOrderFull) {
     await this.orderService
       .patchOrderBuildBody({ status: "Completed" }, order)
       .then()
       .catch();
-      this.loaddata()
+      this.loadData()
 
     //this.dborders[orderindex].status = "Completed";
   }
@@ -125,15 +125,15 @@ export class WaiterViewComponent implements OnInit{
     .patchPosition({ status: "delivered" }, position)
     .then()
     .catch();
-    this.loaddata()
+    this.loadData()
 
   }
-  isdrink(category: string) {
+  isDrink(category: string) {
     return (
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
   }
-  isfood(category: string) {
+  isFood(category: string) {
     return !(
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
