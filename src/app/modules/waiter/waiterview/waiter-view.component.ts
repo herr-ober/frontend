@@ -1,9 +1,7 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { OrderService } from "src/app/core/services/order.service";
-import { EventService } from "src/app/core/services/event.service";
-import { IOrder, IOrderFull, IPositions } from "src/app/shared/models/IOrder";
+import { IOrderFull, IPositions } from "src/app/shared/models/IOrder";
 import { IEvent } from "src/app/shared/models/IEvent";
-import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 @Component({
   selector: "app-waiter-view",
@@ -15,7 +13,6 @@ export class WaiterViewComponent implements OnInit {
   ordervergleich = this.dborders;
   constructor(
     private orderService: OrderService,
-    private eventService: EventService,
     private router: Router
   ) {}
 
@@ -55,17 +52,6 @@ export class WaiterViewComponent implements OnInit {
       );
       this.reload();
     }
-  }
-
-  /*
-  * changes the order status to ready
-  */
-  async ready(order: IOrderFull) {
-    await this.orderService
-      .patchOrderBuildBody({ status: "ready" }, order)
-      .then()
-      .catch();
-    this.loadData();
   }
 
   /*

@@ -1,9 +1,7 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { OrderService } from "src/app/core/services/order.service";
-import { EventService } from "src/app/core/services/event.service";
 import { IOrderFull, IPositions } from "src/app/shared/models/IOrder";
 import { IEvent } from "src/app/shared/models/IEvent";
-import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 
 @Component({
@@ -53,16 +51,6 @@ export class OrderViewComponent implements OnInit {
   }
 
   /*
-  * changes the order status to ready
-  */
-  async ready(order: IOrderFull) {
-    await this.orderService
-      .patchOrderBuildBody({ status: "Ready" }, order)
-      .then()
-      .catch();
-  }
-
-  /*
   * checks if the order status equals completed
   */
   isNotCompleted(order: IOrderFull): boolean {
@@ -103,17 +91,6 @@ export class OrderViewComponent implements OnInit {
       .then()
       .catch();
     //this.dborders[orderindex].status = "Completed";
-  }
-
-  /*
-  * checks if the position status equals ready
-  */
-  positionStatus(position: IPositions) {
-    try {
-      return position.status == "ready";
-    } catch {
-      return false;
-    }
   }
 
   /*

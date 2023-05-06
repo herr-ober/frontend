@@ -3,7 +3,6 @@ import { OrderService } from "src/app/core/services/order.service";
 import { EventService } from "src/app/core/services/event.service";
 import { IOrderFull, IPositions } from "src/app/shared/models/IOrder";
 import { IEvent } from "src/app/shared/models/IEvent";
-import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { CategoryService } from "src/app/core/services/category.service";
 import { ProductService } from "src/app/core/services/product.service";
@@ -25,7 +24,6 @@ export class KitchenViewComponent {
 
   constructor(
     private orderService: OrderService,
-    private eventService: EventService,
     private categoryService: CategoryService,
     private productService: ProductService,
     private router: Router
@@ -58,7 +56,6 @@ export class KitchenViewComponent {
   */
   private async reload() {
     await this.Sleep(2000);
-
     if (
       this.router.url === "/kitchen" ||
       this.router.url === "/kitchen/kitchenview"
@@ -89,27 +86,6 @@ export class KitchenViewComponent {
   */
   Sleep(milliseconds: number) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  }
-  /*
-  * checks if the food status is ready
-  */
-  foodStatus(food: any) {
-    try {
-      return food.status == "ready";
-    } catch {
-      return false;
-    }
-  }
-
-  /*
-  * checks if the drink status is ready
-  */
-  drinkStatus(drink: any) {
-    try {
-      return drink.status == "ready";
-    } catch {
-      return false;
-    }
   }
 
   /*
