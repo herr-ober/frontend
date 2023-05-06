@@ -69,7 +69,7 @@ export class KitchenViewComponent{
   }
 
 
-  async positionready(order: IOrderFull, position: IPositions) {
+  async positionReady(order: IOrderFull, position: IPositions) {
     await this.orderService
       .patchPosition({ status: "ready" }, position)
       .then(res => {})
@@ -94,7 +94,7 @@ export class KitchenViewComponent{
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
-  foodstatus(food: any) {
+  foodStatus(food: any) {
     try {
       return food.status == "ready";
     } catch {
@@ -103,7 +103,7 @@ export class KitchenViewComponent{
 
   }
 
-  drinkstatus(drink: any) {
+  drinkStatus(drink: any) {
     try {
       return drink.status == "ready";
     } catch {
@@ -126,17 +126,17 @@ export class KitchenViewComponent{
     //this.dborders[orderindex].status = "ready";
   }
 
-  ostatus(orderindex: number) {
+  oStatus(orderindex: number) {
     return this.dborders[orderindex].status == "ready";
   }
 
-  isdrink(category: string) {
+  isDrink(category: string) {
     return (
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
   }
 
-  isfood(category: string) {
+  isFood(category: string) {
     return !(
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
