@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from 'src/app/core/services/event.service';
 import {IEvent} from "../../../shared/models/IEvent";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-modify-event',
@@ -14,7 +15,7 @@ export class ModifyEventComponent implements OnInit {
     eventModified: IEvent = {uuid: "", organizerUuid: "", name: "", location: "", date: new Date()};
     eventDateAsString: string = "";
 
-    constructor(private eventService: EventService) {
+    constructor(private router: Router, private eventService: EventService, ) {
     }
 
     ngOnInit(): void {
@@ -26,7 +27,9 @@ export class ModifyEventComponent implements OnInit {
             name: this.eventModified.name,
             date: new Date(this.eventDateAsString),
             location: this.eventModified.location
-        });
+        }).then((res) => {
+            this.router.navigate(['/organizer']);
+        }).catch();
     }
 
 
