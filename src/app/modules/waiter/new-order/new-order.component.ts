@@ -28,8 +28,6 @@ export class NewOrderComponent implements OnInit {
     submittedOrder: IOrder = { uuid: "", eventUuid: "", staffUuid: "", tableUuid: "", paid: false, status: "", positions: [], notes: ""}
     totalAmountSubmittedOrder: number = 0;
 
-
-    /* Super unschön, aber leider bekomme ich sonst nirgendwo her der Name des Produkts und den Preis in der Bestellung */
     allProducts: IProduct[] = [];
     productCategories: ICategory[] = [];
     productsFromCategory: IProduct[] = [];
@@ -47,23 +45,22 @@ export class NewOrderComponent implements OnInit {
     async ngOnInit() {       
         this.productCategories = (await this.categoryService.getCategories()).categoryList;
         this.tablesOfEvent = (await this.tableServive.getTables(localStorage.getItem("eventUuid")!)).tableList;
-        
-        /* Unschön, aber muss leider, wie oben erklärt, sein ... */
         this.allProducts = (await this.productService.getProducts(localStorage.getItem("eventUuid")!)).productList;
     }
 
+    //Loades products corresponding to the selected category
     async switchSelectedCategory(category: string) {
         this.productsFromCategory = (await this.productService.getProductsByCategory(localStorage.getItem("eventUuid")!, category)).productList;
     }
 
+    //Gets current amount of one product in order
     getAmountOfProductInNewOrder(uuid: string): number {
         let pos = this.newOrder.positions.findIndex(e => e.productUuid === uuid);
         if (pos > -1) return this.newOrder.positions[pos].amount;
         return 0;
     }
 
-
-    /* Deletes products from array, if ordererd amout has been reduced back down to 0 */
+    //Deletes products from array, if ordererd amout has been reduced back down to 0
     decrementProductInNewOrder(uuid: string): void {
         let pos = this.newOrder.positions.findIndex(e => e.productUuid === uuid);
 
@@ -77,6 +74,7 @@ export class NewOrderComponent implements OnInit {
         }
     }
 
+    //Inc or decrement amount of products per order
     incrementProductInNewOrder(uuid: string): void {
         let pos = this.newOrder.positions.findIndex(e => e.productUuid === uuid);
 
@@ -88,11 +86,13 @@ export class NewOrderComponent implements OnInit {
         }
     }
 
+    //Sets table of order
     setTableOfOrder(uuid: string) {
         this.newOrder.tableUuid = uuid;
         this.switchSelectTableModal();
     }
 
+    //Checks on manual table input, if table exists
     setTableOfOrderManualInput() {
         let pos = this.tablesOfEvent.findIndex(e => e.tableNumber === this.tableNumberEnteredManually);
         if (pos > -1) {
@@ -102,6 +102,7 @@ export class NewOrderComponent implements OnInit {
             this.displayErrorNotificationSelectTable("Der angeforderte Tisch existiert nicht.")
     }
 
+    //Submits new Order
     async submitNewOrder() {
         if (this.newOrder.positions.length > 0 && this.newOrder.tableUuid != "") {
             await this.orderService.postOrder(this.newOrder, {uuid: localStorage.getItem("eventUuid")!, organizerUuid: "", name: "", location: "", date: new Date()})
@@ -192,11 +193,13 @@ export class NewOrderComponent implements OnInit {
         }
     }
 
+    //Helper-function
     convertProductUuidToProductName(uuid: string): string {
         let pos = this.allProducts.findIndex(e => e.uuid === uuid);
         return this.allProducts[pos].name;
     }
 
+    //Helper-function
     convertTableUuidToTableNumber(uuid: string): any {
         if (uuid != "") {
             let pos = this.tablesOfEvent.findIndex(e => e.uuid === uuid);
@@ -205,6 +208,7 @@ export class NewOrderComponent implements OnInit {
         return "";
     }
 
+    //Helper-function
     convertProductUuidToPrice(uuid: string): number {
         let pos = this.allProducts.findIndex(e => e.uuid === uuid);
         return this.allProducts[pos].price

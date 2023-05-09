@@ -39,6 +39,7 @@ export class DashboardOrganizerComponent implements OnInit {
         window.location.reload();
     }
 
+    //Switches confirm event deletion Modal
     switchConfirmEventDeletionModal() {
         let confirmEventDeletionModal = document.getElementById("confirm-event-deletion-modal");
         if (confirmEventDeletionModal !== null) {
