@@ -10,7 +10,7 @@
               </div>
               <div class="text-sm text-right content-center">
                 <div class="rounded-full bg-lime-600  text-white content px-7 py-1 inline content-center"
-                  [ngStyle]="{'background-color': ostatus(o)? '#65a30d' : 'black'}">
+                  [ngStyle]="{'background-color': oStatus(o)? '#65a30d' : 'black'}">
                   {{getGermanText(order.status)}}
                 </div>
               </div>
@@ -18,7 +18,7 @@
             <div class="grid max-[370px]:grid-rows-2 min-[371px]:grid-cols-2 content-center mb-2">
               <div>
                 <div *ngFor="let food of order.positions; let f = index" [attr.data-index]="f">
-                  <div *ngIf="isfood(food.category!)" class="row-auto my-2">
+                  <div *ngIf="isFood(food.category!)" class="row-auto my-2">
                     <div class="rounded-full text-white bg-primary px-2" style="display: inline-block;">
                       {{food.amount}}
                     </div>
@@ -30,7 +30,7 @@
                 </div>
                 <hr style="border-top: 2px solid #000000;">
                 <div *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
-                  <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
+                  <div *ngIf="isDrink(drink.category!)" class="row-auto my-2">
                     <div class="rounded-full text-white bg-primary px-2" style="display: inline-block;">
                       {{drink.amount}}
                     </div>
@@ -68,7 +68,7 @@
               </div>
               <div class="text-sm text-right content-center">
                 <div class="rounded-full bg-lime-600  text-white content px-7 py-1 inline content-center"
-                  [ngStyle]="{'background-color': ostatus(o)? '#65a30d' : 'black'}">
+                  [ngStyle]="{'background-color': oStatus(o)? '#65a30d' : 'black'}">
                   {{getGermanText(order.status)}}
                 </div>
               </div>
@@ -76,7 +76,7 @@
             <div class="grid max-[370px]:grid-rows-2 min-[371px]:grid-cols-2 content-center mb-2">
               <div>
                 <div *ngFor="let food of order.positions; let f = index" [attr.data-index]="f">
-                  <div *ngIf="isfood(food.category!)" class="row-auto my-2">
+                  <div *ngIf="isFood(food.category!)" class="row-auto my-2">
   
                     <div *ngIf="positionStatusWaiting(food)">
                       <button (click)="setReady(food)">
@@ -108,7 +108,7 @@
                 </div>
                 <hr style="border-top: 2px solid #000000;">
                 <div *ngFor="let drink of order.positions; let d = index" [attr.data-index]="d">
-                  <div *ngIf="isdrink(drink.category!)" class="row-auto my-2">
+                  <div *ngIf="isDrink(drink.category!)" class="row-auto my-2">
   
                     <div *ngIf="positionStatusWaiting(drink)">
                       <button (click)="setReady(drink)">

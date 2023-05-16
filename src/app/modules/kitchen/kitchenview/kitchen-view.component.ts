@@ -3,8 +3,7 @@ import { OrderService } from "src/app/core/services/order.service";
 import { EventService } from "src/app/core/services/event.service";
 import { IOrderFull, IPositions } from "src/app/shared/models/IOrder";
 import { IEvent } from "src/app/shared/models/IEvent";
-import { HttpErrorResponse } from "@angular/common/http";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 import { CategoryService } from "src/app/core/services/category.service";
 import { ProductService } from "src/app/core/services/product.service";
 import { ICategory } from "src/app/shared/models/ICategory";
@@ -12,25 +11,22 @@ import { IProduct } from "src/app/shared/models/IProduct";
 
 @Component({
   selector: "app-kitchen-view",
-  templateUrl: "./kitchen-view.component.html"
+  templateUrl: "./kitchen-view.component.html",
 })
-export class KitchenViewComponent{
+export class KitchenViewComponent {
   dborders: IOrderFull[] = [];
   ordervergleich = this.dborders;
 
   productCategories: ICategory[] = [];
-  productsFromCategories: Map<string, IProduct[]> = new Map([
-      ["", []],
-  ])
+  productsFromCategories: Map<string, IProduct[]> = new Map([["", []]]);
 
   private lockProductsModalVisible: boolean = false;
 
   constructor(
     private orderService: OrderService,
-    private eventService: EventService,
     private categoryService: CategoryService,
     private productService: ProductService,
-    private router: Router,
+    private router: Router
   ) {}
 
   currentEvent: IEvent = {
@@ -42,113 +38,84 @@ export class KitchenViewComponent{
   };
 
   ngOnInit(): void {
-    this.onstart();
-  }
-
-  /**
-   * The function retrieves an event and calls the functions loaddata and reaload then.
-   */
-  private async onstart() {
     this.loaddata();
     this.reload();
   }
 
+  /*
+   * loads the data once at start and on explicit call
+   */
   async loaddata() {
-    this.dborders = await this.orderService.getKitchenOrders(localStorage.getItem("eventUuid")!);
+    this.dborders = await this.orderService.getKitchenOrders(
+      localStorage.getItem("eventUuid")!
+    );
   }
 
+  /*
+   * reloads the data each 2 seconds
+   */
   private async reload() {
     await this.Sleep(2000);
-
-      if(this.router.url === '/kitchen' || this.router.url === '/kitchen/kitchenview'){
-
-        this.dborders = await this.orderService.getKitchenOrders(localStorage.getItem("eventUuid")!);
-        this.reload()
-
-      }
+    if (
+      this.router.url === "/kitchen" ||
+      this.router.url === "/kitchen/kitchenview"
+    ) {
+      this.dborders = await this.orderService.getKitchenOrders(
+        localStorage.getItem("eventUuid")!
+      );
+      this.reload();
+    }
   }
 
-
-  async positionready(order: IOrderFull, position: IPositions) {
-    await this.orderService
-      .patchPosition({ status: "ready" }, position)
-      .then(res => {})
-      .catch();
-      this.loaddata()
-
-    //this.orders[order].food[foodindex].amount
-    //this.dborders[orderid].positions[foodid].status = "ready";
-  }
-
-  inQuery(order: any): boolean {
-    
-    return (order.status == "new");
-  }
-
-  inProgress(order: any) {
-    return order.status == "preparation";
-  }
-
-
+  /*
+   * sleeps for x milliseconds
+   */
   Sleep(milliseconds: number) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 
-  foodstatus(food: any) {
-    try {
-      return food.status == "ready";
-    } catch {
-      return false;
-    }
-
+  /*
+   * checks if order status equals new
+   */
+  inQuery(order: any): boolean {
+    return order.status == "new";
   }
 
-  drinkstatus(drink: any) {
-    try {
-      return drink.status == "ready";
-    } catch {
-      return false;
-    }
+  /*
+   * checks if order status equals preparation
+   */
+  inProgress(order: any) {
+    return order.status == "preparation";
   }
 
-  async edit(order: IOrderFull) {
-    await this.orderService.patchOrderBuildBody({ status: "preparation" }, order);
-    this.loaddata()
-
-  }
-
-  async complete(order: IOrderFull) {
-    //await this.Sleep(10000)
-    await this.orderService.patchOrderBuildBody({ status: "ready" }, order);
-    this.loaddata()
-
-
-    //this.dborders[orderindex].status = "ready";
-  }
-
-  ostatus(orderindex: number) {
+  /*
+   * checks if the order status equals ready
+   */
+  oStatus(orderindex: number) {
     return this.dborders[orderindex].status == "ready";
   }
 
-  isdrink(category: string) {
+  /*
+   * checks if the position is a drink
+   */
+  isDrink(category: string) {
     return (
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
   }
 
-  isfood(category: string) {
+  /*
+   * checks if the position is a food
+   */
+  isFood(category: string) {
     return !(
       category == "Alkoholische Getränke" || category == "Alkoholfreie Getränke"
     );
   }
 
-  positionStatusReady(position: IPositions) {
-    try {
-      return position.status == "ready";
-    } catch {
-      return false;
-    }
-  }
+  /*
+   * checks if the position status is waiting
+   */
   positionStatusWaiting(position: IPositions) {
     try {
       return position.status == "waiting";
@@ -156,6 +123,21 @@ export class KitchenViewComponent{
       return false;
     }
   }
+
+  /*
+   * checks if the position status is ready
+   */
+  positionStatusReady(position: IPositions) {
+    try {
+      return position.status == "ready";
+    } catch {
+      return false;
+    }
+  }
+
+  /*
+   * checks if the position status is delivered
+   */
   positionStatusDelivered(position: IPositions) {
     try {
       return position.status == "delivered";
@@ -163,80 +145,114 @@ export class KitchenViewComponent{
       return false;
     }
   }
-
-  async setReady(position: IPositions){
+  /*
+   * changes the position status to ready
+   */
+  async setReady(position: IPositions) {
     await this.orderService
-    .patchPosition({ status: "ready" }, position)
-    .then()
-    .catch();
-  
-  this.loaddata()
+      .patchPosition({ status: "ready" }, position)
+      .then()
+      .catch();
+    this.loaddata();
+  }
+  /*
+   * mark order as in preparation
+   */
+  async edit(order: IOrderFull) {
+    await this.orderService.patchOrderBuildBody(
+      { status: "preparation" },
+      order
+    );
+    this.loaddata();
   }
 
-  getGermanText(status: string): string{
-    if(status == "new"){
-      return "Wartend"
-
-    }
-    else if(status == "preparation"){
-      return "in Bearbeitung"
-
-    }
-    else if(status == "completed"){
-      return "Abgeschlossen"
-
-    }
-    return ""
-    
+  /*
+   * completes the order and refreshes the data
+   */
+  async complete(order: IOrderFull) {
+    await this.orderService.patchOrderBuildBody({ status: "ready" }, order);
+    this.loaddata();
   }
 
+  /*
+   * Translates Status-text to German
+   */
+  getGermanText(status: string): string {
+    if (status == "new") {
+      return "Wartend";
+    } else if (status == "preparation") {
+      return "in Bearbeitung";
+    } else if (status == "completed") {
+      return "Abgeschlossen";
+    }
+    return "";
+  }
 
   //lock products
-  @HostListener('document:click', ['$event'])
+  @HostListener("document:click", ["$event"])
   async onClick(e: MouseEvent) {
-      let clickedID: String = (e.target as Element).id;
-      if (clickedID !== null) {
-          if (this.lockProductsModalVisible && (clickedID == "lock-products-modal-background")) {
-              this.switchLockProductsModal();
-          }
+    let clickedID: String = (e.target as Element).id;
+    if (clickedID !== null) {
+      if (
+        this.lockProductsModalVisible &&
+        clickedID == "lock-products-modal-background"
+      ) {
+        this.switchLockProductsModal();
       }
+    }
   }
 
   switchLockProductsModal() {
-      this.loadProducts();
-      let lockProductsModal = document.getElementById("lock-products-modal");
-      if (lockProductsModal !== null) {
-          if (!this.lockProductsModalVisible) {
-              lockProductsModal!.style.display = "block";
-              this.lockProductsModalVisible = true;
-          } else {
-              lockProductsModal!.style.display = "none";
-              this.lockProductsModalVisible = false;
-          }
+    this.loadProducts();
+    let lockProductsModal = document.getElementById("lock-products-modal");
+    if (lockProductsModal !== null) {
+      if (!this.lockProductsModalVisible) {
+        lockProductsModal!.style.display = "block";
+        this.lockProductsModalVisible = true;
+      } else {
+        lockProductsModal!.style.display = "none";
+        this.lockProductsModalVisible = false;
       }
+    }
   }
 
   async loadProducts() {
-    this.productCategories = (await this.categoryService.getCategories()).categoryList;
+    this.productCategories = (
+      await this.categoryService.getCategories()
+    ).categoryList;
     this.productsFromCategories.delete("");
     for (const category of this.productCategories) {
-        this.productsFromCategories.set(category.name, (await this.productService.getProductsByCategory(localStorage.getItem("eventUuid")!, category.uuid)).productList)
+      this.productsFromCategories.set(
+        category.name,
+        (
+          await this.productService.getProductsByCategory(
+            localStorage.getItem("eventUuid")!,
+            category.uuid
+          )
+        ).productList
+      );
     }
-}
-  async lockProduct(uuid: string){
-    await this.productService.updateProduct({uuid: uuid, updates: {available: false}})
-    await this.loadProducts()
+  }
+  async lockProduct(uuid: string) {
+    await this.productService.updateProduct({
+      uuid: uuid,
+      updates: { available: false },
+    });
+    await this.loadProducts();
   }
 
-  async unlockProduct(uuid: string){
-    await this.productService.updateProduct({uuid: uuid, updates: {available: true}})
-    await this.loadProducts()
+  async unlockProduct(uuid: string) {
+    await this.productService.updateProduct({
+      uuid: uuid,
+      updates: { available: true },
+    });
+    await this.loadProducts();
   }
 
-  	//lock Products
+  //lock Products
   async logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('roll');
-    this.router.navigate(['']);   
+    localStorage.removeItem("token");
+    localStorage.removeItem("roll");
+    this.router.navigate([""]);
   }
 }
